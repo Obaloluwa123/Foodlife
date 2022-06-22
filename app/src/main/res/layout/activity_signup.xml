@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/etnewUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Username"
+        app:layout_constraintEnd_toEndOf="@+id/etnewPassword"
+        app:layout_constraintStart_toStartOf="@+id/etnewPassword"
+        tools:layout_editor_absoluteY="80dp" />
+
+    <EditText
+        android:id="@+id/etnewPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:text="Password"
+        app:layout_constraintEnd_toEndOf="@+id/etnewEmail"
+        app:layout_constraintStart_toStartOf="@+id/etnewEmail"
+        tools:layout_editor_absoluteY="158dp" />
+
+    <EditText
+        android:id="@+id/etnewEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        android:text="email address"
+        tools:layout_editor_absoluteX="91dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <Button
+        android:id="@+id/signupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="SignUp"
+        app:layout_constraintTop_toBottomOf="@+id/etnewEmail"
+        tools:layout_editor_absoluteX="135dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
