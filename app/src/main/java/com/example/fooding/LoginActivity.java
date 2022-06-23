@@ -47,6 +47,15 @@ public class LoginActivity extends AppCompatActivity {
                 loginUser(username, password);
             }
         });
+
+        etSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
     public void loginUser(String username, String password) {
         //Todo: write the logic
@@ -72,11 +81,6 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 //
-    public void onSignUp(View view) {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
-        finish();
-    }
     public void onLogIn(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);

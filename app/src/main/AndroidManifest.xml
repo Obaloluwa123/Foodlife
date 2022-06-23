@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Fooding"
         tools:targetApi="31">
+
+        <activity
+            android:name=".SignupActivity"
+            android:exported="true">
+
+        </activity>
         <activity
             android:name=".LoginActivity"
             android:exported="true">
