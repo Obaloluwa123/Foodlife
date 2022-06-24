@@ -1,4 +1,4 @@
-package com.example.fooding;
+package com.example.fooding.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.fooding.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
@@ -29,10 +30,10 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         currentUser = ParseUser.getCurrentUser();
-
-//        if(currentUser != null){
-//            goMainActivity();
-//        }
+//
+        if(currentUser != null){
+            goMainActivity();
+        }
         etUsername = findViewById(R.id.etnewUsername);
         etPassword = findViewById(R.id.etnewPassword);
         etSignUp = findViewById(R.id.etSignUp);

@@ -38,7 +38,6 @@
         android:ems="10"
         android:hint="email address"
         android:inputType="textEmailAddress"
-        android:text="email address"
         app:layout_constraintTop_toBottomOf="@+id/etnewPassword"
         tools:layout_editor_absoluteX="91dp" />
 

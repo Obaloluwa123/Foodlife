@@ -1,4 +1,4 @@
 package com.example.fooding.clients;
 
-public class foodclient {
+public interface SpoonacularApi {
 }

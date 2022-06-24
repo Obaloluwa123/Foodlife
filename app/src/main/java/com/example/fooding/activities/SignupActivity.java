@@ -1,4 +1,4 @@
-package com.example.fooding;
+package com.example.fooding.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
+import com.example.fooding.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -45,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
                 String password = etnewPassword.getText().toString();
                 signUpUser(userName,password,email);
 
+
             }
         });
 //        etLoginButton.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +68,7 @@ public class SignupActivity extends AppCompatActivity {
                     if (e == null) {
                         Log.i(TAG, "onClick signUp button");
                         Toast.makeText(getApplicationContext(),"Signed up sucessfully" , Toast.LENGTH_SHORT);
-
+                        goLoginActivity();
                     }
 
                     else {
@@ -75,14 +76,14 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Error Signing Up" , Toast.LENGTH_SHORT);
                         Log.e(TAG, e.toString());
                     }
-                    goLoginActivity();
+//                    goLoginActivity();
                 }
             }
         );
     }
 
     private void goLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
