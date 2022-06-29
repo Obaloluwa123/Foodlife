@@ -164,5 +164,3 @@ FooodLife provides tasty dish recipe that can be made from specific ingredients 
     `GET`    | /recipes/complexSearch?includeIngredients={includeIngredients} | gets all recipes that include certain ingredients
     `GET`    | /recipes/{id}/information | gets recipe details
     
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
