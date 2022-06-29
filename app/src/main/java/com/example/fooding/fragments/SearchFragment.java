@@ -140,4 +140,26 @@ public class SearchFragment extends Fragment implements SearchView.OnQueryTextLi
 //
 //
 //
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//        return false;
+//    }
 //
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onSuggestionSelect(int position) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onSuggestionClick(int position) {
+//        return false;
+//    }
+//}
+//
+//    private void fetchFood() {
+//    }

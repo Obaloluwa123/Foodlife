@@ -1,4 +1,4 @@
 package com.example.fooding.models;
 
-public class result {
+public class User {
 }

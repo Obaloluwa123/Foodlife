@@ -1,4 +1,4 @@
-package com.example.fooding;
+package com.example.fooding.clients;
 
 import android.app.Application;
 

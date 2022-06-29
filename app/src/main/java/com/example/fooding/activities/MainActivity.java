@@ -24,11 +24,21 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     final FragmentManager fragmentManager = getSupportFragmentManager();
     private BottomNavigationView bottomNavigationView;
+//    private MenuItem logOutnow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        logOutnow = findViewById(R.id.logout);
+//              ParseUser.logOut();
+//              ParseUser currentUser = ParseUser.getCurrentUser();
+//              Intent i = new Intent(MainActivity.this, LoginActivity.class);
+//              startActivity(i);
+//              finish();
+
+
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 

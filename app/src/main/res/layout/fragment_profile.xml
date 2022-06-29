@@ -56,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="48dp"
-        android:text="Joy"
+        android:text="David"
         android:textSize="18dp"
         app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -84,7 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/User_ln"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Smith"
@@ -118,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/LastName" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/user_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
