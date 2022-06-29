@@ -1,14 +1,14 @@
 package com.example.fooding.fragments;
 
+import static com.example.fooding.clients.FoodClient.API_KEY;
+
 import android.annotation.SuppressLint;
-import android.app.SearchManager;
-import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,10 +20,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.fooding.BuildConfig;
 import com.example.fooding.R;
 import com.example.fooding.models.Food;
 
@@ -38,13 +38,11 @@ import com.example.fooding.adapters.FoodAdapter;
 import okhttp3.Headers;
 
 public class HomeFragment extends Fragment {
-    public static final String complex_search_url = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f1bb97f5a6b141f1b5f8e17a2eba1296";
+    public static final String complex_search_url = String.format("https://api.spoonacular.com/recipes/complexSearch?apiKey=%s", API_KEY);
     public static final String TAG = "HomeFragment";
-    List<Food> Foods;
+    List<Food> foods;
     private MenuItem menuItem;
     private SearchView searchView;
-//    RecyclerView rvFood;
-
 
     public HomeFragment() {
     }
@@ -77,15 +75,14 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Foods = new ArrayList<>();
+        foods = new ArrayList<>();
 
         RecyclerView rvFood = view.findViewById(R.id.rvFood);
 
-        Foods = new ArrayList<>();
 
-        FoodAdapter Foodadapter = new FoodAdapter(getContext(), Foods);
+        FoodAdapter foodadapter = new FoodAdapter(getContext(), foods);
 
-        rvFood.setAdapter(Foodadapter);
+        rvFood.setAdapter(foodadapter);
 
         rvFood.setLayoutManager(new LinearLayoutManager(getContext()));
         AsyncHttpClient client = new AsyncHttpClient();
@@ -97,10 +94,10 @@ public class HomeFragment extends Fragment {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "Results: " + results.toString());
-                    Foods.addAll(Food.fromJsonArray(results));
-                    Foodadapter.notifyDataSetChanged();
-                    Log.i(TAG, "food: " + Foods.size());
+                    Log.i(TAG, "Results: " + results);
+                    foods.addAll(Food.fromJsonArray(results));
+                    foodadapter.notifyDataSetChanged();
+                    Log.i(TAG, "food: " + foods.size());
                 } catch (JSONException e) {
                     Log.e(TAG, "Hit json exception", e);
                 }

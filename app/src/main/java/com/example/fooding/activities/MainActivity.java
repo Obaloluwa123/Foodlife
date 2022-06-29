@@ -19,28 +19,18 @@ import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.SearchFragment;
 import com.parse.ParseUser;
 
+@SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     final FragmentManager fragmentManager = getSupportFragmentManager();
-    private BottomNavigationView bottomNavigationView;
-//    private MenuItem logOutnow;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        logOutnow = findViewById(R.id.logout);
-//              ParseUser.logOut();
-//              ParseUser currentUser = ParseUser.getCurrentUser();
-//              Intent i = new Intent(MainActivity.this, LoginActivity.class);
-//              startActivity(i);
-//              finish();
 
-
-
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -72,14 +62,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.logout :{
-              onLogout();
-                return true;
-            }
+        if (item.getItemId() == R.id.logout) {
+            onLogout();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

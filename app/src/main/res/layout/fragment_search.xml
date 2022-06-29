@@ -6,25 +6,29 @@
     tools:context="com.example.fooding.fragments.SearchFragment">
 
     <androidx.appcompat.widget.SearchView
-        android:id="@+id/Ing_search_view"
+        android:id="@+id/recipeSearchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="51dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         app:iconifiedByDefault="false"
-        app:queryHint="What's in your fridge?" />
-    <EditText
-        android:id="@+id/etSearch"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        app:queryHint="What's in your fridge?">
+
+        <EditText
+            android:id="@+id/etRecipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </androidx.appcompat.widget.SearchView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSearch"
         android:layout_width="match_parent"
-        android:layout_height="636dp"
+        android:layout_height="614dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
@@ -32,5 +36,15 @@
         android:layout_marginTop="36dp"
         android:layout_marginBottom="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <Button
+        android:id="@+id/searchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="13dp"
+        android:text="Search" />
 
 </RelativeLayout>

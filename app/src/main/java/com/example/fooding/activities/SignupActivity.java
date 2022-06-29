@@ -45,18 +45,9 @@ public class SignupActivity extends AppCompatActivity {
                 String password = etnewPassword.getText().toString();
                 signUpUser(userName,password,email);
 
-
             }
         });
-//        etLoginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
-
     private void signUpUser(String userName, String password, String email) {
         ParseUser user = new ParseUser();
         user.setUsername(userName);
@@ -68,7 +59,7 @@ public class SignupActivity extends AppCompatActivity {
                     if (e == null) {
                         Log.i(TAG, "onClick signUp button");
                         Toast.makeText(getApplicationContext(),"Signed up sucessfully" , Toast.LENGTH_SHORT);
-                        goLoginActivity();
+                        openLoginActivity();
                     }
 
                     else {
@@ -76,18 +67,17 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Error Signing Up" , Toast.LENGTH_SHORT);
                         Log.e(TAG, e.toString());
                     }
-//                    goLoginActivity();
                 }
             }
         );
     }
 
-    private void goLoginActivity() {
+    private void openLoginActivity() {
         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
-    public void onLogIn(View view) {
+    public void onLogIn() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

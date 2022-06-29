@@ -19,25 +19,21 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
 
-    EditText etUsername;
-    EditText etPassword;
-    Button etLoginButton;
-    Button etSignUp;
-    ParseUser currentUser;
+    private EditText etUsername;
+    private EditText etPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        currentUser = ParseUser.getCurrentUser();
-//
+        ParseUser currentUser = ParseUser.getCurrentUser();
         if(currentUser != null){
-            goMainActivity();
+            openMainActivity();
         }
         etUsername = findViewById(R.id.etnewUsername);
         etPassword = findViewById(R.id.etnewPassword);
-        etSignUp = findViewById(R.id.etSignUp);
-        etLoginButton = findViewById(R.id.etLoginButton);
+        Button etSignUp = findViewById(R.id.etSignUp);
+        Button etLoginButton = findViewById(R.id.etLoginButton);
 
         etLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,20 +65,17 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this,"Issue with login!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                goMainActivity();
+                openMainActivity();
                 Toast.makeText(LoginActivity.this,"Sucess!", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-
-    private void goMainActivity() {
+    private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
-//
-    public void onLogIn(View view) {
+    public void onLogIn() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
         finish();

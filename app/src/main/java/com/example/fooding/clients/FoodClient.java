@@ -1,7 +1,6 @@
 package com.example.fooding.clients;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.BuildConfig;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 
@@ -12,7 +11,7 @@ public class FoodClient extends AsyncHttpClient {
 
     public FoodClient() { super(); }
 
-    public void getRecipes(JsonHttpResponseHandler handler, String query) {
+    public void getRecipes(String query, JsonHttpResponseHandler handler) {
         RequestParams params = new RequestParams();
         params.put("query", query);
         params.put("number", 50);
