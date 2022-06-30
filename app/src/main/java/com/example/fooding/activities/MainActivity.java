@@ -12,14 +12,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.fooding.R;
+import com.example.fooding.fragments.IngredientFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.example.fooding.fragments.HomeFragment;
 import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.SearchFragment;
 import com.parse.ParseUser;
-
-@SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
@@ -40,8 +39,14 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_home:
                         fragment = new HomeFragment();
                         break;
+                    case R.id.action_pantry:
+                        fragment = new IngredientFragment();
+                        break;
                     case R.id.action_search:
                         fragment = new SearchFragment();
+                        break;
+                    case R.id.action_favorite:
+                        fragment = new IngredientFragment();
                         break;
                     case R.id.action_profile:
                     default:

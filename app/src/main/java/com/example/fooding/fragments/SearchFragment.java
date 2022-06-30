@@ -1,5 +1,7 @@
 package com.example.fooding.fragments;
 
+import static com.example.fooding.clients.FoodClient.API_KEY;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
@@ -35,12 +37,11 @@ import org.json.JSONObject;
 
 import okhttp3.Headers;
 
-public class SearchFragment extends Fragment{
+public class SearchFragment extends Fragment {
     public static final String Tag = "SearchFragment";
 
     private ArrayList<Food> foods;
     private FoodAdapter foodAdapter;
-    public static final String complex_search_url = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f1bb97f5a6b141f1b5f8e17a2eba1296";
     public static final String TAG = "SearchFragment";
 
     public SearchFragment() {
@@ -62,19 +63,24 @@ public class SearchFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         foods = new ArrayList<>();
-
-        Button btnSubmit = view.findViewById(R.id.searchBtn);
         SearchView recipeSearchView = view.findViewById(R.id.recipeSearchView);
         RecyclerView rvRecipes = view.findViewById(R.id.rvSearch);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "search button pressed");
-                Recipes();
-            }
-        });
+        recipeSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    CharSequence searchValue = recipeSearchView.getQuery().toString();
+                    Recipes(searchValue);
+                    return false;
+                }
 
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    CharSequence searchValue = recipeSearchView.getQuery().toString();
+                    return false;
+                }
+            }
+        );
         foodAdapter = new FoodAdapter(getContext(), foods);
         rvRecipes.setAdapter(foodAdapter);
         rvRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -91,9 +97,9 @@ public class SearchFragment extends Fragment{
 
     }
 
-    private boolean Recipes() {
+    private boolean Recipes(CharSequence searchValue) {
         FoodClient client = new FoodClient();
-        client.getRecipes("query", new JsonHttpResponseHandler() {
+        client.getIngredients(searchValue.toString(), new JsonHttpResponseHandler() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
