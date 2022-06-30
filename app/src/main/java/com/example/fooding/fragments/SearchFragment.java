@@ -35,11 +35,9 @@ import org.json.JSONObject;
 
 import okhttp3.Headers;
 
-@SuppressWarnings("SameReturnValue")
 public class SearchFragment extends Fragment{
     public static final String Tag = "SearchFragment";
 
-    private onFoodSelectedListener listener;
     private ArrayList<Food> foods;
     private FoodAdapter foodAdapter;
     public static final String complex_search_url = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f1bb97f5a6b141f1b5f8e17a2eba1296";
@@ -48,9 +46,6 @@ public class SearchFragment extends Fragment{
     public SearchFragment() {
     }
 
-    public interface onFoodSelectedListener {
-        void onFoodSelectedListener(long id);
-    }
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +93,7 @@ public class SearchFragment extends Fragment{
 
     private boolean Recipes() {
         FoodClient client = new FoodClient();
-        client.getRecipes("pasta", new JsonHttpResponseHandler() {
+        client.getRecipes("query", new JsonHttpResponseHandler() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {

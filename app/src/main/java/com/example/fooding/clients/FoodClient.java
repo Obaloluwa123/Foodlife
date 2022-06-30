@@ -13,7 +13,7 @@ public class FoodClient extends AsyncHttpClient {
 
     public void getRecipes(String query, JsonHttpResponseHandler handler) {
         RequestParams params = new RequestParams();
-        params.put("query", query);
+        params.put("pasta, italian, vegetarian", query);
         params.put("number", 50);
         get(RECIPE_SEARCH_URL, params, handler);
     }
