@@ -1,5 +1,7 @@
 package com.example.fooding.fragments;
 
+import static com.example.fooding.clients.FoodClient.API_KEY;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
@@ -22,12 +24,18 @@ import android.widget.Button;
 
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.fooding.R;
+import com.example.fooding.bottomsheets.FilterBottomSheet;
 import com.example.fooding.clients.FoodClient;
+import com.example.fooding.clients.NetworkCallback;
 import com.example.fooding.models.Food;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.example.fooding.adapters.FoodAdapter;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,12 +43,18 @@ import org.json.JSONObject;
 
 import okhttp3.Headers;
 
-public class SearchFragment extends Fragment{
+public class SearchFragment extends Fragment {
     public static final String Tag = "SearchFragment";
+
+    private FloatingActionButton filterFab;
+    private SearchView recipeSearchView;
 
     private ArrayList<Food> foods;
     private FoodAdapter foodAdapter;
-    public static final String complex_search_url = "https://api.spoonacular.com/recipes/complexSearch?apiKey=f1bb97f5a6b141f1b5f8e17a2eba1296";
+    public String selectedDiet = null;
+    public String selectedMeal = null;
+    public String currentSearch = null;
+
     public static final String TAG = "SearchFragment";
 
     public SearchFragment() {
@@ -62,22 +76,46 @@ public class SearchFragment extends Fragment{
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         foods = new ArrayList<>();
-
-        Button btnSubmit = view.findViewById(R.id.searchBtn);
-        SearchView recipeSearchView = view.findViewById(R.id.recipeSearchView);
+        recipeSearchView = view.findViewById(R.id.recipeSearchView);
         RecyclerView rvRecipes = view.findViewById(R.id.rvSearch);
+        filterFab = view.findViewById(R.id.filter_fab);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "search button pressed");
-                Recipes();
+        recipeSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    currentSearch = recipeSearchView.getQuery().toString();
+                    Recipes(currentSearch);
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    CharSequence searchValue = recipeSearchView.getQuery().toString();
+                    return false;
+                }
             }
-        });
-
+        );
         foodAdapter = new FoodAdapter(getContext(), foods);
         rvRecipes.setAdapter(foodAdapter);
         rvRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
+        setupFAB();
+    }
+
+    private void setupFAB() {
+        filterFab.setOnClickListener(view -> {
+            FilterBottomSheet bottomSheet = new FilterBottomSheet(selectedDiet, selectedMeal);
+            bottomSheet.show(getChildFragmentManager(), FilterBottomSheet.TAG);
+
+        });
+    }
+
+    public void setVariables(String diet, String meal) {
+        this.selectedDiet = diet;
+        this.selectedMeal = meal;
+        if (currentSearch != null && currentSearch.length() > 0) {
+            Recipes(currentSearch);
+        }
+        recipeSearchView.clearFocus();
     }
 
     @Override
@@ -91,31 +129,22 @@ public class SearchFragment extends Fragment{
 
     }
 
-    private boolean Recipes() {
+    private boolean Recipes(String searchValue) {
         FoodClient client = new FoodClient();
-        client.getRecipes("query", new JsonHttpResponseHandler() {
-            @SuppressLint("NotifyDataSetChanged")
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.d(TAG, "onSuccess: " +  json.toString());
-                JSONObject jsonObject = json.jsonObject;
-                try {
-                    JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i(TAG, "Results: " + results);
-                    foods.addAll(Food.fromJsonArray(results));
-                    foodAdapter.notifyDataSetChanged();
-                    Log.i(TAG, "food: " + foods.size());
-                } catch (JSONException e) {
-                    Log.e(TAG, "Hit json exception", e);
-                }
-            }
+        client.getIngredients(selectedDiet, selectedMeal, searchValue, new NetworkCallback<List<Food>>() {
+                    @SuppressLint("NotifyDataSetChanged")
+                    @Override
+                    public void onSuccess(List<Food> data) {
+                        foods.clear();
+                        foods.addAll(data);
+                        foodAdapter.notifyDataSetChanged();
+                    }
 
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d(TAG, "onFailure");
+                    @Override
+                    public void onFailure(Throwable throwable) {
 
-            }
-        });
+                    }
+                });
         return false;
     }
 }

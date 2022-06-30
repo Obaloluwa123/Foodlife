@@ -8,6 +8,10 @@
         android:title="Home"
         app:showAsAction="always" />
     <item
+        android:id="@+id/action_pantry"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Pantry" />
+    <item
         android:id="@+id/action_search"
         android:icon="@android:drawable/ic_menu_search"
         android:title="Search"
