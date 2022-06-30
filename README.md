@@ -24,49 +24,47 @@ FooodLife provides tasty dish recipe that can be made from specific ingredients 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-* [0]User can see custom launch screen
-* [1]User can signup
-* [2]User can login
-* [3]User can see app icon in home screen
-* [3]User can search for recipes based on ingredients
-* [5]User can see dish recipe that can be made
-* [1]User can see steps on how to prepare the food
-* [2]User can search for recipes by ingredients * 
+* User can see custom launch screen
+* User can sign up for a new account
+* User can log into their account
+* User can log out of their account
+* User can search for recipes based on ingredients
+* User can see dish recipe that can be made
+* User can see steps on how to prepare the food
+* User can add ingredients to their Ingredient list
+* User ingredients can be used to get suggested recipes
 
-
-* 
-    * 
-* ...
 
 **Optional Nice-to-have Stories(Stretch)**
-* [1]User can save favorite recipes
-* [2]User can take picture of food
-* [3] User can filter recipes based on diet and omitting allergies.
-* [3]User can share pictures of food taken with their friends on Facebook
-* ...
+* User can save favorite recipes
+* User can take picture of food
+* User can filter recipes based on diet and omitting allergies.
+* User can share pictures of food taken with their friends on Facebook
+* Recipe search autocompletes
+* API call information is cached and can be seen offline
 
 ### 2. Screen Archetypes
 
 * Home 
-   * User can see recipes they prepared 
-   
-
+   * User can see recipes they prepared  
+* Ingredient List
+   * User can add ingredients they have 
 * Search
    * This will allow user to search for recipes
-   * ...
+* Favorite
+   * This will allow users to save their profile 
 * Profile
    * This will allow users to see their profile 
-   * ...
-
+    * ...
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
 * Home screen - Dish recipe screen
-* Search 
+*Ingredients List Screen
+* Search screen - Recipe Screen
+* Favorite recipe screen
 * Profile Screen
-* 
-* 
 
 **Flow Navigation** (Screen to Screen)
 
@@ -76,12 +74,18 @@ FooodLife provides tasty dish recipe that can be made from specific ingredients 
 * Register Screen
    * User Feed
    * ...
-
+   
+*Ingredients List Screen
+   *User can add ingredients
+   *User can remove ingredients
+   
  * * Search Screen 
    *user can search for recipe based on available ingredients
  * * Recipe Screen
    * Shows recipe based on available ingredients in the fridge
-   * ...
+   
+ * * Favorite Screen 
+   *user can save favorite recipe
    
 * Profile Screen
    * User Feed
