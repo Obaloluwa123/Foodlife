@@ -42,6 +42,7 @@ FooodLife provides tasty dish recipe that can be made from specific ingredients 
 * [] User can share pictures of food taken with their friends on Facebook
 * [] Recipe search autocompletes
 * [] API call information is cached and can be seen offline
+* [] Food/Barcode scanner for ingredients to see list of recipes that contain the scanned ingredients.
 
 ### 2. Screen Archetypes
 
