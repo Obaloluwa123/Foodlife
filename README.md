@@ -24,24 +24,24 @@ FooodLife provides tasty dish recipe that can be made from specific ingredients 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-* User can see custom launch screen
-* User can sign up for a new account
-* User can log into their account
-* User can log out of their account
-* User can search for recipes based on ingredients
-* User can see dish recipe that can be made
-* User can see steps on how to prepare the food
-* User can add ingredients to their Ingredient list
-* User ingredients can be used to get suggested recipes
+* [] User can see custom launch screen
+* [] User can sign up for a new account
+* [] User can log into their account
+* [] User can log out of their account
+* [] User can search for recipes based on ingredients
+* [] User can see dish recipe that can be made
+* [] User can see steps on how to prepare the food
+* [] User can add ingredients to their Ingredient list
+* [] User ingredients can be used to get suggested recipes
 
 
 **Optional Nice-to-have Stories(Stretch)**
-* User can save favorite recipes
-* User can take picture of food
-* User can filter recipes based on diet and omitting allergies.
-* User can share pictures of food taken with their friends on Facebook
-* Recipe search autocompletes
-* API call information is cached and can be seen offline
+* [] User can save favorite recipes
+* [] User can take picture of food
+* [] User can filter recipes based on diet and omitting allergies.
+* [] User can share pictures of food taken with their friends on Facebook
+* [] Recipe search autocompletes
+* [] API call information is cached and can be seen offline
 
 ### 2. Screen Archetypes
 
