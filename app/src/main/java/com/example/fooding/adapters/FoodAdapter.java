@@ -1,4 +1,4 @@
-package adapters;
+package com.example.fooding.adapters;
 
 import android.content.Context;
 import android.util.Log;
@@ -13,20 +13,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
-import com.example.fooding.models.food;
+import com.example.fooding.models.Food;
 
 import java.util.List;
 
-public class foodadapter extends RecyclerView.Adapter <foodadapter.ViewHolder>{
+public class FoodAdapter extends RecyclerView.Adapter <FoodAdapter.ViewHolder>{
 
-    Context context;
-    List<food> Foods;
+    final Context context;
+    final List<Food> Foods;
 
-    public foodadapter(Context context, List<food> Foods) {
+    public FoodAdapter(Context context, List<Food> Foods) {
         this.context = context;
         this.Foods = Foods;
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -38,20 +37,18 @@ public class foodadapter extends RecyclerView.Adapter <foodadapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d ("foodadapter", "onBindViewHolder" + position);
-        food Food = Foods.get(position);
-
-        holder.bind(Food);
+        Food food = Foods.get(position);
+        holder.bind(food);
 
     }
-
     @Override
 
     public int getItemCount() {return Foods.size();}
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvTitle;
-        ImageView ivImage;
+        final TextView tvTitle;
+        final ImageView ivImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -59,11 +56,9 @@ public class foodadapter extends RecyclerView.Adapter <foodadapter.ViewHolder>{
             ivImage = itemView.findViewById(R.id.ivImage);
 
         }
-
-        public void bind(food Food) {
-            tvTitle.setText(Food.getTitle());
-            Glide.with(context).load(Food.getImage()).into(ivImage);
+        public void bind(Food food) {
+            tvTitle.setText(food.getTitle());
+            Glide.with(context).load(food.getImage()).into(ivImage);
         }
     }
-
 }

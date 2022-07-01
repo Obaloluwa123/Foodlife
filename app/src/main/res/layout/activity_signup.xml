@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,13 +8,14 @@
         android:id="@+id/etnewUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="@+id/etnewPassword"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/etnewPassword"
-        tools:layout_editor_absoluteY="97dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/etnewPassword"
@@ -25,8 +25,8 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/etnewEmail"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="@+id/etnewEmail"
         app:layout_constraintTop_toBottomOf="@+id/etnewUsername" />
 
@@ -34,20 +34,22 @@
         android:id="@+id/etnewEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="108dp"
         android:ems="10"
         android:hint="email address"
         android:inputType="textEmailAddress"
-        app:layout_constraintTop_toBottomOf="@+id/etnewPassword"
-        tools:layout_editor_absoluteX="91dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etnewPassword" />
 
     <Button
         android:id="@+id/signupBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="176dp"
         android:text="SignUp"
-        app:layout_constraintTop_toBottomOf="@+id/etnewEmail"
-        tools:layout_editor_absoluteX="136dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etnewEmail" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

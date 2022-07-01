@@ -1,4 +1,4 @@
-package com.example.fooding;
+package com.example.fooding.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.parse.LogInCallback;
+import com.example.fooding.R;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -47,15 +47,7 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-//        etLoginButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
-//                startActivity(intent);
-//            }
-//        });
     }
-
     private void signUpUser(String userName, String password, String email) {
         ParseUser user = new ParseUser();
         user.setUsername(userName);
@@ -67,7 +59,7 @@ public class SignupActivity extends AppCompatActivity {
                     if (e == null) {
                         Log.i(TAG, "onClick signUp button");
                         Toast.makeText(getApplicationContext(),"Signed up sucessfully" , Toast.LENGTH_SHORT);
-
+                        openLoginActivity();
                     }
 
                     else {
@@ -75,18 +67,17 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"Error Signing Up" , Toast.LENGTH_SHORT);
                         Log.e(TAG, e.toString());
                     }
-                    goLoginActivity();
                 }
             }
         );
     }
 
-    private void goLoginActivity() {
-        Intent intent = new Intent(this, LoginActivity.class);
+    private void openLoginActivity() {
+        Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
     }
-    public void onLogIn(View view) {
+    public void onLogIn() {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
