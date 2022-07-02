@@ -13,7 +13,6 @@ import com.example.fooding.R;
 public class FavoriteFragment extends Fragment {
 
     public FavoriteFragment() {
-        // Required empty public constructor
     }
 
     @Override

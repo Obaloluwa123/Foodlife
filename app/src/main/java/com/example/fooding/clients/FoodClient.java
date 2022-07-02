@@ -37,6 +37,8 @@ public class FoodClient extends AsyncHttpClient {
         params.put("query", query);
         params.put("diet", diet);
         params.put("type", meal);
+
+
         get(RECIPE_SEARCH_URL, params, new JsonHttpResponseHandler() {
 
             @Override

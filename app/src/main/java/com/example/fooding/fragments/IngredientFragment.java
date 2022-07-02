@@ -13,9 +13,9 @@ import com.example.fooding.R;
 public class IngredientFragment extends Fragment {
 
     public IngredientFragment() {
-        // Required empty public constructor
+
     }
-    // TODO: Rename and change types and number of parameters
+
     public static IngredientFragment newInstance(String param1, String param2) {
         IngredientFragment fragment = new IngredientFragment();
         Bundle args = new Bundle();
@@ -34,7 +34,6 @@ public class IngredientFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_ingredient, container, false);
     }
 }

@@ -17,8 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/diet_text_view"
-        >
+        app:layout_constraintTop_toBottomOf="@id/diet_text_view">
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/dietChipGroup"
@@ -27,20 +26,93 @@
             app:singleSelection="true">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/gluttenFreechip"
+                android:id="@+id/glutenFreeChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:chipBackgroundColor="@color/chip_background_color"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:text="Glutten Free"/>
+                android:text="Gluten Free"
+                app:chipBackgroundColor="@color/chip_background_color" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/vegetarianchip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:chipBackgroundColor="@color/chip_background_color"
+                android:text="Vegeterian"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ketogenicChip"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:text="Vegeterian"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ketogenic"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/lactoVegetarianChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lacto-Vegetarian"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/ovoVegetarianChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ovo-Vegetarian"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/veganChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vegan"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/PescetarianChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pescetarian"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/PaleoChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Paleo"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/PrimalChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Primal"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/LowFODMAPChip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Low FODMAP"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/Whole30Chip"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Whole30"
+                app:chipBackgroundColor="@color/chip_background_color" />
+
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -80,12 +152,106 @@
                 android:text="Breakfast" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/appetizerchip"
+                android:id="@+id/appetizerChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipBackgroundColor="@color/chip_background_color"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:text="Appetizer" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/maincourseChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="main course" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sidedish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="sidedish" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/dessertChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="dessert" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/saladChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="salad" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/breadChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="bread" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/soupChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="soup" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/beverageChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="beverage" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/sauceChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="sauce" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/marinadeChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="marinade" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/fingerfooddish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="fingerfood" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/snackChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="snack" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/drinkChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipBackgroundColor="@color/chip_background_color"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:text="drink" />
+
+
+
 
         </com.google.android.material.chip.ChipGroup>
 

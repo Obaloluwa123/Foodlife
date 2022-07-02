@@ -52,9 +52,10 @@
         android:id="@+id/filter_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_lock_"
+        android:src="@drawable/icons8_restaurant_80"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:tint="@color/white"
         android:layout_marginBottom="74dp"
         android:layout_marginEnd="16dp"/>
 

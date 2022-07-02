@@ -19,10 +19,12 @@ import com.example.fooding.fragments.HomeFragment;
 import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.SearchFragment;
 import com.parse.ParseUser;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     final FragmentManager fragmentManager = getSupportFragmentManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         });
         bottomNavigationView.setSelectedItemId(R.id.action_home);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onLogout() {
         ParseUser.logOut();
-        Intent i = new Intent (this,LoginActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }

@@ -40,6 +40,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
+import org.parceler.ParcelPropertyConverter;
 
 import okhttp3.Headers;
 
@@ -49,7 +51,7 @@ public class SearchFragment extends Fragment {
     private FloatingActionButton filterFab;
     private SearchView recipeSearchView;
 
-    private ArrayList<Food> foods;
+    public ArrayList<Food> foods;
     private FoodAdapter foodAdapter;
     public String selectedDiet = null;
     public String selectedMeal = null;
@@ -81,19 +83,19 @@ public class SearchFragment extends Fragment {
         filterFab = view.findViewById(R.id.filter_fab);
 
         recipeSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    currentSearch = recipeSearchView.getQuery().toString();
-                    Recipes(currentSearch);
-                    return false;
-                }
+                                                    @Override
+                                                    public boolean onQueryTextSubmit(String query) {
+                                                        currentSearch = recipeSearchView.getQuery().toString();
+                                                        Recipes(currentSearch);
+                                                        return false;
+                                                    }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    CharSequence searchValue = recipeSearchView.getQuery().toString();
-                    return false;
-                }
-            }
+                                                    @Override
+                                                    public boolean onQueryTextChange(String newText) {
+                                                        CharSequence searchValue = recipeSearchView.getQuery().toString();
+                                                        return false;
+                                                    }
+                                                }
         );
         foodAdapter = new FoodAdapter(getContext(), foods);
         rvRecipes.setAdapter(foodAdapter);
@@ -132,19 +134,19 @@ public class SearchFragment extends Fragment {
     private boolean Recipes(String searchValue) {
         FoodClient client = new FoodClient();
         client.getIngredients(selectedDiet, selectedMeal, searchValue, new NetworkCallback<List<Food>>() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onSuccess(List<Food> data) {
-                        foods.clear();
-                        foods.addAll(data);
-                        foodAdapter.notifyDataSetChanged();
-                    }
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onSuccess(List<Food> data) {
+                foods.clear();
+                foods.addAll(data);
+                foodAdapter.notifyDataSetChanged();
+            }
 
-                    @Override
-                    public void onFailure(Throwable throwable) {
+            @Override
+            public void onFailure(Throwable throwable) {
 
-                    }
-                });
+            }
+        });
         return false;
     }
 }

@@ -35,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.fooding.adapters.FoodAdapter;
+
 import okhttp3.Headers;
 
 public class HomeFragment extends Fragment {

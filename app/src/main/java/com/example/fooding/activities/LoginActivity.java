@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             openMainActivity();
         }
         etUsername = findViewById(R.id.etnewUsername);
@@ -54,22 +54,24 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     public void loginUser(String username, String password) {
         //Todo: write the logic
-        Log.i(TAG,"Attempting  to login user" + username);
+        Log.i(TAG, "Attempting  to login user" + username);
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                if(e != null){
-                    Log.e(TAG,"Issue with login", e);
-                    Toast.makeText(LoginActivity.this,"Issue with login!", Toast.LENGTH_SHORT).show();
+                if (e != null) {
+                    Log.e(TAG, "Issue with login", e);
+                    Toast.makeText(LoginActivity.this, "Issue with login!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 openMainActivity();
-                Toast.makeText(LoginActivity.this,"Sucess!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Sucess!", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
