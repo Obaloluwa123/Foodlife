@@ -1,210 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_layout"
+    android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="300dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginBottom="4dp">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="8dp">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/recipeCardView"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:strokeColor="@color/cyan4"
-        app:strokeWidth="1dp">
+        app:layout_constraintTop_toTopOf="parent">
 
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/ivImage"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white">
+            android:layout_height="200dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Cauliflower, Brown Rice, and Vegetable Fried Rice"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@id/ivImage"
+            app:layout_constraintTop_toBottomOf="@id/ivImage" />
 
-            <ImageView
-                android:id="@+id/ivImage"
-                android:layout_width="200dp"
-                android:layout_height="287dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.395"
-                tools:srcCompat="@tools:sample/avatars" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:ellipsize="end"
-                android:fontFamily="@font/courgette"
-                android:maxLines="2"
-                android:text="Cauliflower, Brown Rice, and Vegetable Fried Rice"
-                android:textColor="@color/black"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/ivImage"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvDescription"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:text="The recipe Cauliflower, Brown Rice, and Vegetable Fried Rice is ready in about 30 minutes and is definitely an amazing gluten free, dairy free, lacto ovo vegetarian, and vegan option for lovers of Chinese food. For $1.16 per serving, you get a hor d'oeuvre that serves 8. One serving contains 192 calories, 7g of protein, and 6g of fat. 3689 people have tried and liked this recipe. A mixture of broccoli, cauliflower, sesame oil, and a handful of other ingredients are all it takes to make this recipe so yummy. It is brought to you by spoonacular user mommahfivemonkeys. All things considered, we decided this recipe deserves a spoonacular score of 100%. This score is amazing. If you like this recipe, you might also like recipes such as Cauliflower, Brown Rice, and Vegetable Fried Rice, Cauliflower, Brown Rice, and Vegetable Fried Rice, and Vegetable Fried Brown Rice."
-                android:textColor="@color/black"
-                app:layout_constraintEnd_toEndOf="@+id/tvTitle"
-                app:layout_constraintStart_toStartOf="@+id/tvTitle"
-                app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
-
-            <ImageView
-                android:id="@+id/heart_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginBottom="36dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/heart_textView"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/heart_textView"
-                app:layout_constraintTop_toBottomOf="@+id/tvDescription"
-                app:layout_constraintVertical_bias="0.136"
-                app:srcCompat="@drawable/ic_favorite"
-                app:tint="@color/red" />
-
-            <TextView
-                android:id="@+id/heart_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="200"
-                android:textAlignment="center"
-                android:textColor="@color/red"
-                app:layout_constraintBottom_toBottomOf="@+id/ivImage"
-                app:layout_constraintStart_toStartOf="@+id/tvDescription"
-                app:layout_constraintTop_toBottomOf="@+id/heart_imageView"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <ImageView
-                android:id="@+id/clock_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/clock_textView"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/clock_textView"
-                app:layout_constraintTop_toTopOf="@+id/heart_imageView"
-                app:srcCompat="@drawable/ic_time"
-                app:tint="@color/yellow" />
-
-            <TextView
-                android:id="@+id/clock_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:text="100"
-                android:textAlignment="center"
-                android:textColor="@color/yellow"
-                app:layout_constraintBottom_toBottomOf="@+id/ivImage"
-                app:layout_constraintStart_toEndOf="@+id/heart_textView"
-                app:layout_constraintTop_toBottomOf="@+id/clock_imageView"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <ImageView
-                android:id="@+id/leaf_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="96dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/leaf_textView"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/clock_imageView"
-                app:layout_constraintTop_toTopOf="@+id/clock_imageView"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/ic_leaf" />
-
-            <TextView
-                android:id="@+id/leaf_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:text="100"
-                android:textAlignment="center"
-                app:layout_constraintBottom_toBottomOf="@+id/ivImage"
-                app:layout_constraintStart_toEndOf="@+id/clock_textView"
-                app:layout_constraintTop_toBottomOf="@+id/leaf_imageView"
-                app:layout_constraintVertical_bias="0.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <!--<com.google.android.material.card.MaterialCardView-->
-    <!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
-    <!--    xmlns:tools="http://schemas.android.com/tools"-->
-    <!--    android:layout_width="match_parent"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:layout_marginStart="16dp"-->
-    <!--    android:layout_marginEnd="16dp"-->
-    <!--    android:layout_marginTop="8dp"-->
-    <!--    android:layout_marginBottom="8dp"-->
-    <!--    app:cardCornerRadius="8dp">-->
-
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        app:cardBackgroundColor="@color/white"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
-
-    <!--        <ImageView-->
-    <!--            android:id="@+id/ivImage"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="200dp"-->
-    <!--            android:layout_alignParentStart="true"-->
-    <!--            android:layout_alignParentTop="true"-->
-    <!--            android:layout_alignParentEnd="true"-->
-    <!--            android:layout_centerHorizontal="true"-->
-    <!--            android:scaleType="centerCrop"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent"-->
-    <!--            tools:srcCompat="@tools:sample/avatars" />-->
-
-    <!--        <TextView-->
-    <!--            android:id="@+id/tvTitle"-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:layout_alignParentStart="true"-->
-    <!--            android:layout_alignParentTop="true"-->
-    <!--            android:layout_alignParentEnd="true"-->
-    <!--            android:layout_centerHorizontal="true"-->
-    <!--            android:gravity="center"-->
-    <!--            android:text="Cauliflower, Brown Rice, and Vegetable Fried Rice"-->
-    <!--            android:textSize="20sp"-->
-    <!--            android:textStyle="bold"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintHorizontal_bias="0.0"-->
-    <!--            app:layout_constraintStart_toStartOf="@id/ivImage"-->
-    <!--            app:layout_constraintTop_toBottomOf="@id/ivImage" />-->
-
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
-
-    <!--</com.google.android.material.card.MaterialCardView>-->
+</com.google.android.material.card.MaterialCardView>

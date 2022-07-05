@@ -19,17 +19,16 @@ public class SignupActivity extends AppCompatActivity {
 
     public static final String TAG = "SignUpActivity";
 
-    EditText etnewUsername;
-    EditText etnewPassword;
-    EditText etnewEmail;
-    Button signupBtn;
-    Button etLoginButton;
+    private EditText etnewUsername;
+    private EditText etnewPassword;
+    private EditText etnewEmail;
+    private Button signupBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        etLoginButton = findViewById(R.id.etLoginButton);
         etnewUsername = findViewById(R.id.etnewUsername);
         etnewPassword = findViewById(R.id.etnewPassword);
         signupBtn = findViewById(R.id.signupBtn);
@@ -55,19 +54,19 @@ public class SignupActivity extends AppCompatActivity {
         user.setPassword(password);
         user.setEmail(email);
         user.signUpInBackground(new SignUpCallback() {
-                                    @Override
-                                    public void done(ParseException e) {
-                                        if (e == null) {
-                                            Log.i(TAG, "onClick signUp button");
-                                            Toast.makeText(getApplicationContext(), "Signed up sucessfully", Toast.LENGTH_SHORT);
-                                            openLoginActivity();
-                                        } else {
-                                            Log.i(TAG, "onClick Error");
-                                            Toast.makeText(getApplicationContext(), "Error Signing Up", Toast.LENGTH_SHORT);
-                                            Log.e(TAG, e.toString());
-                                        }
-                                    }
-                                }
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.i(TAG, "onClick signUp button");
+                        Toast.makeText(getApplicationContext(), "Signed up sucessfully", Toast.LENGTH_SHORT);
+                        openLoginActivity();
+                    } else {
+                        Log.i(TAG, "onClick Error");
+                        Toast.makeText(getApplicationContext(), "Error Signing Up", Toast.LENGTH_SHORT);
+                        Log.e(TAG, e.toString());
+                    }
+                }
+            }
         );
     }
 
@@ -75,11 +74,6 @@ public class SignupActivity extends AppCompatActivity {
         Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
         startActivity(intent);
         finish();
-    }
-
-    public void onLogIn() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
     }
 
 }

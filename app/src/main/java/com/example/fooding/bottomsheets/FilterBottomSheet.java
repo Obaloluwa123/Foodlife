@@ -2,7 +2,6 @@ package com.example.fooding.bottomsheets;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.fooding.R;
-import com.example.fooding.fragments.SearchFragment;
+import com.example.fooding.fragments.RecipeFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -20,9 +19,8 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
 
     public static final String TAG = "FILTER_BOTTOM_SHEET";
 
-    public String selectedDiet = "";
-    public String selectedMeal = "";
-
+    private final String selectedDiet;
+    private final String selectedMeal;
 
     private ChipGroup dietChipGroup;
     private ChipGroup mealChipGroup;
@@ -54,8 +52,8 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
     private Chip drinkChip;
 
     public FilterBottomSheet(String diet, String meal) {
-        if (diet != null) this.selectedDiet = diet;
-        if (meal != null) this.selectedMeal = meal;
+        this.selectedDiet = diet;
+        this.selectedMeal = meal;
     }
 
     @Nullable
@@ -68,7 +66,7 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         dietChipGroup = view.findViewById(R.id.dietChipGroup);
         mealChipGroup = view.findViewById(R.id.mealChipGroup);
-        glutenFreeChip = view.findViewById(R.id.glutenFreeChip);
+        glutenFreeChip = view.findViewById(R.id.gluttenFreechip);
         vegeterianChip = view.findViewById(R.id.vegetarianchip);
         ketogenicChip = view.findViewById(R.id.ketogenicChip);
         lactoVegetarianChip = view.findViewById(R.id.lactoVegetarianChip);
@@ -80,7 +78,7 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
         LowFODMAPChip = view.findViewById(R.id.LowFODMAPChip);
         Whole30Chip = view.findViewById(R.id.Whole30Chip);
         breakfastChip = view.findViewById(R.id.breakfastChip);
-        appetizerChip = view.findViewById(R.id.appetizerChip);
+        appetizerChip = view.findViewById(R.id.appetizerchip);
         maincourseChip = view.findViewById(R.id.maincourseChip);
         sidedishChip = view.findViewById(R.id.sidedish);
         dessertChip = view.findViewById(R.id.dessertChip);
@@ -94,7 +92,6 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
         snackChip = view.findViewById(R.id.snackChip);
         drinkChip = view.findViewById(R.id.drinkChip);
 
-
         switch (selectedDiet) {
             case "Gluten Free":
                 glutenFreeChip.setChecked(true);
@@ -102,7 +99,6 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
             case "Vegetarian":
                 vegeterianChip.setChecked(true);
                 break;
-
             case "Ketogenic":
                 ketogenicChip.setChecked(true);
                 break;
@@ -180,11 +176,12 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
         String diet = null;
         String meal = null;
 
         switch (dietChipGroup.getCheckedChipId()) {
-            case R.id.glutenFreeChip:
+            case R.id.gluttenFreechip:
                 diet = "Gluten Free";
                 break;
             case R.id.vegetarianchip:
@@ -217,13 +214,14 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
             case R.id.Whole30Chip:
                 diet = "Whole30";
                 break;
+
         }
 
         switch (mealChipGroup.getCheckedChipId()) {
             case R.id.breakfastChip:
                 meal = "breakfast";
                 break;
-            case R.id.appetizerChip:
+            case R.id.appetizerchip:
                 meal = "appetizer";
                 break;
             case R.id.maincourseChip:
@@ -264,11 +262,15 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
                 break;
         }
 
-        SearchFragment fragment = (SearchFragment) getParentFragment();
+        RecipeFragment fragment = (RecipeFragment) getParentFragment();
         if (fragment != null) {
             fragment.setVariables(diet, meal);
         }
 
-        super.onDismiss(dialog);
     }
+
+    private void onDismiss() {
+
+    }
+
 }
