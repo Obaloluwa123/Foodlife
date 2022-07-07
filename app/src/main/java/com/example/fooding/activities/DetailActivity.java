@@ -1,6 +1,7 @@
 package com.example.fooding.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -49,7 +50,7 @@ public class DetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable throwable) {
-
+                    Log.d("Failed", throwable.toString());
                 }
             });
         }
