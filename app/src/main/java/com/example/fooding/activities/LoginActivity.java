@@ -8,13 +8,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.fooding.R;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+@SuppressWarnings("ALL")
 public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
@@ -22,14 +22,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
 
+    ParseUser currentUser = ParseUser.getCurrentUser();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        if(currentUser != null){
-            openMainActivity();
-        }
+
+
         etUsername = findViewById(R.id.etnewUsername);
         etPassword = findViewById(R.id.etnewPassword);
         Button etSignUp = findViewById(R.id.etSignUp);
@@ -42,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
                 String username = etUsername.getText().toString();
                 String password = etPassword.getText().toString();
                 loginUser(username, password);
+                if (currentUser != null) {
+                    openMainActivity();
+                }
             }
         });
 
@@ -54,22 +57,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     public void loginUser(String username, String password) {
-        //Todo: write the logic
-        Log.i(TAG,"Attempting  to login user" + username);
+        Log.i(TAG, "Attempting  to login user" + username);
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                if(e != null){
-                    Log.e(TAG,"Issue with login", e);
-                    Toast.makeText(LoginActivity.this,"Issue with login!", Toast.LENGTH_SHORT).show();
+                if (e != null) {
+                    Log.e(TAG, "Issue with login", e);
                     return;
                 }
                 openMainActivity();
-                Toast.makeText(LoginActivity.this,"Sucess!", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
     private void openMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

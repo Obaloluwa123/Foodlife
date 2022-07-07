@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--suppress ALL -->
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/cyan2</item>
         <item name="colorPrimaryDark">@color/cyan3</item>
         <item name="colorAccent">@color/cyan4</item>
         <item name="android:textColorPrimary">@color/white</item>
+    </style>
+
+    <style name="CustomChipStyle" parent="Widget.MaterialComponents.Chip.Filter">
+        <item name="chipBackgroundColor">@color/chip_background_color</item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="checkedIconTint">@color/chip_text_color</item>
+    </style>
+
+    <!--suppress AndroidDomInspection -->
+    <style name="DetailsActivitystyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/cyan2</item>
+        <item name="colorPrimaryDark">@color/cyan3</item>
+        <item name="colorAccent">@color/cyan4</item>
+        <item name="colorControlNormal"></item>
+        <item name="android:statusBarColor">@color/cyan2</item>
     </style>
 </resources>

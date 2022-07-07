@@ -1,6 +1,5 @@
 package com.example.fooding.adapters;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,51 +13,75 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
 import com.example.fooding.models.Food;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
-public class FoodAdapter extends RecyclerView.Adapter <FoodAdapter.ViewHolder>{
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> implements View.OnClickListener {
 
-    final Context context;
+    final FoodAdapterListener listener;
     final List<Food> Foods;
 
-    public FoodAdapter(Context context, List<Food> Foods) {
-        this.context = context;
+    public FoodAdapter(List<Food> Foods, FoodAdapterListener listener) {
         this.Foods = Foods;
+        this.listener = listener;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d ("foodadapter", "onCreateViewHolder");
-        View FoodView = LayoutInflater.from(context).inflate(R.layout.item_food, parent, false);
+        Log.d("foodadapter", "onCreateViewHolder");
+        View FoodView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food, parent, false);
         return new ViewHolder(FoodView);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d ("foodadapter", "onBindViewHolder" + position);
+        Log.d("foodadapter", "onBindViewHolder" + position);
         Food food = Foods.get(position);
         holder.bind(food);
 
     }
+
     @Override
 
-    public int getItemCount() {return Foods.size();}
+    public int getItemCount() {
+        return Foods.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         final TextView tvTitle;
         final ImageView ivImage;
+        final MaterialCardView cardView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitle = itemView.findViewById(R.id.tvTitle);
             ivImage = itemView.findViewById(R.id.ivImage);
-
+            cardView = itemView.findViewById(R.id.cardView);
         }
+
         public void bind(Food food) {
             tvTitle.setText(food.getTitle());
-            Glide.with(context).load(food.getImage()).into(ivImage);
+            Glide.with(ivImage.getContext()).load(food.getImage()).into(ivImage);
+            cardView.setOnClickListener(view -> {
+                if (listener != null) {
+                    listener.onFoodClicked(food);
+                }
+            });
         }
+    }
+
+    public interface FoodAdapterListener {
+        void onFoodClicked(Food food);
     }
 }

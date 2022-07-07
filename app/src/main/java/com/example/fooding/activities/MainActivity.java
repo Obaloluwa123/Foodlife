@@ -12,17 +12,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.example.fooding.R;
-import com.example.fooding.fragments.IngredientFragment;
+import com.example.fooding.fragments.FavoriteFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import com.example.fooding.fragments.HomeFragment;
 import com.example.fooding.fragments.ProfileFragment;
-import com.example.fooding.fragments.SearchFragment;
+import com.example.fooding.fragments.RecipeFragment;
 import com.parse.ParseUser;
+
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
     final FragmentManager fragmentManager = getSupportFragmentManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,17 +38,11 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
-                    case R.id.action_home:
-                        fragment = new HomeFragment();
-                        break;
-                    case R.id.action_pantry:
-                        fragment = new IngredientFragment();
-                        break;
-                    case R.id.action_search:
-                        fragment = new SearchFragment();
+                    case R.id.action_recipe:
+                        fragment = new RecipeFragment();
                         break;
                     case R.id.action_favorite:
-                        fragment = new IngredientFragment();
+                        fragment = new FavoriteFragment();
                         break;
                     case R.id.action_profile:
                     default:
@@ -58,8 +54,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-        bottomNavigationView.setSelectedItemId(R.id.action_home);
+        bottomNavigationView.setSelectedItemId(R.id.action_recipe);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -78,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void onLogout() {
         ParseUser.logOut();
-        Intent i = new Intent (this,LoginActivity.class);
+        Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
         finish();
     }

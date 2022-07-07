@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fooding.R;
 
+@SuppressWarnings("Convert2Lambda")
 public class SplashscreenActivity extends AppCompatActivity {
 
     @Override
@@ -18,9 +19,9 @@ public class SplashscreenActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity( new Intent(SplashscreenActivity.this, LoginActivity.class));
+                startActivity(new Intent(SplashscreenActivity.this, LoginActivity.class));
                 finish();
             }
-        },1000);
+        }, 1000);
     }
 }

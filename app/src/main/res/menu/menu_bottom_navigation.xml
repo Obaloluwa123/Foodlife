@@ -3,17 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_home"
-        android:icon="@drawable/ic_baseline_home_24"
-        android:title="Home"
-        app:showAsAction="always" />
-    <item
-        android:id="@+id/action_pantry"
-        android:icon="@android:drawable/ic_menu_add"
-        android:title="Pantry" />
-    <item
-        android:id="@+id/action_search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:id="@+id/action_recipe"
+        android:icon="@drawable/ic_book"
         android:title="Search"
         app:showAsAction="always" />
     <item
