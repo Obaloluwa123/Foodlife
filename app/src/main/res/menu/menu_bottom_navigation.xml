@@ -3,10 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_pantry"
+        android:icon="@drawable/icons8_fridge_30"
+        android:title="Fridge" />
+    <item
         android:id="@+id/action_recipe"
         android:icon="@drawable/ic_book"
         android:title="Search"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/action_explore"
+        android:icon="@drawable/icons8_compass_60"
+        android:title="explore" />
     <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/icons8_music_64"

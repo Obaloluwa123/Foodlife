@@ -6,14 +6,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.os.SystemClock;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
+import com.example.fooding.activities.MainActivity;
+import com.example.fooding.favourite.FavouriteList;
 import com.example.fooding.models.FoodExtended;
 
 @SuppressWarnings({"PointlessBooleanExpression", "StatementWithEmptyBody"})
@@ -42,6 +48,7 @@ public class OverviewFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         TextView textView = view.findViewById(R.id.title_textView);
         ImageView imageView = view.findViewById(R.id.ivImage);
+        ImageView likeButtonImageView = view.findViewById(R.id.like_imageView);
         TextView likestextView = view.findViewById(R.id.like_textView);
         TextView summaryTextView = view.findViewById(R.id.summary_textView);
         TextView timeTextView = view.findViewById(R.id.time_textView);
@@ -54,6 +61,69 @@ public class OverviewFragment extends Fragment {
         if (foodExtended.Vegetarian == true) {
         }
 
+        if (MainActivity.favouriteDatabase.favouriteDao().exists(String.valueOf(foodExtended.id))) {
+            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
+        } else {
+            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
+
+        }
+
         Glide.with(requireContext()).load(foodExtended.image).into(imageView);
+
+        final Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.like_button_action);
+
+        likeButtonImageView.setOnClickListener(new DoubleClickListener() {
+            @Override
+            public void onDoubleClick() {
+                likeButtonImageView.startAnimation(animation);
+                FavouriteList favoriteList = new FavouriteList();
+
+                String id = String.valueOf(foodExtended.id);
+                String title = foodExtended.title;
+                String image = foodExtended.image;
+
+
+                favoriteList.setId(id);
+                favoriteList.setTitle(title);
+                favoriteList.setImage(image);
+
+                if (MainActivity.favouriteDatabase.favouriteDao().exists(id)) {
+                    MainActivity.favouriteDatabase.favouriteDao().delete(favoriteList);
+                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
+                } else {
+                    MainActivity.favouriteDatabase.favouriteDao().addData(favoriteList);
+                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
+                    Log.d("ID", id);
+                }
+            }
+        });
+    }
+
+    public abstract class DoubleClickListener implements View.OnClickListener {
+
+        private static final long DEFAULT_QUALIFICATION_SPAN = 200;
+        private long doubleClickQualificationSpanInMillis;
+        private long timestampLastClick;
+
+        public DoubleClickListener() {
+            doubleClickQualificationSpanInMillis = DEFAULT_QUALIFICATION_SPAN;
+            timestampLastClick = 0;
+        }
+
+        public DoubleClickListener(long doubleClickQualificationSpanInMillis) {
+            this.doubleClickQualificationSpanInMillis = doubleClickQualificationSpanInMillis;
+            timestampLastClick = 0;
+        }
+
+        @Override
+        public void onClick(View v) {
+            if ((SystemClock.elapsedRealtime() - timestampLastClick) < doubleClickQualificationSpanInMillis) {
+                onDoubleClick();
+            }
+            timestampLastClick = SystemClock.elapsedRealtime();
+        }
+
+        public abstract void onDoubleClick();
+
     }
 }

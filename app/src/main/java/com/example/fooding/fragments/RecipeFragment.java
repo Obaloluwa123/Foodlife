@@ -43,7 +43,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-@SuppressWarnings({"ConstantConditions", "UnusedAssignment", "unused"})
+@SuppressWarnings("ALL")
 public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterListener {
 
     private FloatingActionButton filterFab;
@@ -167,72 +167,7 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
         startActivity(intent);
     }
 
-    public void storeData() {
 
-        String url = "https://api.spoonacular.com/recipes/complexSearch?apiKey=%s";
-        boolean apikey = false;
-
-        try {
-            DB snappydb = DBFactory.open(requireContext());
-            apikey = snappydb.exists(url);
-            if (apikey) {
-                myResponse1 = snappydb.get(url);
-                Log.d("Url", myResponse1);
-                getDatafromDB();
-                Log.i(TAG, "fromcache");
-            } else {
-
-                AsyncHttpClient client = new AsyncHttpClient();
-                client.get(complex_search_url, new JsonHttpResponseHandler() {
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        Log.d(TAG, "onSuccess");
-                        JSONObject jsonObject = json.jsonObject;
-                        final String myResponse = jsonObject.toString();
-                        Log.i(TAG, "JSON" + myResponse);
-                        try {
-                            DB snappydb = DBFactory.open(getContext());
-                            snappydb.put(url, myResponse);
-                            snappydb.close();
-                            storeData();
-                        } catch (SnappydbException e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.d(TAG, "onFailure");
-
-                    }
-
-                });
-            }
-
-        } catch (SnappydbException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    public void getDatafromDB() {
-
-        try {
-            Log.d(TAG, myResponse1);
-            JSONObject jsonObject = new JSONObject(myResponse1);
-            JSONArray results = jsonObject.getJSONArray("results");
-            Log.i(TAG, "Results: " + results);
-            foods.addAll(Food.fromJsonArray(results));
-            foodAdapter.notifyDataSetChanged();
-            Log.i(TAG, "food: " + foods.size());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-    }
 }
 
 
