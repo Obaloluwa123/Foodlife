@@ -14,20 +14,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
-import com.example.fooding.models.Food;
 import com.example.fooding.models.FoodExtended;
 
+@SuppressWarnings({"PointlessBooleanExpression", "StatementWithEmptyBody"})
 public class OverviewFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";
 
     public FoodExtended foodExtended;
-
-    private TextView textView;
-    private ImageView imageView;
-    private TextView likestextView;
-    private TextView summaryTextView;
-    private TextView timeTextView;
 
     public static OverviewFragment newInstance(FoodExtended food) {
         OverviewFragment fragment = new OverviewFragment();
@@ -46,11 +40,11 @@ public class OverviewFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textView = view.findViewById(R.id.title_textView);
-        imageView = view.findViewById(R.id.ivImage);
-        likestextView = view.findViewById(R.id.like_textView);
-        summaryTextView = view.findViewById(R.id.summary_textView);
-        timeTextView = view.findViewById(R.id.time_textView);
+        TextView textView = view.findViewById(R.id.title_textView);
+        ImageView imageView = view.findViewById(R.id.ivImage);
+        TextView likestextView = view.findViewById(R.id.like_textView);
+        TextView summaryTextView = view.findViewById(R.id.summary_textView);
+        TextView timeTextView = view.findViewById(R.id.time_textView);
         foodExtended = requireArguments().getParcelable(FOOD_ARG);
 
         textView.setText(foodExtended.title);

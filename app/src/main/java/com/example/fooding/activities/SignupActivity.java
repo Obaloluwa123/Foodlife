@@ -15,6 +15,7 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+@SuppressWarnings("ALL")
 public class SignupActivity extends AppCompatActivity {
 
     public static final String TAG = "SignUpActivity";
@@ -22,7 +23,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etnewUsername;
     private EditText etnewPassword;
     private EditText etnewEmail;
-    private Button signupBtn;
 
 
     @Override
@@ -31,7 +31,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         etnewUsername = findViewById(R.id.etnewUsername);
         etnewPassword = findViewById(R.id.etnewPassword);
-        signupBtn = findViewById(R.id.signupBtn);
+        Button signupBtn = findViewById(R.id.signupBtn);
         etnewEmail = findViewById(R.id.etnewEmail);
 
 

@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fooding.R;
 
+@SuppressWarnings("Convert2Lambda")
 public class SplashscreenActivity extends AppCompatActivity {
 
     @Override

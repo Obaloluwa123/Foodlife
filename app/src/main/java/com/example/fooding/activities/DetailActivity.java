@@ -1,7 +1,6 @@
 package com.example.fooding.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -11,20 +10,18 @@ import com.example.fooding.R;
 import com.example.fooding.adapters.PagerAdapter;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
-import com.example.fooding.models.Food;
 import com.example.fooding.models.FoodExtended;
 import com.google.android.material.tabs.TabLayout;
 
+@SuppressWarnings("ALL")
 public class DetailActivity extends AppCompatActivity {
 
     public static final String FOOD_ID_ARG = "FOOD_ID_ARG";
     public static final String FOOD_DIET_ARG = "FOOD_DIET_ARG";
     public static final String FOOD_MEAL_ARG = "FOOD_MEAL_ARG";
 
-    public static final String TAG = "DetailActivity";
     final FragmentManager fragmentManager = getSupportFragmentManager();
     final FoodClient foodClient = new FoodClient();
-    private PagerAdapter pagerAdapter;
     private ViewPager viewPager;
     private TabLayout tabLayout;
 
@@ -59,7 +56,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(FoodExtended food) {
-        pagerAdapter = new PagerAdapter(food, fragmentManager);
+        PagerAdapter pagerAdapter = new PagerAdapter(food, fragmentManager);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }

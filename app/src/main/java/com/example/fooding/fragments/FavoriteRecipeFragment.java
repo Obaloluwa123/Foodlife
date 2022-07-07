@@ -10,16 +10,10 @@ import android.view.ViewGroup;
 
 import com.example.fooding.R;
 
+@SuppressWarnings("StatementWithEmptyBody")
 public class FavoriteRecipeFragment extends Fragment {
 
     public FavoriteRecipeFragment() {
-    }
-
-    public static FavoriteRecipeFragment newInstance() {
-        FavoriteRecipeFragment fragment = new FavoriteRecipeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override

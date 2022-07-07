@@ -17,6 +17,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 
+@SuppressWarnings("unused")
 public class FoodClient extends AsyncHttpClient {
     public static final String API_KEY = BuildConfig.SPOONACULAR_KEY;
     public static final String RECIPE_SEARCH_URL = String.format("https://api.spoonacular.com/recipes/complexSearch?apiKey=%s", API_KEY);

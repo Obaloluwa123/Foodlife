@@ -12,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fooding.R;
 import com.example.fooding.models.Ingredients;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
+@SuppressWarnings("ALL")
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
     List<Ingredients> ingredients;
     Context context;

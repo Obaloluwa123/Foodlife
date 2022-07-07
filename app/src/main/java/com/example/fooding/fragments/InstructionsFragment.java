@@ -11,9 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.fooding.R;
-import com.example.fooding.models.Food;
 import com.example.fooding.models.FoodExtended;
 
+@SuppressWarnings({"ConstantConditions", "unused"})
 public class InstructionsFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";

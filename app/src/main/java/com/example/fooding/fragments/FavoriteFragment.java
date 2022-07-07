@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.fooding.R;
 
+@SuppressWarnings("StatementWithEmptyBody")
 public class FavoriteFragment extends Fragment {
 
     public FavoriteFragment() {

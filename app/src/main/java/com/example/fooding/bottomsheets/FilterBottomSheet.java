@@ -25,32 +25,6 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
     private ChipGroup dietChipGroup;
     private ChipGroup mealChipGroup;
 
-    private Chip glutenFreeChip;
-    private Chip vegeterianChip;
-    private Chip ketogenicChip;
-    private Chip lactoVegetarianChip;
-    private Chip ovoVegetarianChip;
-    private Chip veganChip;
-    private Chip PescetarianChip;
-    private Chip PaleoChip;
-    private Chip PrimalChip;
-    private Chip LowFODMAPChip;
-    private Chip Whole30Chip;
-    private Chip breakfastChip;
-    private Chip appetizerChip;
-    private Chip maincourseChip;
-    private Chip sidedishChip;
-    private Chip dessertChip;
-    private Chip saladChip;
-    private Chip breadChip;
-    private Chip soupChip;
-    private Chip beverageChip;
-    private Chip sauceChip;
-    private Chip marinadeChip;
-    private Chip fingerfooddish;
-    private Chip snackChip;
-    private Chip drinkChip;
-
     public FilterBottomSheet(String diet, String meal) {
         this.selectedDiet = diet;
         this.selectedMeal = meal;
@@ -66,114 +40,119 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         dietChipGroup = view.findViewById(R.id.dietChipGroup);
         mealChipGroup = view.findViewById(R.id.mealChipGroup);
-        glutenFreeChip = view.findViewById(R.id.gluttenFreechip);
-        vegeterianChip = view.findViewById(R.id.vegetarianchip);
-        ketogenicChip = view.findViewById(R.id.ketogenicChip);
-        lactoVegetarianChip = view.findViewById(R.id.lactoVegetarianChip);
-        ovoVegetarianChip = view.findViewById(R.id.ovoVegetarianChip);
-        veganChip = view.findViewById(R.id.veganChip);
-        PescetarianChip = view.findViewById(R.id.PescetarianChip);
-        PaleoChip = view.findViewById(R.id.PaleoChip);
-        PrimalChip = view.findViewById(R.id.PrimalChip);
-        LowFODMAPChip = view.findViewById(R.id.LowFODMAPChip);
-        Whole30Chip = view.findViewById(R.id.Whole30Chip);
-        breakfastChip = view.findViewById(R.id.breakfastChip);
-        appetizerChip = view.findViewById(R.id.appetizerchip);
-        maincourseChip = view.findViewById(R.id.maincourseChip);
-        sidedishChip = view.findViewById(R.id.sidedish);
-        dessertChip = view.findViewById(R.id.dessertChip);
-        saladChip = view.findViewById(R.id.saladChip);
-        breadChip = view.findViewById(R.id.breadChip);
-        soupChip = view.findViewById(R.id.soupChip);
-        beverageChip = view.findViewById(R.id.soupChip);
-        sauceChip = view.findViewById(R.id.sauceChip);
-        marinadeChip = view.findViewById(R.id.marinadeChip);
-        fingerfooddish = view.findViewById(R.id.fingerfooddish);
-        snackChip = view.findViewById(R.id.snackChip);
-        drinkChip = view.findViewById(R.id.drinkChip);
+        Chip glutenFreeChip = view.findViewById(R.id.gluttenFreechip);
+        Chip vegeterianChip = view.findViewById(R.id.vegetarianchip);
+        Chip ketogenicChip = view.findViewById(R.id.ketogenicChip);
+        Chip lactoVegetarianChip = view.findViewById(R.id.lactoVegetarianChip);
+        Chip ovoVegetarianChip = view.findViewById(R.id.ovoVegetarianChip);
+        Chip veganChip = view.findViewById(R.id.veganChip);
+        Chip pescetarianChip = view.findViewById(R.id.PescetarianChip);
+        Chip paleoChip = view.findViewById(R.id.PaleoChip);
+        Chip primalChip = view.findViewById(R.id.PrimalChip);
+        Chip lowFODMAPChip = view.findViewById(R.id.LowFODMAPChip);
+        Chip whole30Chip = view.findViewById(R.id.Whole30Chip);
+        Chip breakfastChip = view.findViewById(R.id.breakfastChip);
+        Chip appetizerChip = view.findViewById(R.id.appetizerchip);
+        Chip maincourseChip = view.findViewById(R.id.maincourseChip);
+        Chip sidedishChip = view.findViewById(R.id.sidedish);
+        Chip dessertChip = view.findViewById(R.id.dessertChip);
+        Chip saladChip = view.findViewById(R.id.saladChip);
+        Chip breadChip = view.findViewById(R.id.breadChip);
+        Chip soupChip = view.findViewById(R.id.soupChip);
+        Chip beverageChip = view.findViewById(R.id.soupChip);
+        Chip sauceChip = view.findViewById(R.id.sauceChip);
+        Chip marinadeChip = view.findViewById(R.id.marinadeChip);
+        Chip fingerfooddish = view.findViewById(R.id.fingerfooddish);
+        Chip snackChip = view.findViewById(R.id.snackChip);
+        Chip drinkChip = view.findViewById(R.id.drinkChip);
 
-        switch (selectedDiet) {
-            case "Gluten Free":
-                glutenFreeChip.setChecked(true);
-                break;
-            case "Vegetarian":
-                vegeterianChip.setChecked(true);
-                break;
-            case "Ketogenic":
-                ketogenicChip.setChecked(true);
-                break;
-            case "lactoVegetarianChip":
-                lactoVegetarianChip.setChecked(true);
-                break;
-            case "Ovo-Vegetarian":
-                ovoVegetarianChip.setChecked(true);
-                break;
-            case "veganChip":
-                veganChip.setChecked(true);
-                break;
-            case "PescetarianChip":
-                PescetarianChip.setChecked(true);
-                break;
-            case "PaleoChip":
-                PaleoChip.setChecked(true);
-                break;
-            case "PrimalChip":
-                PrimalChip.setChecked(true);
-                break;
-            case "LowFODMAPChip":
-                LowFODMAPChip.setChecked(true);
-                break;
-            case "Whole30":
-                Whole30Chip.setChecked(true);
-                break;
+        if (selectedDiet != null) {
+            switch (selectedDiet) {
+                case "Gluten Free":
+                    glutenFreeChip.setChecked(true);
+                    break;
+                case "Vegetarian":
+                    vegeterianChip.setChecked(true);
+                    break;
+                case "Ketogenic":
+                    ketogenicChip.setChecked(true);
+                    break;
+                case "lactoVegetarianChip":
+                    lactoVegetarianChip.setChecked(true);
+                    break;
+                case "Ovo-Vegetarian":
+                    ovoVegetarianChip.setChecked(true);
+                    break;
+                case "veganChip":
+                    veganChip.setChecked(true);
+                    break;
+                case "PescetarianChip":
+                    pescetarianChip.setChecked(true);
+                    break;
+                case "PaleoChip":
+                    paleoChip.setChecked(true);
+                    break;
+                case "PrimalChip":
+                    primalChip.setChecked(true);
+                    break;
+                case "LowFODMAPChip":
+                    lowFODMAPChip.setChecked(true);
+                    break;
+                case "Whole30":
+                    whole30Chip.setChecked(true);
+                    break;
+            }
         }
 
-        switch (selectedMeal) {
-            case "breakfast":
-                breakfastChip.setChecked(true);
-                break;
-            case "appetizer":
-                appetizerChip.setChecked(true);
-                break;
-            case "maincourse":
-                maincourseChip.setChecked(true);
-                break;
-            case "sidedish":
-                sidedishChip.setChecked(true);
-                break;
-            case "dessertChip":
-                dessertChip.setChecked(true);
-                break;
-            case "saladChip":
-                saladChip.setChecked(true);
-                break;
-            case "breadChip":
-                breadChip.setChecked(true);
-                break;
-            case "soup":
-                soupChip.setChecked(true);
-                break;
-            case "beverage":
-                beverageChip.setChecked(true);
-                break;
-            case "sauceChip":
-                sauceChip.setChecked(true);
-                break;
-            case "marinade":
-                marinadeChip.setChecked(true);
-                break;
-            case "fingerfooddish":
-                fingerfooddish.setChecked(true);
-                break;
-            case "snack":
-                snackChip.setChecked(true);
-                break;
-            case "drink":
-                drinkChip.setChecked(true);
-                break;
+        if (selectedMeal != null) {
+            switch (selectedMeal) {
+                case "breakfast":
+                    breakfastChip.setChecked(true);
+                    break;
+                case "appetizer":
+                    appetizerChip.setChecked(true);
+                    break;
+                case "maincourse":
+                    maincourseChip.setChecked(true);
+                    break;
+                case "sidedish":
+                    sidedishChip.setChecked(true);
+                    break;
+                case "dessertChip":
+                    dessertChip.setChecked(true);
+                    break;
+                case "saladChip":
+                    saladChip.setChecked(true);
+                    break;
+                case "breadChip":
+                    breadChip.setChecked(true);
+                    break;
+                case "soup":
+                    soupChip.setChecked(true);
+                    break;
+                case "beverage":
+                    beverageChip.setChecked(true);
+                    break;
+                case "sauceChip":
+                    sauceChip.setChecked(true);
+                    break;
+                case "marinade":
+                    marinadeChip.setChecked(true);
+                    break;
+                case "fingerfooddish":
+                    fingerfooddish.setChecked(true);
+                    break;
+                case "snack":
+                    snackChip.setChecked(true);
+                    break;
+                case "drink":
+                    drinkChip.setChecked(true);
+                    break;
+            }
         }
     }
 
+    @SuppressWarnings("DuplicateBranchesInSwitch")
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
@@ -266,10 +245,6 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
         if (fragment != null) {
             fragment.setVariables(diet, meal);
         }
-
-    }
-
-    private void onDismiss() {
 
     }
 

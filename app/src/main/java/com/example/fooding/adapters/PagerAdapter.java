@@ -11,10 +11,15 @@ import com.example.fooding.fragments.InstructionsFragment;
 import com.example.fooding.fragments.OverviewFragment;
 import com.example.fooding.models.FoodExtended;
 
+@SuppressWarnings("ALL")
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     public FoodExtended food;
+    private static final int PAGE_0 = 0;
+    private static final int PAGE_1 = 1;
+    private static final int PAGE_2 = 2;
 
+    @SuppressWarnings("deprecation")
     public PagerAdapter(FoodExtended food, @NonNull FragmentManager fm) {
         super(fm);
         this.food = food;
@@ -24,11 +29,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position) {
-            case 0:
+            case PAGE_0:
                 return OverviewFragment.newInstance(food);
-            case 1:
+            case PAGE_1:
                 return IngredientsFragment.newInstance(food);
-            case 2:
+            case PAGE_2:
                 return InstructionsFragment.newInstance(food);
             default:
                 return null;
@@ -44,11 +49,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         switch (position) {
-            case 0:
+            case PAGE_0:
                 return "Overview";
-            case 1:
+            case PAGE_1:
                 return "Ingredients";
-            case 2:
+            case PAGE_2:
                 return "Instructions";
             default:
                 return null;

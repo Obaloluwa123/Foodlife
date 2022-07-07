@@ -3,11 +3,11 @@ package com.example.fooding.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class Ingredients {
 
     public Double amount;

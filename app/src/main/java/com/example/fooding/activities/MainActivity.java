@@ -19,6 +19,7 @@ import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.RecipeFragment;
 import com.parse.ParseUser;
 
+@SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";

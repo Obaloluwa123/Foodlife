@@ -20,6 +20,7 @@ public class FoodExtended implements Parcelable {
     public boolean cheap;
     public boolean dairyFree;
     public boolean glutenFree;
+    @SuppressWarnings("unused")
     public int id;
     public String sourceName;
     public String sourceUrl;
