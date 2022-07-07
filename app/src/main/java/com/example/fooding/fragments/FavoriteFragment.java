@@ -2,30 +2,23 @@ package com.example.fooding.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.SearchView;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.fooding.R;
 import com.example.fooding.activities.DetailActivity;
 import com.example.fooding.activities.MainActivity;
-import com.example.fooding.adapters.FoodAdapter;
-import com.example.fooding.bottomsheets.FilterBottomSheet;
 import com.example.fooding.favourite.FavouriteAdapter;
 import com.example.fooding.favourite.FavouriteList;
-import com.example.fooding.models.Food;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
@@ -67,10 +60,10 @@ public class FavoriteFragment extends Fragment implements FavouriteAdapter.Favou
 
         List<FavouriteList> favoriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
 
-        if(favoriteLists.isEmpty()){
+        if (favoriteLists.isEmpty()) {
             noItemText.setVisibility(View.VISIBLE);
         }
-        favouriteAdapter=new FavouriteAdapter(favoriteLists, this);
+        favouriteAdapter = new FavouriteAdapter(favoriteLists, this);
         favouriteRecipesRecyclerView.setAdapter(favouriteAdapter);
         favouriteRecipesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -81,7 +74,6 @@ public class FavoriteFragment extends Fragment implements FavouriteAdapter.Favou
         intent.putExtra(DetailActivity.FOOD_ID_ARG, favouriteList.getId());
         startActivity(intent);
     }
-
 
 
 }

@@ -1,12 +1,9 @@
 package com.example.fooding.adapters;
 
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,10 +20,10 @@ import java.util.List;
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> implements View.OnClickListener {
 
     final FoodAdapterListener listener;
-    final List<Food> Foods;
+    final List<Food> foods;
 
-    public FoodAdapter(List<Food> Foods, FoodAdapterListener listener) {
-        this.Foods = Foods;
+    public FoodAdapter(List<Food> foods, FoodAdapterListener listener) {
+        this.foods = foods;
         this.listener = listener;
     }
 
@@ -42,7 +39,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Log.d("foodadapter", "onBindViewHolder" + position);
-        Food food = Foods.get(position);
+        Food food = foods.get(position);
         holder.bind(food);
 
     }
@@ -50,7 +47,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
     @Override
 
     public int getItemCount() {
-        return Foods.size();
+        return foods.size();
     }
 
     @Override

@@ -9,9 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
-import com.example.fooding.models.Food;
 import com.example.fooding.models.IngredientSearchSuggestion;
-import com.example.fooding.models.Ingredients;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +38,10 @@ public class SuggestionsAdapter extends RecyclerView.Adapter<SuggestionsAdapter.
         return suggestions.size();
     }
 
+    public interface SuggestionAdapterListener {
+        void onSuggestionClicked(IngredientSearchSuggestion suggestion);
+    }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView ingredientNameTextView;
 
@@ -59,9 +61,5 @@ public class SuggestionsAdapter extends RecyclerView.Adapter<SuggestionsAdapter.
                 }
             });
         }
-    }
-
-    public interface SuggestionAdapterListener {
-        void onSuggestionClicked(IngredientSearchSuggestion suggestion);
     }
 }

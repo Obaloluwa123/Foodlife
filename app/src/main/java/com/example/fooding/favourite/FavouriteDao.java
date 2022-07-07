@@ -11,17 +11,17 @@ import java.util.List;
 public interface FavouriteDao {
 
     @Insert
-    public void addData(FavouriteList favouriteList);
+    void addData(FavouriteList favouriteList);
 
     @Query("select * from favouritelist")
-    public List<FavouriteList> getFavouriteData();
+    List<FavouriteList> getFavouriteData();
 
     @Query("SELECT EXISTS(SELECT * FROM favouritelist WHERE Id=:id)")
-    public Boolean exists(String id);
+    Boolean exists(String id);
 
 
     @Delete
-    public void delete(FavouriteList favouriteList);
+    void delete(FavouriteList favouriteList);
 
 }
 

@@ -1,11 +1,6 @@
 package com.example.fooding.fragments;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +10,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
@@ -102,7 +101,7 @@ public class OverviewFragment extends Fragment {
     public abstract class DoubleClickListener implements View.OnClickListener {
 
         private static final long DEFAULT_QUALIFICATION_SPAN = 200;
-        private long doubleClickQualificationSpanInMillis;
+        private final long doubleClickQualificationSpanInMillis;
         private long timestampLastClick;
 
         public DoubleClickListener() {

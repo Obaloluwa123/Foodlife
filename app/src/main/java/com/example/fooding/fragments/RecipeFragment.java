@@ -1,11 +1,8 @@
 package com.example.fooding.fragments;
 
-import static com.example.fooding.clients.FoodClient.API_KEY;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,8 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.fooding.BuildConfig;
 import com.example.fooding.R;
 import com.example.fooding.activities.DetailActivity;
 import com.example.fooding.adapters.FoodAdapter;
@@ -30,18 +26,9 @@ import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
 import com.example.fooding.models.Food;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.snappydb.DB;
-import com.snappydb.DBFactory;
-import com.snappydb.SnappydbException;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.Headers;
 
 @SuppressWarnings("ALL")
 public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterListener {
@@ -57,7 +44,8 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
     private String currentSearch;
     private String myResponse1;
 
-    public static final String complex_search_url = String.format("https://api.spoonacular.com/recipes/complexSearch?apiKey=%s", API_KEY);
+    private static final Object API_KEY = BuildConfig.SPOONACULAR_KEY;
+    private static final String complex_search_url = String.format("https://api.spoonacular.com/recipes/complexSearch?apiKey=%s", API_KEY);
 
     public static final String TAG = "RecipeFragment";
 
@@ -90,7 +78,7 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
                                                     @Override
                                                     public boolean onQueryTextSubmit(String query) {
                                                         currentSearch = recipeSearchView.getQuery().toString();
-                                                        Recipes(currentSearch);
+                                                        getRecipes(currentSearch);
                                                         return false;
                                                     }
 
@@ -105,7 +93,7 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
         rvRecipes.setAdapter(foodAdapter);
         rvRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
         setupFAB();
-        Recipes(currentSearch);
+        getRecipes(currentSearch);
     }
 
     private void setupFAB() {
@@ -126,7 +114,7 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
         this.selectedDiet = diet;
         this.selectedMeal = meal;
         if (currentSearch != null && currentSearch.length() > 0) {
-            Recipes(currentSearch);
+            getRecipes(currentSearch);
         }
         recipeSearchView.clearFocus();
     }
@@ -142,7 +130,7 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
 
     }
 
-    private void Recipes(String searchValue) {
+    private void getRecipes(String searchValue) {
         FoodClient client = new FoodClient();
         client.getIngredients(selectedDiet, selectedMeal, searchValue, new NetworkCallback<List<Food>>() {
             @SuppressLint("NotifyDataSetChanged")

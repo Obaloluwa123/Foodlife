@@ -1,26 +1,25 @@
 package com.example.fooding.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.room.Room;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.room.Room;
+
 import com.example.fooding.R;
 import com.example.fooding.favourite.FavouriteDatabase;
 import com.example.fooding.fragments.FavoriteFragment;
 import com.example.fooding.fragments.PantryFragment;
-import com.example.fooding.fragments.RecipeExploreFragment;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import com.example.fooding.fragments.ProfileFragment;
+import com.example.fooding.fragments.RecipeExploreFragment;
 import com.example.fooding.fragments.RecipeFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
 
 @SuppressWarnings("ALL")

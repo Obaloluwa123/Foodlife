@@ -1,6 +1,5 @@
 package com.example.fooding.favourite;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
-import com.example.fooding.adapters.FoodAdapter;
-import com.example.fooding.models.Food;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;

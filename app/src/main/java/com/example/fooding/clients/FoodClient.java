@@ -21,18 +21,18 @@ import okhttp3.Headers;
 
 @SuppressWarnings("unused")
 public class FoodClient extends AsyncHttpClient {
-    public static final String API_KEY = BuildConfig.SPOONACULAR_KEY;
-    public static final String RECIPE_SEARCH_URL = String.format("https://api.spoonacular.com/recipes/complexSearch?apiKey=%s", API_KEY);
-    public static final String INGREDIENTS_SEARCH_URL = String.format("https://api.spoonacular.com/recipes/findByIngredients/{id}ingredientWidget.json?apiKey=%s", API_KEY);
-    public static final String EXTENDED_FOOD_TEMPLATE = "https://api.spoonacular.com/recipes/%s/information?apiKey=%s";
-    public static final String BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/";
-    public static final String INGREDIENT_AUTO_COMPLETE_URL = String.format("https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=%s", API_KEY);
+    private static final String API_KEY = BuildConfig.SPOONACULAR_KEY;
+    private static final String RECIPE_SEARCH_URL = String.format("https://api.spoonacular.com/recipes/complexSearch?apiKey=%s", API_KEY);
+    private static final String INGREDIENTS_SEARCH_URL = String.format("https://api.spoonacular.com/recipes/findByIngredients/{id}ingredientWidget.json?apiKey=%s", API_KEY);
+    private static final String EXTENDED_FOOD_TEMPLATE = "https://api.spoonacular.com/recipes/%s/information?apiKey=%s";
+    private static final String BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/";
+    private static final String INGREDIENT_AUTO_COMPLETE_URL = String.format("https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=%s", API_KEY);
 
     public FoodClient() {
         super();
     }
 
-    public void getRecipes(String query, JsonHttpResponseHandler handler) {
+    public void getRecipe(String query, JsonHttpResponseHandler handler) {
         RequestParams params = new RequestParams();
         params.put("query", query);
         params.put("number", 50);

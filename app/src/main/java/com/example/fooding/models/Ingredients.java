@@ -10,12 +10,12 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class Ingredients {
 
-    public Double amount;
-    public String consistency;
-    public String image;
-    public String name;
-    public String original;
-    public String unit;
+    private Double amount;
+    private String consistency;
+    private String image;
+    private String name;
+    private String original;
+    private String unit;
 
 
     public Ingredients(JSONObject jsonObject) throws JSONException {

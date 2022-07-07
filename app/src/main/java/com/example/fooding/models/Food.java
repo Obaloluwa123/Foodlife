@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Food {
-    String title;
-    String image;
-    String id;
+    private String title;
+    private String image;
+    private String id;
 
 
     public Food(JSONObject jsonObject) throws JSONException {
@@ -20,10 +20,10 @@ public class Food {
 
     }
 
-    public static List<Food> fromJsonArray(JSONArray FoodJsonArray) throws JSONException {
+    public static List<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
         List<Food> meals = new ArrayList<>();
-        for (int i = 0; i < FoodJsonArray.length(); i++) {
-            meals.add(new Food(FoodJsonArray.getJSONObject(i)));
+        for (int i = 0; i < foodJsonArray.length(); i++) {
+            meals.add(new Food(foodJsonArray.getJSONObject(i)));
         }
         return meals;
     }
