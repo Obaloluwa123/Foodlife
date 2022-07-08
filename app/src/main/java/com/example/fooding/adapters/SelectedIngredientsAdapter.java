@@ -1,13 +1,16 @@
 package com.example.fooding.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.fooding.R;
 import com.example.fooding.models.IngredientSearchSuggestion;
 
@@ -37,15 +40,18 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ingredientNameTextView;
+        TextView tvIingredientName;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ingredientNameTextView = itemView.findViewById(R.id.ingredientName);
+            tvIingredientName = itemView.findViewById(R.id.ingredientName);
+
         }
 
         public void bind(IngredientSearchSuggestion suggestion) {
-            ingredientNameTextView.setText(suggestion.name);
+            tvIingredientName.setText(suggestion.name);
+
         }
     }
 }

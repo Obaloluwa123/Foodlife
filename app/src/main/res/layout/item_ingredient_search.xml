@@ -1,14 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    android:id="@+id/ingredientName"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="52dp"
-    android:gravity="center_vertical"
-    tools:text="Rice"
-    android:paddingStart="24dp"
-    android:textColor="@color/black"
-    android:textSize="16sp"
-    android:background="?selectableItemBackground"
-    tools:ignore="RtlSymmetry" />
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:scrollHorizontally="false">
+
+    <TextView
+        android:id="@+id/ingredientName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/ingredientImage"
+        android:autoSizeTextType="uniform"
+        android:text="Rice"
+        />
+
+    <ImageView
+        android:id="@+id/ingredientImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:adjustViewBounds="true"
+        android:visibility="visible"
+        android:contentDescription="ingredientImage"
+        tools:srcCompat="@tools:sample/avatars" />
+</RelativeLayout>
+

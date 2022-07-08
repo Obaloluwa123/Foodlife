@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.23980815347721823" />
         <entry key="app/src/main/res/drawable/gradient_overlay.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1915" />

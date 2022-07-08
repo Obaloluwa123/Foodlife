@@ -6,11 +6,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
@@ -61,6 +63,7 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         suggestionsAdapter.listener = this;
 
         ingredientsRecyclerView.setAdapter(ingredientsAdapter);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(ingredientsRecyclerView);
         ingredientsAdapter.ingredients = selectedSuggestions;
     }
 
@@ -116,4 +119,21 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
 
         recipeSearchView.setQuery("", false);
     }
+
+    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            selectedSuggestions.remove(viewHolder.getAdapterPosition());
+            suggestionsAdapter.notifyDataSetChanged();
+            suggestionsAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            Toast.makeText(getContext(), "Ingredient deleted", Toast.LENGTH_SHORT).show();
+
+
+        }
+    };
 }
