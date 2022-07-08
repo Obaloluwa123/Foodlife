@@ -1,4 +1,4 @@
-plugins {
+ plugins {
     id 'com.android.application'
 }
 
@@ -10,6 +10,11 @@ android {
     compileSdk 32
 
     defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
         applicationId "com.example.foodlife"
         minSdk 21
         targetSdk 32
@@ -24,6 +29,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
         }
     }
     compileOptions {

@@ -1,11 +1,14 @@
 package com.example.fooding.fragments;
 
+import static android.content.ContentValues.TAG;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,7 +23,11 @@ import com.example.fooding.adapters.SelectedIngredientsAdapter;
 import com.example.fooding.adapters.SuggestionsAdapter;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
+import com.example.fooding.models.Ingredient;
 import com.example.fooding.models.IngredientSearchSuggestion;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +40,8 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
     private SearchView recipeSearchView;
     private RecyclerView ingredientsRecyclerView;
     private RecyclerView suggestedRecyclerView;
+    private TextView ingredientName;
+    private TextView ingredientImage;
 
     private SuggestionsAdapter suggestionsAdapter = new SuggestionsAdapter();
     private SelectedIngredientsAdapter ingredientsAdapter = new SelectedIngredientsAdapter();
@@ -53,6 +62,8 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         recipeSearchView = view.findViewById(R.id.ingredientSearchView);
         ingredientsRecyclerView = view.findViewById(R.id.ingredientsRecyclerView);
         suggestedRecyclerView = view.findViewById(R.id.suggestedIngredientsRecyclerView);
+        ingredientName = view.findViewById(R.id.ingredientName);
+        ingredientImage = view.findViewById(R.id.ingredientImage); 
         recipeSearchView.setOnQueryTextListener(this);
 
         setupRecyclerView();
@@ -133,7 +144,26 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
             suggestionsAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
             Toast.makeText(getContext(), "Ingredient deleted", Toast.LENGTH_SHORT).show();
 
+            
 
+            queryIngredients();
+        }
+
+        private void queryIngredients() {
+            ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
+            query.include(Ingredient.USER_KEY);
+            query.findInBackground(new FindCallback<Ingredient>() {
+                @Override
+                public void done(List<Ingredient> ingredients, ParseException e) {
+                    if (e != null) {
+                       Log.e(TAG, "Issue with getting ingredients", e) ;
+                       return;
+                    }
+                    for (Ingredient ingredient: ingredients) {
+
+                    }
+                }
+            });
         }
     };
 }
