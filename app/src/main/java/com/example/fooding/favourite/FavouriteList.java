@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+@SuppressWarnings("ALL")
 @Entity(tableName = "favouritelist")
 public class FavouriteList {
 
@@ -19,11 +20,12 @@ public class FavouriteList {
     private String Image;
 
 
+    @NonNull
     public String getId() {
         return Id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.Id = id;
     }
 

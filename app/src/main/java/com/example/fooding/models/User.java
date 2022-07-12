@@ -23,7 +23,8 @@ public class User {
     @ColumnInfo
     private String ingredientImage;
 
-    private User() {}
+    private User() {
+    }
 
     public static User fromJson(JSONObject jsonObject) throws JSONException {
         User user = new User();

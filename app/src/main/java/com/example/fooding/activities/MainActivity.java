@@ -1,6 +1,5 @@
 package com.example.fooding.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,7 +19,6 @@ import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.RecipeExploreFragment;
 import com.example.fooding.fragments.RecipeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.parse.ParseUser;
 
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
@@ -78,22 +76,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.logout) {
-            onLogout();
-            return true;
-        } else if (item.getItemId() == R.id.action_favorite) {
+        if (item.getItemId() == R.id.action_favorite) {
             Fragment fragment = new FavoriteFragment();
             fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void onLogout() {
-        ParseUser.logOut();
-        Intent i = new Intent(this, LoginActivity.class);
-        startActivity(i);
-        finish();
     }
 }
 

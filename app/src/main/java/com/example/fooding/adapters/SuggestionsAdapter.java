@@ -46,21 +46,21 @@ public class SuggestionsAdapter extends RecyclerView.Adapter<SuggestionsAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ingredientNameTextView;
-        ImageView ivIingredientImage;
+        TextView ingredientTextView;
+        ImageView ingredientImageView;
         Context context;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            ingredientNameTextView = itemView.findViewById(R.id.ingredientName);
-            ivIingredientImage = itemView.findViewById(R.id.ingredientImage);
+            ingredientImageView = itemView.findViewById(R.id.ivIngredientImage);
+            ingredientTextView = itemView.findViewById(R.id.tvIngredientName);
             this.context = context;
         }
 
         public void bind(IngredientSearchSuggestion suggestion) {
-            ingredientNameTextView.setText(suggestion.name);
-            Glide.with(ivIingredientImage.getContext()).load(suggestion.getImage()).into(ivIingredientImage);
-            ingredientNameTextView.setOnClickListener(new View.OnClickListener() {
+            ingredientTextView.setText(suggestion.name);
+            Glide.with(ingredientImageView.getContext()).load(suggestion.getImage()).into(ingredientImageView);
+            ingredientTextView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (listener != null) {

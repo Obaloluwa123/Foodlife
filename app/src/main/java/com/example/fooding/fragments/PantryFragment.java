@@ -25,27 +25,55 @@ import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
 import com.example.fooding.models.Ingredient;
 import com.example.fooding.models.IngredientSearchSuggestion;
+import com.example.fooding.models.Ingredients;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
+@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class PantryFragment extends Fragment implements SearchView.OnQueryTextListener, SuggestionsAdapter.SuggestionAdapterListener {
 
-    private List<IngredientSearchSuggestion> selectedSuggestions = new ArrayList<>();
-
+    protected List<Ingredient> allIngredients;
+    private final List<IngredientSearchSuggestion> selectedSuggestions = new ArrayList<>();
+    private final List<Ingredients> selectedIngredients = new ArrayList<>();
     private SearchView recipeSearchView;
     private RecyclerView ingredientsRecyclerView;
     private RecyclerView suggestedRecyclerView;
-    private TextView ingredientName;
-    private TextView ingredientImage;
+    private TextView ingredientNameTextView;
 
-    private SuggestionsAdapter suggestionsAdapter = new SuggestionsAdapter();
-    private SelectedIngredientsAdapter ingredientsAdapter = new SelectedIngredientsAdapter();
-    private FoodClient client = new FoodClient();
+    private final SuggestionsAdapter suggestionsAdapter = new SuggestionsAdapter();
+    private SelectedIngredientsAdapter ingredientsAdapter;
+    final ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            allIngredients.remove(viewHolder.getAdapterPosition());
+            ingredientsAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
+            Toast.makeText(getContext(), "Ingredient deleted", Toast.LENGTH_SHORT).show();
+            queryIngredients();
+        }
+
+        private void queryIngredients() {
+            ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
+            query.include(Ingredient.USER_KEY);
+            query.findInBackground((ingredients, e) -> {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting ingredients", e);
+                }
+            });
+        }
+    };
+    private final FoodClient client = new FoodClient();
 
     public PantryFragment() {
     }
@@ -54,28 +82,32 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_pantry, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         recipeSearchView = view.findViewById(R.id.ingredientSearchView);
         ingredientsRecyclerView = view.findViewById(R.id.ingredientsRecyclerView);
         suggestedRecyclerView = view.findViewById(R.id.suggestedIngredientsRecyclerView);
-        ingredientName = view.findViewById(R.id.ingredientName);
-        ingredientImage = view.findViewById(R.id.ingredientImage); 
+        ingredientNameTextView = view.findViewById(R.id.etRecipe);
         recipeSearchView.setOnQueryTextListener(this);
 
+
         setupRecyclerView();
+        queryIngredients();
     }
 
     private void setupRecyclerView() {
         suggestedRecyclerView.setAdapter(suggestionsAdapter);
         suggestionsAdapter.listener = this;
 
+        allIngredients = new ArrayList<>();
+        ingredientsAdapter = new SelectedIngredientsAdapter(getContext(), allIngredients);
         ingredientsRecyclerView.setAdapter(ingredientsAdapter);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(ingredientsRecyclerView);
-        ingredientsAdapter.ingredients = selectedSuggestions;
     }
 
     @Override
@@ -122,6 +154,7 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onSuggestionClicked(IngredientSearchSuggestion suggestion) {
+        String ingredientName = ingredientNameTextView.getText().toString();
         selectedSuggestions.add(suggestion);
         ingredientsAdapter.notifyDataSetChanged();
 
@@ -129,41 +162,41 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         suggestionsAdapter.notifyDataSetChanged();
 
         recipeSearchView.setQuery("", false);
+        saveIngredient(suggestion.name);
+
     }
 
-    ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
-        @Override
-        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-            return false;
-        }
+    private void saveIngredient(String ingredientName) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName(ingredientName);
+        ingredient.setUser(ParseUser.getCurrentUser());
+        ingredient.saveInBackground(e -> {
+            if (e == null) {
+                Log.d(TAG, "success for save");
+            } else {
+                Log.d(TAG, "failure");
+            }
+        });
+    }
 
-        @Override
-        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-            selectedSuggestions.remove(viewHolder.getAdapterPosition());
-            suggestionsAdapter.notifyDataSetChanged();
-            suggestionsAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-            Toast.makeText(getContext(), "Ingredient deleted", Toast.LENGTH_SHORT).show();
+    private void queryIngredients() {
+        ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
+        query.include(Ingredient.USER_KEY);
+        query.setLimit(20);
+        query.addDescendingOrder("createdAt");
+        query.findInBackground((ingredients, e) -> {
+            // check for errors
+            if (e != null) {
+                Log.e(TAG, "Issue with getting posts", e);
+                return;
+            }
 
-            
+            for (Ingredient ingredient : ingredients) {
+                Log.i(TAG, "Ingredient: " + ingredient.getIngredient() + ", username: " + ingredient.getUser().getUsername());
+            }
 
-            queryIngredients();
-        }
-
-        private void queryIngredients() {
-            ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
-            query.include(Ingredient.USER_KEY);
-            query.findInBackground(new FindCallback<Ingredient>() {
-                @Override
-                public void done(List<Ingredient> ingredients, ParseException e) {
-                    if (e != null) {
-                       Log.e(TAG, "Issue with getting ingredients", e) ;
-                       return;
-                    }
-                    for (Ingredient ingredient: ingredients) {
-
-                    }
-                }
-            });
-        }
-    };
+            allIngredients.addAll(ingredients);
+            ingredientsAdapter.notifyDataSetChanged();
+        });
+    }
 }

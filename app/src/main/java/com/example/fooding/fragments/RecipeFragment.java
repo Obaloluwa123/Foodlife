@@ -42,7 +42,6 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
     private String selectedDiet;
     private String selectedMeal;
     private String currentSearch;
-    private String myResponse1;
 
     private static final Object API_KEY = BuildConfig.SPOONACULAR_KEY;
     private static final String complex_search_url = String.format("https://api.spoonacular.com/recipes/complexSearch?apiKey=%s", API_KEY);

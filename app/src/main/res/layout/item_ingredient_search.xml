@@ -7,24 +7,24 @@
     android:scrollHorizontally="false">
 
     <TextView
-        android:id="@+id/ingredientName"
+        android:id="@+id/tvIngredientName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginStart="10dp"
-        android:layout_toEndOf="@+id/ingredientImage"
+        android:layout_toEndOf="@+id/ivIngredientImage"
         android:autoSizeTextType="uniform"
-        android:text="Rice"
+        android:text="@string/rice"
         />
 
     <ImageView
-        android:id="@+id/ingredientImage"
+        android:id="@+id/ivIngredientImage"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/ingredientimage"
         android:visibility="visible"
-        android:contentDescription="ingredientImage"
         tools:srcCompat="@tools:sample/avatars" />
 </RelativeLayout>
 

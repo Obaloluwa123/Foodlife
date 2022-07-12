@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <TextView
-        android:id="@+id/ingredientName"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center_vertical"
-        tools:text="Rice"
-        android:paddingStart="24dp"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        android:background="?selectableItemBackground"
-        tools:ignore="RtlSymmetry" />
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ingredientName"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@drawable/rounded_rectangle"
+    android:gravity="center_vertical"
+    android:paddingStart="24dp"
+    android:textColor="@color/black"
+    android:textSize="34sp"
+    tools:ignore="RtlSymmetry"
+
+    tools:text="Rice" />
 
 
 

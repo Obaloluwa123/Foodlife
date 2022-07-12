@@ -14,18 +14,23 @@ public class Ingredient extends ParseObject {
     public String getIngredient() {
         return getString(INGREDIENT_KEY);
     }
-    public void setDescription(String ingredientName) {
+
+    public void setName(String ingredientName) {
         put(INGREDIENT_KEY, ingredientName);
     }
+
     public ParseFile getIngredientImage() {
         return getParseFile(IMAGE_KEY);
     }
+
     public void setImage(ParseFile parseFile) {
         put(IMAGE_KEY, parseFile);
     }
+
     public ParseUser getUser() {
         return getParseUser(USER_KEY);
     }
+
     public void setUser(ParseUser user) {
         put(USER_KEY, user);
     }

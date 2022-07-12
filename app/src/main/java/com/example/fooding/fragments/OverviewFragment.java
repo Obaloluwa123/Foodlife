@@ -1,7 +1,9 @@
 package com.example.fooding.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +23,8 @@ import com.example.fooding.R;
 import com.example.fooding.activities.MainActivity;
 import com.example.fooding.favourite.FavouriteList;
 import com.example.fooding.models.FoodExtended;
+
+import java.util.Objects;
 
 @SuppressWarnings({"PointlessBooleanExpression", "StatementWithEmptyBody"})
 public class OverviewFragment extends Fragment {
@@ -56,14 +61,23 @@ public class OverviewFragment extends Fragment {
         textView.setText(foodExtended.title);
         likestextView.setText(String.valueOf(foodExtended.aggregateLikes));
         summaryTextView.setText(foodExtended.summary);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            summaryTextView.setText(HtmlCompat.fromHtml(foodExtended.summary, HtmlCompat.FROM_HTML_MODE_LEGACY));
+        } else {
+            summaryTextView.setText(Html.fromHtml(foodExtended.summary));
+        }
+        timeTextView.setText(String.valueOf(foodExtended.readyInMinutes));
+        if (foodExtended.Vegetarian == true) {
+        }
+
         timeTextView.setText(String.valueOf(foodExtended.readyInMinutes));
         if (foodExtended.Vegetarian == true) {
         }
 
         if (MainActivity.favouriteDatabase.favouriteDao().exists(String.valueOf(foodExtended.id))) {
-            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
+            likeButtonImageView.setBackground(Objects.requireNonNull(getContext()).getDrawable(R.drawable.ic_blue_heart));
         } else {
-            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
+            likeButtonImageView.setBackground(Objects.requireNonNull(getContext()).getDrawable(R.drawable.ic_heart_button));
 
         }
 
@@ -71,7 +85,7 @@ public class OverviewFragment extends Fragment {
 
         final Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.like_button_action);
 
-        likeButtonImageView.setOnClickListener(new DoubleClickListener() {
+        imageView.setOnClickListener(new DoubleClickListener() {
             @Override
             public void onDoubleClick() {
                 likeButtonImageView.startAnimation(animation);
@@ -88,17 +102,17 @@ public class OverviewFragment extends Fragment {
 
                 if (MainActivity.favouriteDatabase.favouriteDao().exists(id)) {
                     MainActivity.favouriteDatabase.favouriteDao().delete(favoriteList);
-                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
+                    likeButtonImageView.setBackground(requireContext().getDrawable(R.drawable.ic_heart_button));
                 } else {
                     MainActivity.favouriteDatabase.favouriteDao().addData(favoriteList);
-                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
+                    likeButtonImageView.setBackground(requireContext().getDrawable(R.drawable.ic_blue_heart));
                     Log.d("ID", id);
                 }
             }
         });
     }
 
-    public abstract class DoubleClickListener implements View.OnClickListener {
+    public abstract static class DoubleClickListener implements View.OnClickListener {
 
         private static final long DEFAULT_QUALIFICATION_SPAN = 200;
         private final long doubleClickQualificationSpanInMillis;

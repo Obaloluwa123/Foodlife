@@ -10,10 +10,10 @@
         android:id="@+id/recipeSearchView"
         android:layout_width="match_parent"
         android:layout_height="51dp"
+        android:background="@drawable/rounded_rectangle"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/cyan5"
         app:iconifiedByDefault="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,7 +23,7 @@
             android:id="@+id/etRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/textview" />
     </androidx.appcompat.widget.SearchView>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
