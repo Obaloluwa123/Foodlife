@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExploreRecipes {
+public class Recipes {
 
     private int servings;
     private String title;
@@ -17,7 +17,7 @@ public class ExploreRecipes {
     private String steps;
     private String ingredients;
 
-    public ExploreRecipes(JSONObject jsonObject) throws JSONException {
+    public Recipes(JSONObject jsonObject) throws JSONException {
         servings = jsonObject.getInt("servings");
         title = jsonObject.getString("title");
         imageURL = jsonObject.getString("imageURL");
@@ -28,10 +28,10 @@ public class ExploreRecipes {
 
     }
 
-    public static List<ExploreRecipes> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
-        List<ExploreRecipes> recipes = new ArrayList<>();
+    public static List<Recipes> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
+        List<Recipes> recipes = new ArrayList<>();
         for (int i = 0; i < foodJsonArray.length(); i++) {
-            recipes.add(new ExploreRecipes(foodJsonArray.getJSONObject(i)));
+            recipes.add(new Recipes(foodJsonArray.getJSONObject(i)));
         }
         return recipes;
     }

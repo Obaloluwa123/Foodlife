@@ -52,7 +52,7 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
         }
 
         public void bind(Ingredient suggestion) {
-            tvIingredientName.setText(suggestion.getIngredient());
+            tvIingredientName.setText(suggestion.getIngredientName());
 
         }
     }

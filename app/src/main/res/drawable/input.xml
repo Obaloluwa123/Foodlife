@@ -1,9 +1,12 @@
 <!-- drawable/input.xml -->
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="200dp"
-    android:height="200dp"
+<vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="360dp"
+    android:height="50dp"
     android:viewportWidth="360"
-    android:viewportHeight="50">
+    android:viewportHeight="50"
+    >
 
     <group>
 

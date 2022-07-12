@@ -2,6 +2,7 @@ package com.example.fooding.fragments;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,12 +12,20 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
+import com.example.fooding.activities.DetailActivity;
+import com.example.fooding.adapters.FoodAdapter;
+import com.example.fooding.adapters.RecipeExploreAdapter;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
+import com.example.fooding.models.Food;
 import com.example.fooding.models.FoodExtended;
 import com.example.fooding.models.Ingredient;
+import com.example.fooding.models.Ingredients;
+import com.example.fooding.models.Recipes;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -27,8 +36,10 @@ import java.util.List;
 import java.util.Set;
 
 
-public class RecipeExploreFragment extends Fragment {
+public class RecipeExploreFragment extends Fragment implements FoodAdapter.FoodAdapterListener {
 
+    private RecipeExploreAdapter recipeAdapter;
+    private List<Ingredients> recipeByIngredients;
 
     public RecipeExploreFragment() {
     }
@@ -50,22 +61,29 @@ public class RecipeExploreFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         queryIngredients();
+        recipeAdapter = new RecipeExploreAdapter(getContext(), recipeByIngredients);
+        RecyclerView exploreRecyclerView = view.findViewById(R.id.exploreRecyclerView);
+        recipeByIngredients = new ArrayList<>();
+        exploreRecyclerView.setAdapter(recipeAdapter);
+        exploreRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     private void queryIngredients() {
         ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
         query.include(Ingredient.USER_KEY);
-        query.setLimit(20);
+        query.setLimit(120);
         query.addDescendingOrder("createdAt");
-        query.findInBackground((ingredients, e) -> {
-            // check for errors
-            if (e != null) {
-                Log.e(TAG, "Issue with getting posts", e);
-                return;
-            }
+        query.findInBackground(new FindCallback<Ingredient>() {
+            @Override
+            public void done(List<Ingredient> ingredients, ParseException e) {
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting ingredients ", e);
+                    return;
+                }
 
-            if (ingredients != null) {
-                fetchRecipes(ingredients);
+                if (ingredients != null) {
+                    fetchRecipes(ingredients);
+                }
             }
         });
     }
@@ -74,7 +92,7 @@ public class RecipeExploreFragment extends Fragment {
         if (ingredients.isEmpty()) return;
         Set<String> uniqueIngredients = new HashSet<>();
         for (Ingredient ingredient : ingredients) {
-            uniqueIngredients.add(ingredient.getIngredient());
+            uniqueIngredients.add(ingredient.getIngredientName());
         }
         List<String> list = new ArrayList<>(uniqueIngredients);
         StringBuilder query = new StringBuilder();
@@ -91,6 +109,7 @@ public class RecipeExploreFragment extends Fragment {
             @Override
             public void onSuccess(List<FoodExtended> data) {
                 Log.e(TAG, "DATAAAAAAA: " + data.toString());
+                recipeAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -98,5 +117,12 @@ public class RecipeExploreFragment extends Fragment {
                 Log.e(TAG, "ONFAIL: ");
             }
         });
+    }
+
+    @Override
+    public void onFoodClicked(Food food) {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(DetailActivity.FOOD_ID_ARG, food.getId());
+        startActivity(intent);
     }
 }

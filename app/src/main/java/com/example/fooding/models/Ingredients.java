@@ -10,15 +10,17 @@ import java.util.List;
 @SuppressWarnings("unused")
 public class Ingredients {
 
-    private final Double amount;
-    private final String consistency;
-    private final String image;
-    private final String name;
-    private final String original;
-    private final String unit;
+    private String title;
+    private Double amount;
+    private String consistency;
+    private String image;
+    private String name;
+    private String original;
+    private String unit;
 
 
     public Ingredients(JSONObject jsonObject) throws JSONException {
+        title = jsonObject.getString("title");
         amount = jsonObject.getDouble("amount");
         consistency = jsonObject.getString("consistency");
         image = jsonObject.getString("image");
@@ -36,6 +38,9 @@ public class Ingredients {
         return ingredient;
     }
 
+    public String getTitle(){
+        return title;
+    }
     public Double getAmount() {
         return amount;
     }

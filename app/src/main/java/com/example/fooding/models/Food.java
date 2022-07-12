@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Food {
-    private final String title;
-    private final String image;
-    private final String id;
+    private String title;
+    private String image;
+    private String id;
 
 
     public Food(JSONObject jsonObject) throws JSONException {

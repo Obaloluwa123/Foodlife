@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
 public class PantryFragment extends Fragment implements SearchView.OnQueryTextListener, SuggestionsAdapter.SuggestionAdapterListener {
 
     protected List<Ingredient> allIngredients;
@@ -66,9 +65,12 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         private void queryIngredients() {
             ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
             query.include(Ingredient.USER_KEY);
-            query.findInBackground((ingredients, e) -> {
-                if (e != null) {
-                    Log.e(TAG, "Issue with getting ingredients", e);
+            query.findInBackground(new FindCallback<Ingredient>() {
+                @Override
+                public void done(List<Ingredient> ingredients, ParseException e) {
+                    if (e != null) {
+                        Log.e(TAG, "Issue with getting ingredients", e);
+                    }
                 }
             });
         }
@@ -170,11 +172,14 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         Ingredient ingredient = new Ingredient();
         ingredient.setName(ingredientName);
         ingredient.setUser(ParseUser.getCurrentUser());
-        ingredient.saveInBackground(e -> {
-            if (e == null) {
-                Log.d(TAG, "success for save");
-            } else {
-                Log.d(TAG, "failure");
+        ingredient.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d(TAG, "success for save");
+                } else {
+                    Log.d(TAG, "failure");
+                }
             }
         });
     }
@@ -184,19 +189,22 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         query.include(Ingredient.USER_KEY);
         query.setLimit(20);
         query.addDescendingOrder("createdAt");
-        query.findInBackground((ingredients, e) -> {
-            // check for errors
-            if (e != null) {
-                Log.e(TAG, "Issue with getting posts", e);
-                return;
-            }
+        query.findInBackground(new FindCallback<Ingredient>() {
+            @Override
+            public void done(List<Ingredient> ingredients, ParseException e) {
+                // check for errors
+                if (e != null) {
+                    Log.e(TAG, "Issue with getting posts", e);
+                    return;
+                }
 
-            for (Ingredient ingredient : ingredients) {
-                Log.i(TAG, "Ingredient: " + ingredient.getIngredient() + ", username: " + ingredient.getUser().getUsername());
-            }
+                for (Ingredient ingredient : ingredients) {
+                    Log.i(TAG, "Ingredient: " + ingredient.getIngredientName() + ", username: " + ingredient.getUser().getUsername());
+                }
 
-            allIngredients.addAll(ingredients);
-            ingredientsAdapter.notifyDataSetChanged();
+                allIngredients.addAll(ingredients);
+                ingredientsAdapter.notifyDataSetChanged();
+            }
         });
     }
 }

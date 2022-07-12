@@ -39,11 +39,14 @@ public class ProfileFragment extends Fragment {
             userEmail.setText(ParseUser.getCurrentUser().getEmail());
         }
 
-        logoutBtn.setOnClickListener(v -> {
-            ParseUser.logOutInBackground();
-            ParseUser currentUser = ParseUser.getCurrentUser();
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOutInBackground();
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+            }
         });
 
     }

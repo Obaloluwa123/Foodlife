@@ -24,8 +24,6 @@ import com.example.fooding.activities.MainActivity;
 import com.example.fooding.favourite.FavouriteList;
 import com.example.fooding.models.FoodExtended;
 
-import java.util.Objects;
-
 @SuppressWarnings({"PointlessBooleanExpression", "StatementWithEmptyBody"})
 public class OverviewFragment extends Fragment {
 
@@ -53,31 +51,21 @@ public class OverviewFragment extends Fragment {
         TextView textView = view.findViewById(R.id.title_textView);
         ImageView imageView = view.findViewById(R.id.ivImage);
         ImageView likeButtonImageView = view.findViewById(R.id.like_imageView);
-        TextView likestextView = view.findViewById(R.id.like_textView);
         TextView summaryTextView = view.findViewById(R.id.summary_textView);
-        TextView timeTextView = view.findViewById(R.id.time_textView);
         foodExtended = requireArguments().getParcelable(FOOD_ARG);
 
         textView.setText(foodExtended.title);
-        likestextView.setText(String.valueOf(foodExtended.aggregateLikes));
         summaryTextView.setText(foodExtended.summary);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             summaryTextView.setText(HtmlCompat.fromHtml(foodExtended.summary, HtmlCompat.FROM_HTML_MODE_LEGACY));
         } else {
             summaryTextView.setText(Html.fromHtml(foodExtended.summary));
         }
-        timeTextView.setText(String.valueOf(foodExtended.readyInMinutes));
-        if (foodExtended.Vegetarian == true) {
-        }
-
-        timeTextView.setText(String.valueOf(foodExtended.readyInMinutes));
-        if (foodExtended.Vegetarian == true) {
-        }
 
         if (MainActivity.favouriteDatabase.favouriteDao().exists(String.valueOf(foodExtended.id))) {
-            likeButtonImageView.setBackground(Objects.requireNonNull(getContext()).getDrawable(R.drawable.ic_blue_heart));
+            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
         } else {
-            likeButtonImageView.setBackground(Objects.requireNonNull(getContext()).getDrawable(R.drawable.ic_heart_button));
+            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
 
         }
 
@@ -102,10 +90,10 @@ public class OverviewFragment extends Fragment {
 
                 if (MainActivity.favouriteDatabase.favouriteDao().exists(id)) {
                     MainActivity.favouriteDatabase.favouriteDao().delete(favoriteList);
-                    likeButtonImageView.setBackground(requireContext().getDrawable(R.drawable.ic_heart_button));
+                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
                 } else {
                     MainActivity.favouriteDatabase.favouriteDao().addData(favoriteList);
-                    likeButtonImageView.setBackground(requireContext().getDrawable(R.drawable.ic_blue_heart));
+                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
                     Log.d("ID", id);
                 }
             }
