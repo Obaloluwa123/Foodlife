@@ -138,4 +138,27 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 
+    <!--    <ImageView-->
+    <!--        android:id="@+id/ivImageSearch"-->
+    <!--        android:layout_width="130dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_alignParentStart="true"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:layout_marginEnd="32dp"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/tvTitleSearch"-->
+    <!--        app:layout_constraintEnd_toStartOf="@+id/tvTitleSearch"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/tvTitleSearch"-->
+    <!--        tools:srcCompat="@tools:sample/avatars" />-->
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/tvTitleSearch"-->
+    <!--        android:layout_width="263dp"-->
+    <!--        android:layout_height="113dp"-->
+    <!--        android:layout_alignParentStart="true"-->
+    <!--        android:layout_alignParentTop="true"-->
+    <!--        android:text="Cauliflower, Brown Rice, and Vegetable Fried Rice"-->
+    <!--        android:textSize="20sp"-->
+    <!--        tools:layout_editor_absoluteX="149dp"-->
+    <!--        tools:layout_editor_absoluteY="1dp" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
 package com.example.fooding.adapters;
 
-public class RecipeExploreAdapter {
+public class PantryAdapter {
 }
