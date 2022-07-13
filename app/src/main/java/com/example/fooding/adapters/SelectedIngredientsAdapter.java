@@ -1,5 +1,6 @@
 package com.example.fooding.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
-import com.example.fooding.models.IngredientSearchSuggestion;
+import com.example.fooding.models.Ingredient;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
 public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIngredientsAdapter.ViewHolder> {
 
-    public List<IngredientSearchSuggestion> ingredients = new ArrayList<>();
+    private List<Ingredient> ingredients;
+    private Context context;
 
+    public SelectedIngredientsAdapter(Context context, List<Ingredient> ingredients) {
+        this.context = context;
+        this.ingredients = ingredients;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,13 +44,16 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView ingredientNameTextView;
 
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ingredientNameTextView = itemView.findViewById(R.id.ingredientName);
+
         }
 
-        public void bind(IngredientSearchSuggestion suggestion) {
-            ingredientNameTextView.setText(suggestion.name);
+        public void bind(Ingredient suggestion) {
+            ingredientNameTextView.setText(suggestion.uniqueIngredientSet());
+
         }
     }
 }

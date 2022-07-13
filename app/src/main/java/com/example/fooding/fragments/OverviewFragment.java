@@ -1,7 +1,9 @@
 package com.example.fooding.fragments;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
@@ -48,16 +51,18 @@ public class OverviewFragment extends Fragment {
         TextView textView = view.findViewById(R.id.title_textView);
         ImageView imageView = view.findViewById(R.id.ivImage);
         ImageView likeButtonImageView = view.findViewById(R.id.like_imageView);
-        TextView likestextView = view.findViewById(R.id.like_textView);
+
         TextView summaryTextView = view.findViewById(R.id.summary_textView);
-        TextView timeTextView = view.findViewById(R.id.time_textView);
+
         foodExtended = requireArguments().getParcelable(FOOD_ARG);
 
         textView.setText(foodExtended.title);
-        likestextView.setText(String.valueOf(foodExtended.aggregateLikes));
+
         summaryTextView.setText(foodExtended.summary);
-        timeTextView.setText(String.valueOf(foodExtended.readyInMinutes));
-        if (foodExtended.Vegetarian == true) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            summaryTextView.setText(HtmlCompat.fromHtml(foodExtended.summary, HtmlCompat.FROM_HTML_MODE_LEGACY));
+        } else {
+            summaryTextView.setText(Html.fromHtml(foodExtended.summary));
         }
 
         if (MainActivity.favouriteDatabase.favouriteDao().exists(String.valueOf(foodExtended.id))) {
@@ -71,7 +76,7 @@ public class OverviewFragment extends Fragment {
 
         final Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.like_button_action);
 
-        likeButtonImageView.setOnClickListener(new DoubleClickListener() {
+        imageView.setOnClickListener(new DoubleClickListener() {
             @Override
             public void onDoubleClick() {
                 likeButtonImageView.startAnimation(animation);
@@ -98,7 +103,7 @@ public class OverviewFragment extends Fragment {
         });
     }
 
-    public abstract class DoubleClickListener implements View.OnClickListener {
+    public abstract static class DoubleClickListener implements View.OnClickListener {
 
         private static final long DEFAULT_QUALIFICATION_SPAN = 200;
         private final long doubleClickQualificationSpanInMillis;

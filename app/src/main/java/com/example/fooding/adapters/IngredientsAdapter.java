@@ -42,7 +42,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvIngredientName = itemView.findViewById(R.id.ingredient_amount);
+            tvIngredientName = itemView.findViewById(R.id.ingredientName);
         }
 
         public void bind(Ingredients ingredient) {

@@ -25,15 +25,13 @@ import java.util.List;
 public class FavoriteFragment extends Fragment implements FavouriteAdapter.FavouriteAdapterListener {
 
 
+    public static final String TAG = "FavouriteFragment";
     private FavouriteAdapter favouriteAdapter;
     private RecyclerView favouriteRecipesRecyclerView;
     private TextView noItemText;
-
     private String selectedDiet;
     private String selectedMeal;
     private String currentSearch;
-
-    public static final String TAG = "FavouriteFragment";
 
     public FavoriteFragment() {
         selectedDiet = null;
