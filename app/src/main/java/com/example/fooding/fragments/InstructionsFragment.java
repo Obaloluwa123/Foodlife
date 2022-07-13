@@ -4,8 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +16,6 @@ import com.example.fooding.models.FoodExtended;
 public class InstructionsFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";
-    private static final String IMAGE_URL = "https://fullbellysisters.blogspot.com/";
 
     public FoodExtended foodExtended;
 
@@ -36,12 +33,7 @@ public class InstructionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_instructions, container, false);
-        WebView webView = (WebView) view.findViewById(R.id.instructionsWebview);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(IMAGE_URL);
-        return view;
+        return inflater.inflate(R.layout.fragment_instructions, container, false);
     }
 
     @Override

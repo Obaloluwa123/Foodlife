@@ -1,5 +1,5 @@
 package com.example.fooding.models;
 
 @SuppressWarnings("unused")
-public class User {
+public class Result {
 }
