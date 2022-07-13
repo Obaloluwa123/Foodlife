@@ -25,6 +25,6 @@ public class FavoriteRecipeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_favorite_recipe, container, false);
+        return inflater.inflate(R.layout.item_childrecyclerview, container, false);
     }
 }
