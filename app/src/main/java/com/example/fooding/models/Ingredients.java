@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Ingredients {
 
-    private String title;
     private Double amount;
     private String consistency;
     private String image;
@@ -19,7 +18,6 @@ public class Ingredients {
 
 
     public Ingredients(JSONObject jsonObject) throws JSONException {
-        title = jsonObject.getString("title");
         amount = jsonObject.getDouble("amount");
         consistency = jsonObject.getString("consistency");
         image = jsonObject.getString("image");
@@ -37,9 +35,6 @@ public class Ingredients {
         return ingredient;
     }
 
-    public String getTitle(){
-        return title;
-    }
     public Double getAmount() {
         return amount;
     }
