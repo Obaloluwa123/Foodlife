@@ -28,11 +28,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
     ParseUser currentUser = ParseUser.getCurrentUser();
+    CallbackManager callbackManager;
     private EditText etUsername;
     private EditText etPassword;
     private ImageView facebookBtn;
-    CallbackManager callbackManager;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -32,6 +32,7 @@
         <entry key="app/src/main/res/layout/fragment_recipe_explore.xml" value="0.11627906976744186" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ingredients_row_layout.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_childrecyclerview.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_explore.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_food.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_ingredient.xml" value="0.1" />

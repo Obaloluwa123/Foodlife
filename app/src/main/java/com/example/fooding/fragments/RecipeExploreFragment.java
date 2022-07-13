@@ -22,10 +22,7 @@ import com.example.fooding.adapters.RecipeExploreAdapter;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
 import com.example.fooding.models.Food;
-import com.example.fooding.models.FoodExtended;
 import com.example.fooding.models.Ingredient;
-import com.example.fooding.models.Ingredients;
-import com.example.fooding.models.Recipes;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -38,8 +35,12 @@ import java.util.Set;
 
 public class RecipeExploreFragment extends Fragment implements FoodAdapter.FoodAdapterListener {
 
+
+    //TODO:Implement infinite scrolling as stretch goal
+    private static final Integer INGREDIENT_NUMBER_LIMIT = 150;
+    RecipeExploreAdapter.RecipeExploreAdapterListener listener;
     private RecipeExploreAdapter recipeAdapter;
-    private List<Ingredients> recipeByIngredients;
+    private List<Food> recipes;
 
     public RecipeExploreFragment() {
     }
@@ -60,24 +61,26 @@ public class RecipeExploreFragment extends Fragment implements FoodAdapter.FoodA
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        recipes = new ArrayList<>();
+
         queryIngredients();
-        recipeAdapter = new RecipeExploreAdapter(getContext(), recipeByIngredients);
+        recipeAdapter = new RecipeExploreAdapter(recipes, listener);
+
         RecyclerView exploreRecyclerView = view.findViewById(R.id.exploreRecyclerView);
-        recipeByIngredients = new ArrayList<>();
         exploreRecyclerView.setAdapter(recipeAdapter);
         exploreRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
     }
 
     private void queryIngredients() {
         ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
         query.include(Ingredient.USER_KEY);
-        query.setLimit(120);
+        query.setLimit(INGREDIENT_NUMBER_LIMIT);
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Ingredient>() {
             @Override
             public void done(List<Ingredient> ingredients, ParseException e) {
                 if (e != null) {
-                    Log.e(TAG, "Issue with getting ingredients ", e);
                     return;
                 }
 
@@ -92,7 +95,7 @@ public class RecipeExploreFragment extends Fragment implements FoodAdapter.FoodA
         if (ingredients.isEmpty()) return;
         Set<String> uniqueIngredients = new HashSet<>();
         for (Ingredient ingredient : ingredients) {
-            uniqueIngredients.add(ingredient.getIngredientName());
+            uniqueIngredients.add(ingredient.uniqueIngredientSet());
         }
         List<String> list = new ArrayList<>(uniqueIngredients);
         StringBuilder query = new StringBuilder();
@@ -104,11 +107,12 @@ public class RecipeExploreFragment extends Fragment implements FoodAdapter.FoodA
         }
 
         FoodClient client = new FoodClient();
-        client.getRecipeByIngredients(query.toString(), new NetworkCallback<List<FoodExtended>>() {
+        client.getRecipeByIngredients("apples,+flour,+sugar&number=2", new NetworkCallback<List<Food>>() {
 
             @Override
-            public void onSuccess(List<FoodExtended> data) {
-                Log.e(TAG, "DATAAAAAAA: " + data.toString());
+            public void onSuccess(List<Food> data) {
+
+                recipes.addAll(data);
                 recipeAdapter.notifyDataSetChanged();
             }
 

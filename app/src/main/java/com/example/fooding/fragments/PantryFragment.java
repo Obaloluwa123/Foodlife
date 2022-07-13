@@ -1,10 +1,7 @@
 package com.example.fooding.fragments;
 
-import static android.content.ContentValues.TAG;
-
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -69,7 +66,6 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
                 @Override
                 public void done(List<Ingredient> ingredients, ParseException e) {
                     if (e != null) {
-                        Log.e(TAG, "Issue with getting ingredients", e);
                     }
                 }
             });
@@ -134,14 +130,12 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         client.getSuggestions(query, new NetworkCallback<List<IngredientSearchSuggestion>>() {
             @Override
             public void onSuccess(List<IngredientSearchSuggestion> data) {
-                Log.e("TAG", "onSuccess: " + data.toString());
                 suggestionsAdapter.suggestions = data;
                 suggestionsAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Throwable throwable) {
-                Log.e("TAG", "There was an error");
                 throwable.printStackTrace();
             }
         });
@@ -176,9 +170,7 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
             @Override
             public void done(ParseException e) {
                 if (e == null) {
-                    Log.d(TAG, "success for save");
                 } else {
-                    Log.d(TAG, "failure");
                 }
             }
         });
@@ -192,14 +184,11 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         query.findInBackground(new FindCallback<Ingredient>() {
             @Override
             public void done(List<Ingredient> ingredients, ParseException e) {
-                // check for errors
                 if (e != null) {
-                    Log.e(TAG, "Issue with getting posts", e);
                     return;
                 }
 
                 for (Ingredient ingredient : ingredients) {
-                    Log.i(TAG, "Ingredient: " + ingredient.getIngredientName() + ", username: " + ingredient.getUser().getUsername());
                 }
 
                 allIngredients.addAll(ingredients);

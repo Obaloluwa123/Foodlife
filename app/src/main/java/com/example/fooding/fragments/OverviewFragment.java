@@ -51,10 +51,13 @@ public class OverviewFragment extends Fragment {
         TextView textView = view.findViewById(R.id.title_textView);
         ImageView imageView = view.findViewById(R.id.ivImage);
         ImageView likeButtonImageView = view.findViewById(R.id.like_imageView);
+
         TextView summaryTextView = view.findViewById(R.id.summary_textView);
+
         foodExtended = requireArguments().getParcelable(FOOD_ARG);
 
         textView.setText(foodExtended.title);
+
         summaryTextView.setText(foodExtended.summary);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             summaryTextView.setText(HtmlCompat.fromHtml(foodExtended.summary, HtmlCompat.FROM_HTML_MODE_LEGACY));

@@ -18,6 +18,7 @@ import com.example.fooding.models.FoodExtended;
 public class InstructionsFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";
+    private static final String IMAGE_URL = "https://fullbellysisters.blogspot.com/";
 
     public FoodExtended foodExtended;
 
@@ -39,7 +40,7 @@ public class InstructionsFragment extends Fragment {
         WebView webView = (WebView) view.findViewById(R.id.instructionsWebview);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://fullbellysisters.blogspot.com/");
+        webView.loadUrl(IMAGE_URL);
         return view;
     }
 

@@ -1,6 +1,6 @@
 package com.example.fooding.adapters;
 
-import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,60 +8,83 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
-import com.example.fooding.models.Ingredients;
+import com.example.fooding.models.Food;
 
 import java.util.List;
 
-public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdapter.ViewHolder> {
+public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdapter.ViewHolder> implements View.OnClickListener {
 
-    Context context;
-    public List<Ingredients> recipeByIngredients;
+    final RecipeExploreAdapterListener listener;
+    final List<Food> foodList;
 
-
-    public RecipeExploreAdapter(Context context, List<Ingredients> recipeByIngredients) {
-        this.context = context;
-        this.recipeByIngredients = recipeByIngredients;
+    public RecipeExploreAdapter(List<Food> foods, RecipeExploreAdapterListener listener) {
+        this.foodList = foods;
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View recipeView = LayoutInflater.from(context).inflate(R.layout.item_explore, parent, false);
-        return new ViewHolder(recipeView);
+        Log.d("foodadapter", "onCreateViewHolder");
+        View FoodView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_childrecyclerview, parent, false);
+        return new ViewHolder(FoodView);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Ingredients ingredient = recipeByIngredients.get(position);
-        holder.bind(ingredient);
+        Log.d("foodadapter", "onBindViewHolder" + position);
+        Food food = foodList.get(position);
+        holder.bind(food);
+
     }
 
-    @NonNull
     @Override
+
     public int getItemCount() {
-        if (recipeByIngredients == null) return 0;
-        return recipeByIngredients.size();
+        return foodList.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    public interface RecipeExploreAdapterListener {
+        void onRecipeClicked(Food food);
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView titleTextView;
-        ImageView recipeImageView;
+        final TextView tvTitle;
+        final ImageView ivImage;
+        final CardView cardView;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTextView = itemView.findViewById(R.id.recipeTextView);
-            recipeImageView = itemView.findViewById(R.id.recipeImageView);
+            tvTitle = itemView.findViewById(R.id.recipeName);
+            ivImage = itemView.findViewById(R.id.recipeImage);
+            cardView = itemView.findViewById(R.id.recipeCardView);
         }
 
-        public void bind(Ingredients ingredient) {
-            titleTextView.setText(ingredient.getName());
-            Glide.with(context).load(ingredient.getImage()).into(recipeImageView);
+        public void bind(Food food) {
+            tvTitle.setText(food.getTitle());
+
+            Glide.with(ivImage.getContext()).load(food.getImage()).into(ivImage);
+            cardView.setOnClickListener(view -> {
+                if (listener != null) {
+                    listener.onRecipeClicked(food);
+                }
+            });
+
         }
     }
+
 }

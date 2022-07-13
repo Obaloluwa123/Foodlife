@@ -44,4 +44,5 @@
     <string name="facebook_app_id">1384477938741883</string>
     <string name="fb_login_protocol_scheme">fb1384477938741883</string>
     <string name="facebook_client_token">ca0317c0efea871a3009e4d445cc039f</string>
+    <string name="recipes_suggested_by_ingredients">Recipes suggested by Ingredients</string>
 </resources>

@@ -1,7 +1,5 @@
 package com.example.fooding.clients;
 
-import android.util.Log;
-
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -39,19 +37,17 @@ public class FoodClient extends AsyncHttpClient {
         params.put("number", 50);
         get(RECIPE_SEARCH_URL, params, handler);
     }
-    public void suggestByIngredients(String ingredient,NetworkCallback<List<Food>> callback){
-        Log.i("URL", "suggestByIngredients: "+SUGGEST_BY_INGREDIENTS);
+
+    public void suggestByIngredients(String ingredient, NetworkCallback<List<Food>> callback) {
         RequestParams params = new RequestParams();
         params.put("ingredients", ingredient);
         params.put("number", 10);
-        params.put("ignorePantry",true);
-        get(SUGGEST_BY_INGREDIENTS,params, new JsonHttpResponseHandler() {
+        params.put("ignorePantry", true);
+        get(SUGGEST_BY_INGREDIENTS, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 JSONArray jsonArray = json.jsonArray;
                 try {
-                    //JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i("Suggestion Results", "Suggestion Results: " + jsonArray);
                     callback.onSuccess(Food.fromJsonArray(jsonArray));
                 } catch (JSONException e) {
                     callback.onFailure(e);
@@ -106,7 +102,6 @@ public class FoodClient extends AsyncHttpClient {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i("Results", "Results: " + results);
                     callback.onSuccess(Food.fromJsonArray(results));
                 } catch (JSONException e) {
                     callback.onFailure(e);
@@ -130,7 +125,6 @@ public class FoodClient extends AsyncHttpClient {
                 JSONArray array = json.jsonArray;
                 try {
                     List<IngredientSearchSuggestion> results = new ArrayList<>();
-                    Log.e("TAG", "onSuccess: " + array);
 
                     for (int i = 0; i < array.length(); i++) {
                         JSONObject object = array.getJSONObject(i);
@@ -153,7 +147,7 @@ public class FoodClient extends AsyncHttpClient {
         });
     }
 
-    public void getRecipeByIngredients(String query, NetworkCallback<List<FoodExtended>> callback) {
+    public void getRecipeByIngredients(String query, NetworkCallback<List<Food>> callback) {
         RequestParams params = new RequestParams();
         params.put("ingredients", query);
         params.put("number", 20);
@@ -163,14 +157,8 @@ public class FoodClient extends AsyncHttpClient {
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 JSONArray array = json.jsonArray;
                 try {
-                    List<FoodExtended> results = new ArrayList<>();
-                    Log.e("TAG", "onSuccess: " + array);
-
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
-                        FoodExtended food = FoodExtended.fromJsonObject(object);
-                        results.add(food);
-                    }
+                    List<Food> results = new ArrayList<>();
+                    results.addAll(Food.fromJsonArray(array));
                     callback.onSuccess(results);
                 } catch (Exception e) {
                     callback.onFailure(e);

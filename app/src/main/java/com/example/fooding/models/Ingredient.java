@@ -11,7 +11,7 @@ public class Ingredient extends ParseObject {
     public static final String IMAGE_KEY = "image";
     public static final String USER_KEY = "user";
 
-    public String getIngredientName() {
+    public String uniqueIngredientSet() {
         return getString(INGREDIENT_KEY);
     }
 

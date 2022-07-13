@@ -7,18 +7,15 @@
 
     android:orientation="vertical">
 
-    <com.cooltechworks.views.shimmer.ShimmerRecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/exploreRecyclerView"
         android:layout_width="match_parent"
-        android:layout_height="732dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:padding="4dp"
         android:layout_marginBottom="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
-    </com.cooltechworks.views.shimmer.ShimmerRecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
