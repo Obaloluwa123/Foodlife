@@ -1,6 +1,5 @@
 package com.example.fooding.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
-import com.example.fooding.models.Ingredient;
+import com.example.fooding.models.IngredientSearchSuggestion;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("ALL")
 public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIngredientsAdapter.ViewHolder> {
 
-    private List<Ingredient> ingredients;
-    private Context context;
+    public List<IngredientSearchSuggestion> ingredients = new ArrayList<>();
 
-    public SelectedIngredientsAdapter(Context context, List<Ingredient> ingredients) {
-        this.context = context;
-        this.ingredients = ingredients;
-    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,18 +37,15 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvIingredientName;
-
+        TextView ingredientNameTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvIingredientName = itemView.findViewById(R.id.ingredientName);
-
+            ingredientNameTextView = itemView.findViewById(R.id.ingredientName);
         }
 
-        public void bind(Ingredient suggestion) {
-            tvIingredientName.setText(suggestion.getIngredientName());
-
+        public void bind(IngredientSearchSuggestion suggestion) {
+            ingredientNameTextView.setText(suggestion.name);
         }
     }
 }

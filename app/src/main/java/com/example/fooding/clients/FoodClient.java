@@ -27,7 +27,6 @@ public class FoodClient extends AsyncHttpClient {
     private static final String EXTENDED_FOOD_TEMPLATE = "https://api.spoonacular.com/recipes/%s/information?apiKey=%s";
     private static final String BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/";
     private static final String INGREDIENT_AUTO_COMPLETE_URL = String.format("https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=%s", API_KEY);
-    public static final String SUGGEST_BY_INGREDIENTS = String.format("https://api.spoonacular.com/recipes/findByIngredients?apiKey=%s", API_KEY);
 
     public FoodClient() {
         super();
@@ -38,31 +37,6 @@ public class FoodClient extends AsyncHttpClient {
         params.put("query", query);
         params.put("number", 50);
         get(RECIPE_SEARCH_URL, params, handler);
-    }
-    public void suggestByIngredients(String ingredient,NetworkCallback<List<Food>> callback){
-        Log.i("URL", "suggestByIngredients: "+SUGGEST_BY_INGREDIENTS);
-        RequestParams params = new RequestParams();
-        params.put("ingredients", ingredient);
-        params.put("number", 10);
-        params.put("ignorePantry",true);
-        get(SUGGEST_BY_INGREDIENTS,params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                JSONArray jsonArray = json.jsonArray;
-                try {
-                    //JSONArray results = jsonObject.getJSONArray("results");
-                    Log.i("Suggestion Results", "Suggestion Results: " + jsonArray);
-                    callback.onSuccess(Food.fromJsonArray(jsonArray));
-                } catch (JSONException e) {
-                    callback.onFailure(e);
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                callback.onFailure(throwable);
-            }
-        });
     }
 
     public void getExtendedFood(String id, String diet, String meal, NetworkCallback<FoodExtended> callback) {
@@ -143,38 +117,6 @@ public class FoodClient extends AsyncHttpClient {
                     callback.onSuccess(results);
                 } catch (Exception e) {
                     callback.onFailure(e);
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                callback.onFailure(throwable);
-            }
-        });
-    }
-
-    public void getRecipeByIngredients(String query, NetworkCallback<List<FoodExtended>> callback) {
-        RequestParams params = new RequestParams();
-        params.put("ingredients", query);
-        params.put("number", 20);
-
-        get(SUGGEST_BY_INGREDIENTS, params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                JSONArray array = json.jsonArray;
-                try {
-                    List<FoodExtended> results = new ArrayList<>();
-                    Log.e("TAG", "onSuccess: " + array);
-
-                    for (int i = 0; i < array.length(); i++) {
-                        JSONObject object = array.getJSONObject(i);
-                        FoodExtended food = FoodExtended.fromJsonObject(object);
-                        results.add(food);
-                    }
-                    callback.onSuccess(results);
-                } catch (Exception e) {
-                    callback.onFailure(e);
-                    e.printStackTrace();
                 }
             }
 
