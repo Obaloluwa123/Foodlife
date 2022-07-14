@@ -8,39 +8,39 @@
 
 ## Overview
 ### Description
-FooodLife provides tasty dish recipe that can be made from specific ingredients available
+FoodLife is a cooking app that provides tasty dish recipes that can be made from specific ingredients a user has
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
-- **Category: Food**
-- **Mobile: Users can search for ingredients in their fridge and see recipes with those ingredients**
-- **Story: This answers the question of "what can I cook with the ingredients I have? Users will be able to know the dish to cook with their available ingrediemts "**
+- **Category: Food/Cooking**
+- **Mobile: This app will mainly be for mobile use and Users can search for ingredients from the api and add those ingredients to their fridge and see recipes based on those ingredients and it will be helpful for college students that need something to cook fast**
+- **Story: This answers the question of "what can I cook with the ingredients I have? Users will be able to know the dish to cook with their available ingredients.The app takes in user's ingredients (what they have in their fridge) and provides recipe suggestions from them. **
 - **Market: A lot of people have something at home in their fridge, but don't know what to cook**
 - **Habit:this app will be addictive because a lot of people want to know what food they can cook with the ingredients they have.**
-- **Scope: The app most basic feature is that it allows user to know what to cook and**
+- **Scope: The app most basic feature is that it allows user to know what to cook and the app recommends recipes based on user ingredients, allow user to view details about recipe and save their favorite recipes**
 
 ## Product Spec
 
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-* [] User can see custom launch screen
-* [] User can sign up for a new account
-* [] User can log into their account
-* [] User can log out of their account
-* [] User can search for recipes based on ingredients
-* [] User can see dish recipe that can be made
-* [] User can see steps on how to prepare the food
-* [] User can add ingredients to their Ingredient list
-* [] User ingredients can be used to get suggested recipes
+* [x] User can see custom launch screen
+* [x] User can sign up for a new account
+* [x] User can log into their account
+* [x] User can log out of their account
+* [x] User can search for recipes based on ingredients
+* [x] User can see dish recipe that can be made
+* [x] User can see steps on how to prepare the food
+* [x] User can add ingredients to their Fridge/Ingredient List
+* [x] User available ingredients in the fridge can be used to get suggested recipes
+* [x] Ingredients search autocompletes
 
 
 **Optional Nice-to-have Stories(Stretch)**
-* [] User can save favorite recipes
+* [x] User can save favorite recipes
+* [x] User can filter recipes based on diet and meal type.
 * [] User can take picture of food
-* [] User can filter recipes based on diet and omitting allergies.
 * [] User can share pictures of food taken with their friends on Facebook
-* [] Recipe search autocompletes
 * [] API call information is cached and can be seen offline
 * [] Food/Barcode scanner for ingredients to see list of recipes that contain the scanned ingredients.
 
