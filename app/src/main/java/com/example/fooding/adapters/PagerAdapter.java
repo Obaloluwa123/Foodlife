@@ -11,15 +11,15 @@ import com.example.fooding.fragments.InstructionsFragment;
 import com.example.fooding.fragments.OverviewFragment;
 import com.example.fooding.models.FoodExtended;
 
-@SuppressWarnings("ALL")
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
-    public FoodExtended food;
     private static final int PAGE_0 = 0;
     private static final int PAGE_1 = 1;
     private static final int PAGE_2 = 2;
+    public FoodExtended food;
 
-    @SuppressWarnings("deprecation")
+
     public PagerAdapter(FoodExtended food, @NonNull FragmentManager fm) {
         super(fm);
         this.food = food;

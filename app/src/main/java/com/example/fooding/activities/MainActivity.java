@@ -25,9 +25,8 @@ import com.parse.ParseUser;
 @SuppressWarnings("ALL")
 public class MainActivity extends AppCompatActivity {
 
-    public static FavouriteDatabase favouriteDatabase;
-
     public static final String TAG = "MainActivity";
+    public static FavouriteDatabase favouriteDatabase;
     final FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
