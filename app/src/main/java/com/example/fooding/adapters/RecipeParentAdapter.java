@@ -94,7 +94,7 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
     private void queryIngredients() {
         ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
         query.include(Ingredient.USER_KEY);
-        query.setLimit( INGREDIENT_NUMBER_LIMIT);
+        query.setLimit(INGREDIENT_NUMBER_LIMIT);
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Ingredient>() {
             @Override
@@ -137,7 +137,7 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
 
             @Override
             public void onFailure(Throwable throwable) {
-                Log.e(TAG, "ONFAIL: ");
+
             }
         });
     }

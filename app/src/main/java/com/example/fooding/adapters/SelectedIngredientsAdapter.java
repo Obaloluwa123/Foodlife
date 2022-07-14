@@ -24,6 +24,7 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
         this.context = context;
         this.ingredients = ingredients;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

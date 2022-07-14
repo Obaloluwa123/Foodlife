@@ -1,10 +1,6 @@
 package com.example.fooding.fragments;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,23 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
-import com.example.fooding.activities.DetailActivity;
-import com.example.fooding.adapters.FoodAdapter;
 import com.example.fooding.adapters.RecipeExploreAdapter;
 import com.example.fooding.adapters.RecipeParentAdapter;
-import com.example.fooding.clients.FoodClient;
-import com.example.fooding.clients.NetworkCallback;
-import com.example.fooding.models.Food;
-import com.example.fooding.models.Ingredient;
 import com.example.fooding.models.RecipeParent;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
 public class RecipeExploreFragment extends Fragment {
@@ -42,7 +26,6 @@ public class RecipeExploreFragment extends Fragment {
     RecipeExploreAdapter.RecipeExploreAdapterListener listener;
     private RecipeParentAdapter recipeParentAdapter;
     private ArrayList<RecipeParent> recipes = new ArrayList<>();
-
 
 
     @Override

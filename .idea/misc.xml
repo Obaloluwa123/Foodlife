@@ -4,11 +4,13 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/gradient_overlay.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_close.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.1915" />
         <entry key="app/src/main/res/drawable/ic_blue_heart.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_heart_button.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_time.xml" value="0.1915" />
+        <entry key="app/src/main/res/drawable/rounded_rectangle.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.29393115942028986" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
