@@ -16,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
 import com.example.fooding.activities.DetailActivity;
+import com.example.fooding.activities.MainActivity;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
+import com.example.fooding.favourite.FavouriteList;
 import com.example.fooding.models.Food;
 import com.example.fooding.models.Ingredient;
 import com.example.fooding.models.RecipeParent;
@@ -28,22 +30,34 @@ import com.parse.ParseQuery;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
-//TODO:working on this Adapter for my explore page
 public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapter.MyViewholder> implements RecipeExploreAdapter.RecipeExploreAdapterListener {
     private ArrayList<RecipeParent> parentModelArrayList;
     private RecipeExploreAdapter recipeAdapter;
     public Context context;
     private static final Integer INGREDIENT_NUMBER_LIMIT = 150;
     private ArrayList<Food> recipes = new ArrayList<>();
+    private List<FavouriteList> favouriteLists;
 
 
-    public RecipeParentAdapter(ArrayList<RecipeParent> parentModelArrayList, Context context) {
-        this.parentModelArrayList = parentModelArrayList;
+    public RecipeParentAdapter(ArrayList<RecipeParent> parentModel, Context context) {
+        this.parentModelArrayList = parentModel;
         this.context = context;
     }
 
+    public class MyViewholder extends RecyclerView.ViewHolder {
+        public TextView recipeCategory;
+        public RecyclerView parentRecyclerView;
+
+        public MyViewholder(View itemView) {
+            super(itemView);
+
+            recipeCategory = itemView.findViewById(R.id.recipeCategory);
+            parentRecyclerView = itemView.findViewById(R.id.parentRecyclerView);
+        }
+    }
     @NonNull
     @Override
     public MyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -59,8 +73,20 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
         holder.parentRecyclerView.setHasFixedSize(true);
 
         holder.recipeCategory.setText(currentItem.recipeCategory());
-        if (parentModelArrayList.get(position).recipeCategory().equals("Recipe By Ingredients in my Fridge")) {
+        if (parentModelArrayList.get(position).recipeCategory().equals("Recommended Recipes Based on Ingredients in my Fridge")) {
             queryIngredients();
+        }
+        if (parentModelArrayList.get(position).recipeCategory().equals("Recommended Breakfast Recipes Based on my favorite ")) {
+            queryPreviouslyLikedRecipe();
+        }
+        if (parentModelArrayList.get(position).recipeCategory().equals("Recommended Italian Recipes Based on my favorite")) {
+            querySimilarCuisinesRecipe("Italian");
+        }
+        if (parentModelArrayList.get(position).recipeCategory().equals("Recommended American Recipes Based on my favorite")) {
+            querySimilarCuisinesRecipe("American");
+        }
+        if (parentModelArrayList.get(position).recipeCategory().equals("Recommended Chinese Recipes Based on my favorite")) {
+            querySimilarCuisinesRecipe("Chinese");
         }
 
         recipeAdapter = new RecipeExploreAdapter(recipes, this);
@@ -79,17 +105,7 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
         context.startActivity(intent);
     }
 
-    public class MyViewholder extends RecyclerView.ViewHolder {
-        public TextView recipeCategory;
-        public RecyclerView parentRecyclerView;
 
-        public MyViewholder(View itemView) {
-            super(itemView);
-
-            recipeCategory = itemView.findViewById(R.id.recipeCategory);
-            parentRecyclerView = itemView.findViewById(R.id.parentRecyclerView);
-        }
-    }
 
     private void queryIngredients() {
         ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
@@ -142,6 +158,67 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
         });
     }
 
+    private void querySimilarCuisinesRecipe(String cuisine) {
+
+        favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
+        if (favouriteLists.isEmpty()) return;
+
+        StringBuilder features = new StringBuilder();
+
+        for (int i = 0; i < favouriteLists.size(); i++) {
+            features.append(favouriteLists.get(i).getTitle());
+            features.append(" ");
+        }
+        String favoriteFeatures = features.toString();
+        String[] favFeatures = favoriteFeatures.split(" ");
+        Random favoriteIngredient = new Random();
+        int randomFav = favoriteIngredient.nextInt(favFeatures.length - 1);
+
+        FoodClient client = new FoodClient();
+        client.suggestByFavorite(null, cuisine, favFeatures[randomFav], new NetworkCallback<List<Food>>() {
+            @Override
+            public void onSuccess(List<Food> data) {
+                recipes.addAll(data);
+                recipeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+            }
+        });
+
+    }
+
+    private void queryPreviouslyLikedRecipe() {
+
+        favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
+        if (favouriteLists.isEmpty()) return;
+
+        StringBuilder features = new StringBuilder();
+
+        for (int i = 0; i < favouriteLists.size(); i++) {
+            features.append(favouriteLists.get(i).getTitle());
+            features.append(" ");
+        }
+        String favoriteFeatures = features.toString();
+        String[] favFeatures = favoriteFeatures.split(" ");
+        Random favoriteIngredient = new Random();
+        int randomFav = favoriteIngredient.nextInt(favFeatures.length - 1);
+        Log.i(TAG, "queryPreviouslyLikedRecipe: " + favFeatures[randomFav]);
+        FoodClient client = new FoodClient();
+        client.suggestByFavorite("Breakfast", null, favFeatures[randomFav], new NetworkCallback<List<Food>>() {
+            @Override
+            public void onSuccess(List<Food> data) {
+                recipes.addAll(data);
+                recipeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Throwable throwable) {
+            }
+        });
+
+    }
 }
 
 

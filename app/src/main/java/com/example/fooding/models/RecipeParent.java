@@ -1,7 +1,7 @@
 package com.example.fooding.models;
 
 public class RecipeParent {
-    private String recipeCategory;
+    private final String recipeCategory;
 
     public RecipeParent(String recipeCategory) {
         this.recipeCategory = recipeCategory;

@@ -43,7 +43,7 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ingredientNameTextView;
+        private TextView ingredientNameTextView;
 
 
         public ViewHolder(@NonNull View itemView) {

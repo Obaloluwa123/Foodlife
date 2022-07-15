@@ -24,7 +24,7 @@
         android:layout_width="176dp"
         android:layout_height="40dp"
         android:layout_marginTop="20dp"
-        android:text="@string/i_m_a_vegetarian"
+        android:text="@string/i_am_a_vegetarian"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -99,52 +99,17 @@
         app:layout_constraintStart_toEndOf="@+id/userPassword"
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
-    <ImageView
-        android:id="@+id/emailImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="92dp"
-        android:layout_marginTop="28dp"
-        android:src="@drawable/ic_email"
-        android:contentDescription="@string/app_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/LastNameImage" />
-
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/email"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/userEmail"
-        app:layout_constraintStart_toEndOf="@+id/emailImage"
-        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
-
-    <TextView
-        android:id="@+id/userEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/user_gmail_com"
-        android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
-
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="116dp"
-        android:gravity="center"
+        android:layout_marginTop="172dp"
         android:background="@drawable/rounded_rectangle"
+        android:gravity="center"
         android:text="@string/logout"
         app:iconTint="#121111"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
+        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

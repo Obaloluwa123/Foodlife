@@ -32,11 +32,9 @@ public class ProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Button logoutBtn = view.findViewById(R.id.btnLogout);
         TextView username = view.findViewById(R.id.username);
-        TextView userEmail = view.findViewById(R.id.userEmail);
 
         if (ParseUser.getCurrentUser() != null) {
             username.setText(ParseUser.getCurrentUser().getUsername());
-            userEmail.setText(ParseUser.getCurrentUser().getEmail());
         }
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {

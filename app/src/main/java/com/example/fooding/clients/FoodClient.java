@@ -34,14 +34,14 @@ public class FoodClient extends AsyncHttpClient {
     public void getRecipe(String query, JsonHttpResponseHandler handler) {
         RequestParams params = new RequestParams();
         params.put("query", query);
-        params.put("number", 50);
+        params.put("number", 100);
         get(RECIPE_SEARCH_URL, params, handler);
     }
 
     public void suggestByIngredients(String ingredient, NetworkCallback<List<Food>> callback) {
         RequestParams params = new RequestParams();
         params.put("ingredients", ingredient);
-        params.put("number", 10);
+        params.put("number", 100);
         params.put("ignorePantry", true);
         get(SUGGEST_BY_INGREDIENTS, params, new JsonHttpResponseHandler() {
             @Override
@@ -67,7 +67,7 @@ public class FoodClient extends AsyncHttpClient {
         params.put("fillIngredients", true);
         params.put("type", meal);
         params.put("diet", diet);
-        params.put("number", 50);
+        params.put("number", 100);
         String url = String.format(EXTENDED_FOOD_TEMPLATE, id, API_KEY);
 
         get(url, new JsonHttpResponseHandler() {
@@ -94,7 +94,7 @@ public class FoodClient extends AsyncHttpClient {
         params.put("query", query);
         params.put("diet", diet);
         params.put("type", meal);
-        params.put("number", 50);
+        params.put("number", 100);
         get(RECIPE_SEARCH_URL, params, new JsonHttpResponseHandler() {
 
             @Override
@@ -147,10 +147,43 @@ public class FoodClient extends AsyncHttpClient {
         });
     }
 
-    public void getRecipeByIngredients(String query, NetworkCallback<List<Food>> callback) {
+    public void suggestByFavorite(String type, String cuisine, String includeIngredients, NetworkCallback<List<Food>> callback) {
         RequestParams params = new RequestParams();
-        params.put("ingredients", query);
-        params.put("number", 20);
+        if (type != null) {
+            params.put("type", type);
+        }
+        if (cuisine != null) {
+            params.put("cuisine", cuisine);
+        }
+        if (includeIngredients != null) {
+            params.put("includeIngredients", includeIngredients);
+        }
+
+        params.put("number", 100);
+        get(RECIPE_SEARCH_URL, params, new JsonHttpResponseHandler() {
+
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    JSONArray results = jsonObject.getJSONArray("results");
+                    callback.onSuccess(Food.fromJsonArray(results));
+                } catch (JSONException e) {
+                    callback.onFailure(e);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                callback.onFailure(throwable);
+            }
+        });
+    }
+
+    public void getRecipeByIngredients(String ingredients, NetworkCallback<List<Food>> callback) {
+        RequestParams params = new RequestParams();
+        params.put("ingredients", ingredients);
+        params.put("number", 100);
 
         get(SUGGEST_BY_INGREDIENTS, params, new JsonHttpResponseHandler() {
             @Override
@@ -172,5 +205,33 @@ public class FoodClient extends AsyncHttpClient {
             }
         });
     }
+
+    public void getRecipeByPreference(String ingredients, NetworkCallback<List<Food>> callback) {
+        RequestParams params = new RequestParams();
+        params.put("ingredients", ingredients);
+        params.put("number", 100);
+
+
+        get(RECIPE_SEARCH_URL, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                JSONArray array = json.jsonArray;
+                try {
+                    List<Food> results = new ArrayList<>();
+                    results.addAll(Food.fromJsonArray(array));
+                    callback.onSuccess(results);
+                } catch (Exception e) {
+                    callback.onFailure(e);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                callback.onFailure(throwable);
+            }
+        });
+    }
+
 
 }

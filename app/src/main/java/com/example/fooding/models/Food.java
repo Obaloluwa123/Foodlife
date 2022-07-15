@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Food {
-    private String title;
-    private String image;
-    private String id;
+    private final String title;
+    private final String image;
+    private final String id;
 
 
     public Food(JSONObject jsonObject) throws JSONException {
@@ -19,6 +19,7 @@ public class Food {
         id = jsonObject.getString("id");
 
     }
+
 
     public static List<Food> fromJsonArray(JSONArray foodJsonArray) throws JSONException {
         List<Food> meals = new ArrayList<>();

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -47,7 +48,9 @@ public class DetailActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
         suggestedFoods = new ArrayList<>();
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         setupFood();
 
         if (!suggestionShown) {
@@ -119,7 +122,7 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         if (suggestedFoods != null && suggestedFoods.size() > suggestionIndex) {
-            Glide.with(this).load(suggestedFoods.get(suggestionIndex).getImage()).into(suggestedFoodImage);
+            Glide.with(getApplicationContext()).load(suggestedFoods.get(suggestionIndex).getImage()).into(suggestedFoodImage);
             suggestedFoodName.setText(suggestedFoods.get(suggestionIndex).getTitle());
             suggestionDialog.show();
         }

@@ -25,7 +25,11 @@ import com.example.fooding.bottomsheets.FilterBottomSheet;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
 import com.example.fooding.models.Food;
+import com.example.fooding.models.Search;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +37,7 @@ import java.util.List;
 @SuppressWarnings("ALL")
 public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterListener {
 
+    protected List<Search> allSearches;
     private FloatingActionButton filterFab;
     private SearchView recipeSearchView;
 
@@ -67,6 +72,7 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -74,10 +80,12 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
         recipeSearchView = view.findViewById(R.id.recipeSearchView);
         RecyclerView rvRecipes = view.findViewById(R.id.rvSearch);
         filterFab = view.findViewById(R.id.filter_fab);
+        setupFAB();
         recipeSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                                                     @Override
                                                     public boolean onQueryTextSubmit(String query) {
                                                         currentSearch = recipeSearchView.getQuery().toString();
+                                                        saveSearchQuery(currentSearch);
                                                         getRecipes(currentSearch);
                                                         return false;
                                                     }
@@ -87,7 +95,10 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
                                                         CharSequence searchValue = recipeSearchView.getQuery().toString();
                                                         return false;
                                                     }
+
                                                 }
+
+
         );
         foodAdapter = new FoodAdapter(foods, this);
         rvRecipes.setAdapter(foodAdapter);
@@ -117,6 +128,8 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
             getRecipes(currentSearch);
         }
         recipeSearchView.clearFocus();
+
+
     }
 
     @Override
@@ -144,6 +157,20 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
             @Override
             public void onFailure(Throwable throwable) {
 
+            }
+        });
+    }
+
+    private void saveSearchQuery(String searchName) {
+        Search search = new Search();
+        search.setSearchName(searchName);
+        search.setUser(ParseUser.getCurrentUser());
+        search.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                } else {
+                }
             }
         });
     }

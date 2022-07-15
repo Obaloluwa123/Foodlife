@@ -3,6 +3,7 @@ package com.example.fooding.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -38,17 +39,22 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Food food = foods.get(position);
         holder.bind(food);
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim1));
 
     }
 
     @Override
 
     public int getItemCount() {
-        return foods.size();
+        if (foods != null) {
+            return foods.size();
+        }
+        return 1;
     }
 
     @Override
     public void onClick(View v) {
+
 
     }
 

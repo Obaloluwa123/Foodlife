@@ -16,7 +16,10 @@ import com.example.fooding.adapters.RecipeExploreAdapter;
 import com.example.fooding.adapters.RecipeParentAdapter;
 import com.example.fooding.models.RecipeParent;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class RecipeExploreFragment extends Fragment {
@@ -43,11 +46,22 @@ public class RecipeExploreFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Date currentTime = Calendar.getInstance().getTime();
+        String formattedDate = DateFormat.getDateInstance(DateFormat.FULL).format(currentTime);
 
-        recipes.add(new RecipeParent("Recipe By Ingredients in my Fridge"));
+        String[] splitDate = formattedDate.split(",");
+
+
+        recipes.add(new RecipeParent("Recommended Recipes Based on Ingredients in my Fridge"));
+        recipes.add(new RecipeParent("Recommended Breakfast Recipes Based on my favorite "));
+        recipes.add(new RecipeParent("Recommended Italian Recipes Based on my favorite"));
+        recipes.add(new RecipeParent("Recommended American Recipes Based on my favorite "));
+        recipes.add(new RecipeParent("Recommended Chinese Recipes Based on my favorite"));
+
         recipeParentAdapter = new RecipeParentAdapter(recipes, getContext());
 
         RecyclerView exploreRecyclerView = view.findViewById(R.id.exploreRecyclerView);
+        exploreRecyclerView.setHasFixedSize(true);
         exploreRecyclerView.setAdapter(recipeParentAdapter);
         exploreRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recipeParentAdapter.notifyDataSetChanged();

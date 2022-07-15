@@ -10,14 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
-import com.example.fooding.models.Ingredients;
+import com.example.fooding.models.IngredientDetails;
 
 import java.util.List;
 
 @SuppressWarnings("ALL")
 public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.ViewHolder> {
-    List<Ingredients> ingredients;
-    Context context;
+    private List<IngredientDetails> ingredients;
+    private Context context;
 
     @NonNull
     @Override
@@ -28,7 +28,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Ingredients ingredient = ingredients.get(position);
+        IngredientDetails ingredient = ingredients.get(position);
         holder.bind(ingredient);
     }
 
@@ -45,7 +45,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
             tvIngredientName = itemView.findViewById(R.id.ingredient_amount);
         }
 
-        public void bind(Ingredients ingredient) {
+        public void bind(IngredientDetails ingredient) {
             tvIngredientName.setText(ingredient.getName());
         }
     }

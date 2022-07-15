@@ -1,8 +1,10 @@
 package com.example.fooding.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
     ParseUser currentUser = ParseUser.getCurrentUser();
-    CallbackManager callbackManager;
+    private CallbackManager callbackManager;
     private EditText etUsername;
     private EditText etPassword;
     private ImageView facebookBtn;
@@ -42,6 +44,16 @@ public class LoginActivity extends AppCompatActivity {
         facebookBtn = findViewById(R.id.facebookbtn);
         etUsername = findViewById(R.id.etnewUsername);
         etPassword = findViewById(R.id.etnewPassword);
+        etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    inputMethodManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+
+            }
+        });
         Button etSignUp = findViewById(R.id.etSignUp);
         Button etLoginButton = findViewById(R.id.etLoginButton);
         LoginManager.getInstance().registerCallback(callbackManager,
@@ -67,7 +79,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
                 LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile"));
-
             }
         });
         etLoginButton.setOnClickListener(new View.OnClickListener() {
