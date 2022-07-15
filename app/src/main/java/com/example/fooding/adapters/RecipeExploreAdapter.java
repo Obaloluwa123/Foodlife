@@ -30,7 +30,6 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("foodadapter", "onCreateViewHolder");
         View FoodView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_childrecyclerview, parent, false);
         return new ViewHolder(FoodView);
 
@@ -38,7 +37,6 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("foodadapter", "onBindViewHolder" + position);
         Food food = foodList.get(position);
         holder.bind(food);
 

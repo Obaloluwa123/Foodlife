@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.fooding.fragments.HomeFragment">
 
-<!--    <androidx.cardview.widget.CardView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFood"
         android:layout_width="match_parent"

@@ -114,10 +114,6 @@ public class OverviewFragment extends Fragment {
             timestampLastClick = 0;
         }
 
-        public DoubleClickListener(long doubleClickQualificationSpanInMillis) {
-            this.doubleClickQualificationSpanInMillis = doubleClickQualificationSpanInMillis;
-            timestampLastClick = 0;
-        }
 
         @Override
         public void onClick(View v) {

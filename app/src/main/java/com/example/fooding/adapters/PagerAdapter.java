@@ -11,7 +11,7 @@ import com.example.fooding.fragments.InstructionsFragment;
 import com.example.fooding.fragments.OverviewFragment;
 import com.example.fooding.models.FoodExtended;
 
-@SuppressWarnings("ALL")
+
 public class PagerAdapter extends FragmentStatePagerAdapter {
 
     private static final int PAGE_0 = 0;
@@ -19,7 +19,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     private static final int PAGE_2 = 2;
     public FoodExtended food;
 
-    @SuppressWarnings("deprecation")
+
     public PagerAdapter(FoodExtended food, @NonNull FragmentManager fm) {
         super(fm);
         this.food = food;
