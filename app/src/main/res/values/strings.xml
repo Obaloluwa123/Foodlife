@@ -49,4 +49,8 @@
     <string name="user_gmail_com" />
     <string name="david" />
     <string name="i_am_a_vegetarian" />
+    <string name="signup">SignUp</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="favorite">Favorite</string>
 </resources>

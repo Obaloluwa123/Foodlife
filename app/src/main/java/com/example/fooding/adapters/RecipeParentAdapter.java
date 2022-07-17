@@ -36,9 +36,12 @@ import java.util.Set;
 public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapter.MyViewholder> implements RecipeExploreAdapter.RecipeExploreAdapterListener {
     private ArrayList<RecipeParent> parentModelArrayList;
     private RecipeExploreAdapter recipeAdapter;
+    private RecipeExploreAdapter breakfastRecipeAdapter;
+
     public Context context;
     private static final Integer INGREDIENT_NUMBER_LIMIT = 150;
     private ArrayList<Food> recipes = new ArrayList<>();
+    private ArrayList<Food> breakfastRecipes = new ArrayList<>();
     private List<FavouriteList> favouriteLists;
 
 
@@ -50,18 +53,23 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
     public class MyViewholder extends RecyclerView.ViewHolder {
         public TextView recipeCategory;
         public RecyclerView parentRecyclerView;
+        public TextView breakfastCategory;
+        public RecyclerView parentRecyclerView2;
 
         public MyViewholder(View itemView) {
             super(itemView);
 
             recipeCategory = itemView.findViewById(R.id.recipeCategory);
             parentRecyclerView = itemView.findViewById(R.id.parentRecyclerView);
+//            breakfastCategory =  itemView.findViewById(R.id.breakfastCategory);
+            parentRecyclerView2 = itemView.findViewById(R.id.parentRecyclerView);
+
         }
     }
     @NonNull
     @Override
     public MyViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_explore, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_recipe_explore, parent, false);
         return new MyViewholder(view);
     }
 
@@ -91,6 +99,9 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
 
         recipeAdapter = new RecipeExploreAdapter(recipes, this);
         holder.parentRecyclerView.setAdapter(recipeAdapter);
+        breakfastRecipeAdapter = new RecipeExploreAdapter(breakfastRecipes, this);
+        holder.parentRecyclerView2.setAdapter(breakfastRecipeAdapter);
+
     }
 
     @Override
@@ -209,8 +220,8 @@ public class RecipeParentAdapter extends RecyclerView.Adapter<RecipeParentAdapte
         client.suggestByFavorite("Breakfast", null, favFeatures[randomFav], new NetworkCallback<List<Food>>() {
             @Override
             public void onSuccess(List<Food> data) {
-                recipes.addAll(data);
-                recipeAdapter.notifyDataSetChanged();
+                breakfastRecipes.addAll(data);
+                breakfastRecipeAdapter.notifyDataSetChanged();
             }
 
             @Override
