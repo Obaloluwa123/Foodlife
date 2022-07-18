@@ -7,15 +7,17 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="cyan">#18FFFF</color>
-    <color name="cyan1">#84FFFF</color>
+    <color name="cyan">#03DAC5</color>
+    <color name="cyan1">#01B5FA</color>
     <color name="cyan2">#00E5FF</color>
     <color name="cyan3">#00B8D4</color>
     <color name="cyan4">#18FFFF</color>
     <color name="cyan5">#B2EBF2</color>
     <color name="grey"> #757575</color>
+    <color name="primaryColor">#222F49</color>
     <color name="chip_text_color">#FF000000</color>
-    #757575
+    <color name="searchBarColor">#F1F1F1</color>
+
 
 
 </resources>

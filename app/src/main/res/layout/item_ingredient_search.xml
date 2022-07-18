@@ -9,6 +9,6 @@
     tools:text="Rice"
     android:paddingStart="24dp"
     android:textColor="@color/black"
-    android:textSize="16sp"
+    android:textAppearance="@style/desc"
     android:background="?selectableItemBackground"
     tools:ignore="RtlSymmetry" />

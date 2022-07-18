@@ -40,6 +40,7 @@ public class DetailActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ArrayList<Food> suggestedFoods;
+    int suggestionIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +105,9 @@ public class DetailActivity extends AppCompatActivity {
 
     public void showSuggestionDialog() {
         Random random = new Random();
-        int suggestionIndex = random.nextInt(suggestedFoods.size());
+        if(!suggestedFoods.isEmpty()){
+             suggestionIndex = random.nextInt(suggestedFoods.size());
+        }
         suggestionDialog = new Dialog(this);
         suggestionDialog.setContentView(R.layout.item_suggestion);
         suggestionDialog.getWindow().getAttributes().windowAnimations = R.style.SuggestionDialogAnimation;

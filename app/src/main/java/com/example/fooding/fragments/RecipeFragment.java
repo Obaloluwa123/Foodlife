@@ -3,6 +3,7 @@ package com.example.fooding.fragments;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -156,7 +157,7 @@ public class RecipeFragment extends Fragment implements FoodAdapter.FoodAdapterL
 
             @Override
             public void onFailure(Throwable throwable) {
-
+                Log.d(TAG, throwable.toString());
             }
         });
     }
