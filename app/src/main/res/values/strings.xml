@@ -53,4 +53,18 @@
     <string name="password">Password</string>
     <string name="username">Username</string>
     <string name="favorite">Favorite</string>
+    <string name="fridge">Fridge</string>
+    <string name="search">Search</string>
+    <string name="explore">explore</string>
+    <string name="profile">Profile</string>
+    <string name="recommended_recipes_based_on_ingredients_in_the_fridge">Recommended Recipes based on Ingredients in the fridge</string>
+    <string name="recommended_italian_recipes">Recommended Italian Recipes</string>
+    <string name="recommended_american_recipes">Recommended American Recipes</string>
+    <string name="recommended_chinese_recipes">Recommended Chinese Recipes</string>
+    <string name="recommended_breakfast_recipes">Recommended Breakfast Recipes</string>
+    <string name="recipe_name">Recipe Name</string>
+    <string name="like_recipes_so_they_can_be_added_here">Like recipes so they can be added here</string>
+    <string name="login">LOGIN</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="or">OR</string>
 </resources>
