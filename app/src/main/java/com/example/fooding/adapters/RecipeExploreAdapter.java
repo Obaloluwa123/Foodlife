@@ -12,16 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
-import com.example.fooding.models.Food;
+import com.example.fooding.models.Recipe;
 
 import java.util.List;
 
 public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdapter.ViewHolder> implements View.OnClickListener {
 
     final RecipeExploreAdapterListener listener;
-    final List<Food> foodList;
+    final List<Recipe> foodList;
 
-    public RecipeExploreAdapter(List<Food> foods, RecipeExploreAdapterListener listener) {
+    public RecipeExploreAdapter(List<Recipe> foods, RecipeExploreAdapterListener listener) {
         this.foodList = foods;
         this.listener = listener;
     }
@@ -36,7 +36,7 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Food food = foodList.get(position);
+        Recipe food = foodList.get(position);
         holder.bind(food);
 
     }
@@ -53,7 +53,7 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
     }
 
     public interface RecipeExploreAdapterListener {
-        void onRecipeClicked(Food food);
+        void onRecipeClicked(Recipe food);
     }
 
 
@@ -71,7 +71,7 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
             cardView = itemView.findViewById(R.id.recipeCardView);
         }
 
-        public void bind(Food food) {
+        public void bind(Recipe food) {
             tvTitle.setText(food.getTitle());
 
             Glide.with(ivImage.getContext()).load(food.getImage()).into(ivImage);

@@ -18,8 +18,8 @@ import com.example.fooding.R;
 import com.example.fooding.adapters.PagerAdapter;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
-import com.example.fooding.models.Food;
-import com.example.fooding.models.FoodExtended;
+import com.example.fooding.models.Recipe;
+import com.example.fooding.models.RecipeExtended;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class DetailActivity extends AppCompatActivity {
     private Dialog suggestionDialog;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private ArrayList<Food> suggestedFoods;
+    private ArrayList<Recipe> suggestedFoods;
     int suggestionIndex;
 
     @Override
@@ -59,7 +59,6 @@ public class DetailActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     suggestionShown = true;
-                    showSuggestionDialog();
                 }
             }, 3000);
         } else {
@@ -74,9 +73,9 @@ public class DetailActivity extends AppCompatActivity {
         String foodmeal = getIntent().getStringExtra(FOOD_MEAL_ARG);
 
         if (foodId != null) {
-            foodClient.getExtendedFood(foodId, fooddiet, foodmeal, new NetworkCallback<FoodExtended>() {
+            foodClient.getExtendedFood(foodId, fooddiet, foodmeal, new NetworkCallback<RecipeExtended>() {
                 @Override
-                public void onSuccess(FoodExtended data) {
+                public void onSuccess(RecipeExtended data) {
                     setupViewPager(data);
                     getSuggestionDetails("rice");
                 }
@@ -90,9 +89,9 @@ public class DetailActivity extends AppCompatActivity {
 
     public void getSuggestionDetails(String ingredient) {
 
-        foodClient.suggestByIngredients(ingredient, new NetworkCallback<List<Food>>() {
+        foodClient.suggestByIngredients(ingredient, new NetworkCallback<List<Recipe>>() {
             @Override
-            public void onSuccess(List<Food> data) {
+            public void onSuccess(List<Recipe> data) {
                 suggestedFoods.addAll(data);
             }
 
@@ -105,8 +104,8 @@ public class DetailActivity extends AppCompatActivity {
 
     public void showSuggestionDialog() {
         Random random = new Random();
-        if(!suggestedFoods.isEmpty()){
-             suggestionIndex = random.nextInt(suggestedFoods.size());
+        if (!suggestedFoods.isEmpty()) {
+            suggestionIndex = random.nextInt(suggestedFoods.size());
         }
         suggestionDialog = new Dialog(this);
         suggestionDialog.setContentView(R.layout.item_suggestion);
@@ -131,7 +130,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    private void setupViewPager(FoodExtended food) {
+    private void setupViewPager(RecipeExtended food) {
         PagerAdapter pagerAdapter = new PagerAdapter(food, fragmentManager);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);

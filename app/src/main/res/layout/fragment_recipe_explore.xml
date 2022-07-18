@@ -15,10 +15,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+            <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_margin="5dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
@@ -30,7 +28,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="24dp"
-                    android:text="Recommended Recipes based on Ingredients in the fridge"
+                    android:text="@string/recommended_recipes_based_on_ingredients_in_the_fridge"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textAppearance="@style/desc"
@@ -46,10 +44,8 @@
 
             </LinearLayout>
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+            <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_margin="5dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
@@ -61,7 +57,7 @@
                     android:layout_marginStart="11dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="24dp"
-                    android:text="Recommended Italian Recipes Based on user Liked Recipes ---"
+                    android:text="@string/recommended_italian_recipes"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textAppearance="@style/desc"
@@ -76,10 +72,8 @@
                     android:orientation="horizontal"/>
 
             </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+            <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_margin="5dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
@@ -91,7 +85,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="24dp"
-                    android:text="Recommended American Recipes "
+                    android:text="@string/recommended_american_recipes"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textAppearance="@style/desc"
@@ -106,10 +100,8 @@
                     android:orientation="horizontal"/>
 
             </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+            <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_margin="5dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
@@ -121,7 +113,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="24dp"
-                    android:text="Recommended Chinese Recipes Based on user Liked Recipes "
+                    android:text="@string/recommended_chinese_recipes"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textAppearance="@style/desc"
@@ -136,10 +128,8 @@
                     android:orientation="horizontal"/>
 
             </LinearLayout>
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
+            <LinearLayout android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:layout_margin="5dp"
                 android:layout_marginTop="5dp"
                 android:orientation="vertical">
@@ -151,7 +141,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="24dp"
-                    android:text="Recommended Breakfast Recipes "
+                    android:text="@string/recommended_breakfast_recipes"
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     android:textAppearance="@style/desc"

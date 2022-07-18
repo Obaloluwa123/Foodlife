@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.fooding.fragments.RecipeFragment">
+    tools:context="com.example.fooding.fragments.RecipeSearchFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/recipeSearchView"
@@ -23,7 +23,7 @@
             android:id="@+id/etRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/textview" />
     </androidx.appcompat.widget.SearchView>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

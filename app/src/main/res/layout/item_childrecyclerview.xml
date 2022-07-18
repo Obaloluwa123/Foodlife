@@ -6,12 +6,12 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/recipeCardView"
-            android:layout_width="120dp"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             app:cardPreventCornerOverlap="false"
             app:cardElevation="5dp"
-            app:cardCornerRadius="5dp"
+            app:cardCornerRadius="10dp"
             android:clickable="true"
             android:focusable="true">
 
@@ -23,12 +23,12 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="5dp"
+                    app:cardCornerRadius="10dp"
                     app:cardElevation="7dp">
                     <ImageView
                         android:id="@+id/recipeImage"
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
+                        android:layout_height="100dp"
                         android:scaleType="centerCrop"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.cardview.widget.CardView>
@@ -44,7 +44,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="Recipe Name"
+                        android:text="@string/recipe_name"
                         android:textAlignment="center"
                         android:textSize="12sp" />
 

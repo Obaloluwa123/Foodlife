@@ -23,16 +23,8 @@ public class Ingredient extends ParseObject {
         return getString("ingredientName");
     }
 
-    public ParseFile getIngredientImage() {
-        return getParseFile(IMAGE_KEY);
-    }
-
     public void setImage(ParseFile parseFile) {
         put(IMAGE_KEY, parseFile);
-    }
-
-    public ParseUser getUser() {
-        return getParseUser(USER_KEY);
     }
 
     public void setUser(ParseUser user) {

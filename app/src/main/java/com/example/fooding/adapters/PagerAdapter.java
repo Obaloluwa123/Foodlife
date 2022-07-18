@@ -7,9 +7,9 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.fooding.fragments.IngredientsFragment;
-import com.example.fooding.fragments.InstructionsFragment;
-import com.example.fooding.fragments.OverviewFragment;
-import com.example.fooding.models.FoodExtended;
+import com.example.fooding.fragments.RecipeInstructionsFragment;
+import com.example.fooding.fragments.RecipeOverviewFragment;
+import com.example.fooding.models.RecipeExtended;
 
 @SuppressWarnings("ALL")
 public class PagerAdapter extends FragmentStatePagerAdapter {
@@ -17,10 +17,10 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     private static final int PAGE_0 = 0;
     private static final int PAGE_1 = 1;
     private static final int PAGE_2 = 2;
-    public FoodExtended food;
+    public RecipeExtended food;
 
     @SuppressWarnings("deprecation")
-    public PagerAdapter(FoodExtended food, @NonNull FragmentManager fm) {
+    public PagerAdapter(RecipeExtended food, @NonNull FragmentManager fm) {
         super(fm);
         this.food = food;
     }
@@ -30,11 +30,11 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case PAGE_0:
-                return OverviewFragment.newInstance(food);
+                return RecipeOverviewFragment.newInstance(food);
             case PAGE_1:
                 return IngredientsFragment.newInstance(food);
             case PAGE_2:
-                return InstructionsFragment.newInstance(food);
+                return RecipeInstructionsFragment.newInstance(food);
             default:
                 return null;
         }

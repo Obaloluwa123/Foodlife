@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.fooding.R;
-import com.example.fooding.fragments.RecipeFragment;
+import com.example.fooding.fragments.RecipeSearchFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -241,7 +241,7 @@ public class FilterBottomSheet extends BottomSheetDialogFragment {
                 break;
         }
 
-        RecipeFragment fragment = (RecipeFragment) getParentFragment();
+        RecipeSearchFragment fragment = (RecipeSearchFragment) getParentFragment();
         if (fragment != null) {
             fragment.setVariables(diet, meal);
         }

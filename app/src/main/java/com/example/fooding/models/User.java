@@ -33,7 +33,5 @@ public class User {
         user.ingredientImage = jsonObject.getString("ingredientImage");
         return user;
 
-
     }
-
 }

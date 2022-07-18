@@ -14,9 +14,13 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fooding.R;
 import com.example.fooding.activities.LoginActivity;
+import com.facebook.CallbackManager;
+import com.facebook.login.widget.ProfilePictureView;
 import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
+
+    CallbackManager callbackManager;
 
     public ProfileFragment() {
     }
@@ -30,22 +34,23 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        callbackManager = CallbackManager.Factory.create();
         Button logoutBtn = view.findViewById(R.id.btnLogout);
         TextView username = view.findViewById(R.id.username);
+        ProfilePictureView profileImage = view.findViewById(R.id.profileImage);
+
 
         if (ParseUser.getCurrentUser() != null) {
             username.setText(ParseUser.getCurrentUser().getUsername());
         }
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ParseUser.logOutInBackground();
-                ParseUser currentUser = ParseUser.getCurrentUser();
-                Intent intent = new Intent(getContext(), LoginActivity.class);
-                startActivity(intent);
-            }
+        logoutBtn.setOnClickListener(v -> {
+            ParseUser.logOutInBackground();
+            ParseUser currentUser = ParseUser.getCurrentUser();
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
         });
 
     }
+
 }

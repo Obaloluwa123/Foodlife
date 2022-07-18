@@ -6,9 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.fooding.fragments.ProfileFragment">
 
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView"
+    <com.facebook.login.widget.ProfilePictureView
+        android:id="@+id/profileImage"
         android:layout_width="151dp"
         android:layout_height="181dp"
         android:layout_marginTop="16dp"
@@ -19,6 +18,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+
     <TextView
         android:id="@+id/bio"
         android:layout_width="176dp"
@@ -26,16 +27,16 @@
         android:layout_marginTop="20dp"
         android:text="@string/i_am_a_vegetarian"
         android:textAppearance="@style/desc"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintEnd_toEndOf="@+id/profileImage"
+        app:layout_constraintStart_toStartOf="@+id/profileImage"
+        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
 
     <ImageView
         android:id="@+id/userImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="92dp"
-        android:src="@drawable/ic_baseline_person_24"
+        android:src="@drawable/ic_person"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/user_name" />
 
@@ -44,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Username:"
+        android:text="@string/username"
         android:textStyle="bold"
         android:textAppearance="@style/desc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +60,7 @@
         android:layout_marginStart="92dp"
         android:layout_marginTop="44dp"
         android:contentDescription="@string/app_name"
-        android:src="@drawable/ic_baseline_person_24"
+        android:src="@drawable/ic_person"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userImage" />
 
@@ -69,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
-        android:text="Password:"
+        android:text="String/username"
         android:textAppearance="@style/desc"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/LastNameImage"

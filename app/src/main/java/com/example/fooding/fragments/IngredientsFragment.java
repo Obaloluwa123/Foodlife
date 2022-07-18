@@ -10,16 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.fooding.R;
-import com.example.fooding.models.FoodExtended;
+import com.example.fooding.models.RecipeExtended;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
 public class IngredientsFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";
 
-    public FoodExtended foodExtended;
+    public RecipeExtended foodExtended;
 
-    public static IngredientsFragment newInstance(FoodExtended food) {
+    public static IngredientsFragment newInstance(RecipeExtended food) {
         IngredientsFragment fragment = new IngredientsFragment();
         Bundle args = new Bundle();
         args.putParcelable(FOOD_ARG, food);
