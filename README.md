@@ -34,14 +34,14 @@ FoodLife is a cooking app that provides tasty dish recipes that can be made from
 * [x] User can add ingredients to their Fridge/Ingredient List
 * [x] User available ingredients in the fridge can be used to get suggested recipes
 * [x] Ingredients search autocompletes
+* [x] RecipeDetails displays overview, instructions and ingredients for recipe
 
 
 **Optional Nice-to-have Stories(Stretch)**
 * [x] User can save favorite recipes
 * [x] User can filter recipes based on diet and meal type.
-* [x] RecipeDetails displays overview, instructions and ingredients for recipe
+* [x] Add Facebook SDK for login
 * [] RecipeFragment has infinite scroll
-* [] Add Facebook SDK for login
 * [] User can take picture of food
 * [] User can share pictures of food taken with their friends on Facebook
 * [] API call information is cached and can be seen offline
