@@ -13,7 +13,22 @@ FoodLife is a cooking app that provides tasty dish recipes that can be made from
 ### App Evaluation
 [Evaluation of your app across the following attributes]
 - **Category: Food/Cooking**
-- **Mobile: This app will mainly be for mobile use and Users can search for ingredients from the api and add those ingredients to their fridge and see recipes based on those ingredients and it will be helpful for college students that need something to cook fast**
+- **Mobile: This app will mainly be for mobile use and Users can search for ingredients from the Spoonacular API, add ingredients to their fridge, remove ingredients from the fridge. The added ingredients are saved in Back4App database.
+
+.Fridge Fragment
+The fridge has ingredient search autocomplete which shows the first five ingredients based on the user searches.After searching, ingredients are added to the fridge by tapping on the ingredient, and user can swipe left to remove ingredients from the fridge. Hence, the explore fragment displays recipes based on the ingredients in the user's fridge and previously liked recipes.
+
+.RecipeSearchFragment
+User can search for recipes in the RecipeSearchFragment, click on recipes to see the overview, and instructions for recipes, and filter recipes based on diet and meal type.
+
+.RecipeExploreFragment
+RecipeExploreFragment display recipes based on ingredients stored in fridge(Back4App database) and previously liked recipes(room database)
+
+.RecipeFavoriteFragment
+RecipeFavoriteFragment display favorite recipes which was stored in room database.
+
+.ProfileFragment
+ProfileFragment shows users profile, which contains users imported profile image from facebook, and logout .**
 - **Story: This answers the question of "what can I cook with the ingredients I have?" Users will be able to know the dish to cook with their available ingredients.The app takes in user's ingredients (what they have in their fridge) and provides recipe suggestions from them.**
 - **Market: A lot of people have something at home in their fridge, but don't know what to cook**
 - **Habit:This app will be addictive because a lot of people want to know what food they can cook with the ingredients they have.**
@@ -43,7 +58,7 @@ Complex Features:
 
 1.I created a fridge, where users can search for ingredients from the API with ingredient search autocomplete. This is the API endpoint I used for the ingredients autocomplete "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=%s" and "https://api.spoonacular.com/recipes/findByIngredients/{id}ingredientWidget.json?apiKey=%s" for the ingredient search from the API. Then, the user can click on any of the suggestions, which is added to the Fridge Fragment, user can also swipe to delete ingredients. The ingredients are then saved to BAck4App database and used it to display recommended recipes from the API with the **fetchRecipesByIngredients()** method in the RecipeExploreFragment.
 
-2. I saved users previously liked recipes to room database. Then, I created a method called **querySimilarCuisinesRecipe()**, then I got the previouly saved favorite recipes, then I filtered the recipes based on type and three different cuisines which are Italian, American, and Chinese cuisines. For the breakfast category, I did the same, but I created the **queryPreviouslyLikedRecipe()** for it and I displayed recommended breakfast recipes.
+2. I used Nested recyclerview, so I had a recyclerview with horizontal scrolling in the main recyclerview that supports vertical scrolling because I displayed recommendations for five categories. Then, I saved users previously liked recipes to room database and I created a method called **querySimilarCuisinesRecipe()**, which is the method that gets the favorite recipes saved in the databse and calls similar recipes from the API. Also,  I filtered the recipes based on type,cuisine and to include certain ingredients, then I displayed three different cuisines which are Italian, American, and Chinese cuisines, and the breakfast category from the meal type.
 
 
 **Mobile (iOS & Android) / Web App Requirements
@@ -66,18 +81,40 @@ Your app has multiple views
 * [x] Your app incorporates at least one external library to add visual polish -  I added FloatingActionButton and Facebook shimmer effect as a loading state.
 * [x] Your app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)-  I added slide-in animation in the Recipe/Search Fragment
 
-[web only] 
-Your app has an interesting cursor interaction (e.g. a custom tooltip on hover)
-Your app demonstrates at least one component with complex visual styling (done by you, from scratch)
-Your app uses a loading state to create visual polish
 
 **File Architecture:**
-I arranged my files into different packages, which are activities, adapters, clients, favourite, fragments and models. 
-The Activities are DetailActivity, LoginActivity, MainActivity, SignupActivity, SplashscreenActivity. The Fragments are FridgeFragment, RecipeSearchFragment, RecipeExploreFragment, FavoriteRecipeFragment, ProfileFragment, and for the detail activity  I have RecipeOverviewFragment, RecipeInstructionsFragment, IngredientsFragment. 
-The adapters are RecipeAdapter, which is the main adapter for the recipes, RecipeExploreAdapter, this is the adapter for the explore page, SuggestionsAdapter, this is the adapter for the ingredients autocomplete in the FridgeFragment, SelectedIngredientsAdapter is the adapter for the selected ingredients in the Fridge Fragment, FavouriteRecipeAdapter is the adapter for the FavouriteFragment, PagerAdapter is for the ViewPager, and IngredientsAdapter is for the ingredientsFragment in the detail activity. 
-The clients file are FoodClient, where all my API calls were made, NetworkCallback, an interface for NetworkCallback,  ParseApplication for Back4App database.  
-The favourite package contains Database class, Data entities, and Data access objects for the favorite recipes which was saved with room database.
-The models contains the Recipe,RecipeExtended, Ingredient, IngredientDetails, IngredientSearchSuggestion, Search, User. The Recipe model class is for the title, image, and id of Recipe, the RecipeExtended model contains more information about Recipes, hence it is for the detail activity of the Recipes. The Ingredient and Search model class was used to save ingredients and search query to the Back4App database respectively. The IngredientSearchSuggestion is the model class for the Ingredient Search in the FridgeFragment. The User the model class for the User.
+  . I arranged my files into different packages, which are activities, adapters, clients, favourite, fragments and models. 
+  activities:
+    DetailActivity
+    LoginActivity
+    MainActivity
+    SignupActivity
+    SplashscreenActivity. 
+  fragments:
+    FridgeFragment
+    RecipeSearchFragment
+    RecipeExploreFragment
+    FavoriteRecipeFragment
+    ProfileFragment
+    detail activity  have RecipeOverviewFragment, RecipeInstructionsFragment, IngredientsFragment. 
+  adapters:
+    RecipeAdapter: which is the main adapter for the recipes
+    RecipeExploreAdapter: this is the adapter for the explore page
+    SuggestionsAdapter:  this is the adapter for the ingredients autocomplete in the FridgeFragment,       SelectedIngredientsAdapter: is the adapter for the selected ingredients in the Fridge Fragment,
+    FavouriteRecipeAdapter: is the adapter for the FavouriteFragment
+    PagerAdapter: is for the ViewPager, and IngredientsAdapter is for the ingredientsFragment in the       detail activity.
+  clients: 
+    The clients file are FoodClient, where all my API calls were made, NetworkCallback, an interface       for NetworkCallback,  ParseApplication for Back4App database. 
+  favourite :
+    The favourite package contains Database class, Data entities, and Data access objects for the           favorite recipes which was saved with room database.
+  models:
+    Recipe :The Recipe model class is for the title, image, and id of Recipe
+    RecipeExtended : the RecipeExtended model contains more information about Recipes, hence it is for     the detail activity of the Recipes
+    Ingredient : The Ingredient model class was used to save ingredients  to the Back4App database.
+    IngredientDetails 
+    IngredientSearchSuggestion: IngredientSearchSuggestion is the model class for the Ingredient Search     in the FridgeFragment.
+    Search: Search model class was used to save search query to the Back4App database.
+    User:  The User the model class for the User.
 
 ### 2. Screen Functionality
 
