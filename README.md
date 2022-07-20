@@ -63,7 +63,7 @@ Visuals & Interactions
 Your app has multiple views
 [mobile only] 
 * [x] Your app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale) -  I used double tap to like in the detail activity, and swipe to delete ingredients in the Fridge fragment.
-* [x] Your app incorporates at least one external library to add visual polish -  I added FloatingActionButton, but I'm going to add one more
+* [x] Your app incorporates at least one external library to add visual polish -  I added FloatingActionButton and Facebook shimmer effect as a loading state.
 * [x] Your app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)-  I added slide-in animation in the Recipe/Search Fragment
 
 [web only] 
@@ -75,6 +75,7 @@ Your app uses a loading state to create visual polish
 * [x] User can save favorite recipes
 * [x] Add Facebook SDK for login
 * [x] Import user facebook profile image to user's profile 
+* [x] Added shimmer effect loading state for the explore page
 * [] User can share pictures of food taken with their friends on Facebook
 * [] API call information is cached and can be seen offline
 * [] RecipeFragment has infinite scroll
