@@ -39,7 +39,8 @@ FoodLife is a cooking app that provides tasty dish recipes that can be made from
 * [x] User can see Recommended Recipes for five categories. The first category is based on ingredients in their fridge, while the remaining categories are cuisines based on previously liked recipes.
 * [x] Ingredients search autocompletes
 
-**Complex Features**
+Complex Features:
+
 1.I created a fridge, where users can search for ingredients from the API with ingredient search autocomplete. This is the API endpoint I used for the ingredients autocomplete "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=%s" and "https://api.spoonacular.com/recipes/findByIngredients/{id}ingredientWidget.json?apiKey=%s" for the ingredient search from the API. Then, the user can click on any of the suggestions, which is added to the Fridge Fragment, user can also swipe to delete ingredients. The ingredients are then saved to BAck4App database and used it to display recommended recipes from the API with the **fetchRecipesByIngredients()** method in the RecipeExploreFragment.
 
 2. I saved users previously liked recipes to room database. Then, I created a method called **querySimilarCuisinesRecipe()**, then I got the previouly saved favorite recipes, then I filtered the recipes based on type and three different cuisines which are Italian, American, and Chinese cuisines. For the breakfast category, I did the same, but I created the **queryPreviouslyLikedRecipe()** for it and I displayed recommended breakfast recipes.
