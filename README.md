@@ -45,6 +45,7 @@ Complex Features:
 
 2. I saved users previously liked recipes to room database. Then, I created a method called **querySimilarCuisinesRecipe()**, then I got the previouly saved favorite recipes, then I filtered the recipes based on type and three different cuisines which are Italian, American, and Chinese cuisines. For the breakfast category, I did the same, but I created the **queryPreviouslyLikedRecipe()** for it and I displayed recommended breakfast recipes.
 
+
 **Mobile (iOS & Android) / Web App Requirements
 Go beyond CodePath:**
 
