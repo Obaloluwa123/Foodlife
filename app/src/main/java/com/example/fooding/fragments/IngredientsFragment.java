@@ -13,6 +13,7 @@ import com.example.fooding.R;
 import com.example.fooding.models.RecipeExtended;
 
 @SuppressWarnings({"ALL", "ConstantConditions"})
+//TODO:add ingredients to detail activity or delete this page
 public class IngredientsFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";
