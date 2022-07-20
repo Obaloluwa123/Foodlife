@@ -24,27 +24,58 @@ FoodLife is a cooking app that provides tasty dish recipes that can be made from
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-* [x] User can see custom launch screen
+* [x] User can see custom splash screen
 * [x] User can sign up for a new account
 * [x] User can log into their account
 * [x] User can log out of their account
-* [x] User can search for recipes based on ingredients
-* [x] User can see dish recipe that can be made
-* [x] User can see steps on how to prepare the food
-* [x] User can add ingredients to their Fridge/Ingredient List
+* [x] User can search, add and remove ingredients from their Fridge/Ingredient List
 * [x] User available ingredients in the fridge can be used to get suggested recipes
-* [x] Ingredients search autocompletes
+* [x] User can search for recipes based on ingredients
+* [x] User can filter recipes based on meal type and diet type
 * [x] RecipeDetails displays overview, instructions and ingredients for recipe
+* [x] User can double tap to like a recipe in the Overview Fragment of the detail activity
+* [x] User can see dish recipe that can be made
+* [x] User can see steps on how to prepare the Recipe
+* [x] User can see Recommended Recipes for five categories. The first category is based on ingredients in their fridge, while the remaining categories are cuisines based on previously liked recipes.
+* [x] Ingredients search autocompletes
 
+**Complex Features**
+1.I created a fridge, where users can search for ingredients from the API with ingredient search autocomplete. This is the API endpoint I used for the ingredients autocomplete "https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=%s" and "https://api.spoonacular.com/recipes/findByIngredients/{id}ingredientWidget.json?apiKey=%s" for the ingredient search from the API. Then, the user can click on any of the suggestions, which is added to the Fridge Fragment, user can also swipe to delete ingredients. The ingredients are then saved to BAck4App database and used it to display recommended recipes from the API with the **fetchRecipesByIngredients()** method in the RecipeExploreFragment. 
+2. I saved users previously liked recipes to room database. Then, I created a method called **querySimilarCuisinesRecipe()**, then I got the previouly saved favorite recipes, then I filtered the recipes based on type and three different cuisines which are Italian, American, and Chinese cuisines. For the breakfast category, I did the same, but I created the **queryPreviouslyLikedRecipe()** for it and I displayed recommended breakfast recipes.
+
+**Mobile (iOS & Android) / Web App Requirements
+Go beyond CodePath:**
+
+Difficult/ Ambiguous Technical Problems: 
+Your app provides multiple opportunities for you to overcome difficult/ambiguous technical problems (more below)
+SDK & Database Integration
+* [x] Your app interacts with a database (e.g. Parse) - I used Back4App & Room database
+* [x] Your app integrates with at least one SDK (e.g. Google Maps SDK, Facebook SDK) or API (that you didn’t learn about in CodePath) – free SDKs and APIs only -  I used Spoonacular API & Facebook SDK
+
+User Authentication
+* [x] You can log in/log out of your app as a user
+* [x] You can sign up with a new user profile
+
+Visuals & Interactions
+Your app has multiple views
+[mobile only] 
+* [x] Your app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale) -  I used double tap to like in the detail activity, and swipe to delete ingredients in the Fridge fragment.
+* [x] Your app incorporates at least one external library to add visual polish -  I added FloatingActionButton, but I'm going to add one more
+* [x] Your app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)-  I added slide-in animation in the Recipe/Search Fragment
+
+[web only] 
+Your app has an interesting cursor interaction (e.g. a custom tooltip on hover)
+Your app demonstrates at least one component with complex visual styling (done by you, from scratch)
+Your app uses a loading state to create visual polish
 
 **Optional Nice-to-have Stories(Stretch)**
 * [x] User can save favorite recipes
-* [x] User can filter recipes based on diet and meal type.
 * [x] Add Facebook SDK for login
-* [] RecipeFragment has infinite scroll
-* [] User can take picture of food
+* [x] Import user facebook profile image to user's profile 
 * [] User can share pictures of food taken with their friends on Facebook
 * [] API call information is cached and can be seen offline
+* [] RecipeFragment has infinite scroll
+* [] User can take picture of food
 * [] Food/Barcode scanner for ingredients to see list of recipes that contain the scanned ingredients.
 
 ### 2. Screen Archetypes
