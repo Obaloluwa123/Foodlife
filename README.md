@@ -71,6 +71,33 @@ Your app has an interesting cursor interaction (e.g. a custom tooltip on hover)
 Your app demonstrates at least one component with complex visual styling (done by you, from scratch)
 Your app uses a loading state to create visual polish
 
+**File Architecture:**
+I arranged my files into different packages, which are activities, adapters, clients, favourite, fragments and models. 
+The Activities are DetailActivity, LoginActivity, MainActivity, SignupActivity, SplashscreenActivity. The Fragments are FridgeFragment, RecipeSearchFragment, RecipeExploreFragment, FavoriteRecipeFragment, ProfileFragment, and for the detail activity  I have RecipeOverviewFragment, RecipeInstructionsFragment, IngredientsFragment. 
+The adapters are RecipeAdapter, which is the main adapter for the recipes, RecipeExploreAdapter, this is the adapter for the explore page, SuggestionsAdapter, this is the adapter for the ingredients autocomplete in the FridgeFragment, SelectedIngredientsAdapter is the adapter for the selected ingredients in the Fridge Fragment, FavouriteRecipeAdapter is the adapter for the FavouriteFragment, PagerAdapter is for the ViewPager, and IngredientsAdapter is for the ingredientsFragment in the detail activity. 
+The clients file are FoodClient, where all my API calls were made, NetworkCallback, an interface for NetworkCallback,  ParseApplication for Back4App database.  
+The favourite package contains Database class, Data entities, and Data access objects for the favorite recipes which was saved with room database.
+The models contains the Recipe,RecipeExtended, Ingredient, IngredientDetails, IngredientSearchSuggestion, Search, User. The Recipe model class is for the title, image, and id of Recipe, the RecipeExtended model contains more information about Recipes, hence it is for the detail activity of the Recipes. The Ingredient and Search model class was used to save ingredients and search query to the Back4App database respectively. The IngredientSearchSuggestion is the model class for the Ingredient Search in the FridgeFragment. The User the model class for the User.
+
+### 2. Screen Functionality
+
+* Fridge Fragment
+   * I created a Fridge to allow User to search for ingredients from api. I queried Ingredients for the specific user, then I setup the recyclerview to allow user to search for ingredients from api, then I used an ItemTouchHelper to attach the selected ingredients to the Recyclerview. I created a method named onSuggestionClicked() to attach the ingredients clicked on and attach it to the recyclerview. And, I used the saveIngredient() to saved ingredients to the database and I called it in the onSuggestionClicked() function. Also, I created the deleteIngredient() to delete ingredients from the database and I called the method in the onSwiped() function.
+   * User can search for, add ingredients to the pantry fragment
+   * User can remove ingredients from the pantry fragment
+* Recipe Fragment
+   * I created the getRecipes() method that allow users to search for Recipes from the API, and a floatingActionButton to allow users to filter recipes based on diet and meal type, and I saved user searchquery to the database.
+   * User can filter recipe based on diet and meal type
+   * User can click on Recipe to see details about recipe
+* Explore Fragment
+   * User can see recommended recipes based on ingredients in their fridge
+   * User can see recommended recipes by cuisine based on their preference
+* Favorite Fragment
+   * I saved user favorite recipes to room database and displayed it in this fragment
+   * User can see saved recipes 
+* Profile
+   * User can see their profile
+
 **Optional Nice-to-have Stories(Stretch)**
 * [x] User can save favorite recipes
 * [x] Add Facebook SDK for login
@@ -101,6 +128,7 @@ Your app uses a loading state to create visual polish
 * Favorite Fragment
    * User can see saved recipes 
 * Profile
+   * User can logout of their profile, I used Facebook Graph API to fetch the users profile image. i got the currentAccessToken when the user login and made a graphrequest if the accesstoken is not null, and I set the profile image to the profile fragment based on the user id.
    * User can see their profile
 ### 3. Navigation
 
