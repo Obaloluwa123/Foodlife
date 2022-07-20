@@ -90,6 +90,7 @@ The models contains the Recipe,RecipeExtended, Ingredient, IngredientDetails, In
    * User can filter recipe based on diet and meal type
    * User can click on Recipe to see details about recipe
 * Explore Fragment
+   * I displayed recommended recipes based on ingredients available in the users fridge. I saved users previously liked recipes to room database. Then, I created a method called **querySimilarCuisinesRecipe()**, then I got the previouly saved favorite recipes, then I filtered the recipes based on type and three different cuisines which are Italian, American, and Chinese cuisines. For the breakfast category, I did the same, but I created the **queryPreviouslyLikedRecipe()** for it and I displayed recommended breakfast recipes.
    * User can see recommended recipes based on ingredients in their fridge
    * User can see recommended recipes by cuisine based on their preference
 * Favorite Fragment
