@@ -61,7 +61,7 @@ Complex Features:
 2. I used Nested recyclerview, so I had a recyclerview with horizontal scrolling in the main recyclerview that supports vertical scrolling because I displayed recommendations for five categories. Then, I saved users previously liked recipes to room database and I created a method called **querySimilarCuisinesRecipe()**, which is the method that gets the favorite recipes saved in the databse and calls similar recipes from the API. Also,  I filtered the recipes based on type,cuisine and to include certain ingredients, then I displayed three different cuisines which are Italian, American, and Chinese cuisines, and the breakfast category from the meal type.
 
 
-**Mobile (iOS & Android) / Web App Requirements
+**Mobile (Android)
 Go beyond CodePath:**
 
 Difficult/ Ambiguous Technical Problems: 
@@ -84,30 +84,44 @@ Your app has multiple views
 
 **File Architecture:**
   . I arranged my files into different packages, which are activities, adapters, clients, favourite, fragments and models. 
+  
   activities:
     DetailActivity
     LoginActivity
     MainActivity
     SignupActivity
     SplashscreenActivity. 
+    
+    
   fragments:
+  
     FridgeFragment
     RecipeSearchFragment
     RecipeExploreFragment
     FavoriteRecipeFragment
     ProfileFragment
     detail activity  have RecipeOverviewFragment, RecipeInstructionsFragment, IngredientsFragment. 
+    
+    
   adapters:
+  
     RecipeAdapter: which is the main adapter for the recipes
     RecipeExploreAdapter: this is the adapter for the explore page
     SuggestionsAdapter:  this is the adapter for the ingredients autocomplete in the FridgeFragment,       SelectedIngredientsAdapter: is the adapter for the selected ingredients in the Fridge Fragment,
     FavouriteRecipeAdapter: is the adapter for the FavouriteFragment
     PagerAdapter: is for the ViewPager, and IngredientsAdapter is for the ingredientsFragment in the       detail activity.
+    
+    
   clients: 
+  
     The clients file are FoodClient, where all my API calls were made, NetworkCallback, an interface       for NetworkCallback,  ParseApplication for Back4App database. 
+    
   favourite :
+  
     The favourite package contains Database class, Data entities, and Data access objects for the           favorite recipes which was saved with room database.
+    
   models:
+  
     Recipe :The Recipe model class is for the title, image, and id of Recipe
     RecipeExtended : the RecipeExtended model contains more information about Recipes, hence it is for     the detail activity of the Recipes
     Ingredient : The Ingredient model class was used to save ingredients  to the Back4App database.
