@@ -5,40 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
+    android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context=".activities.LoginActivity"
-    android:focusable="true">
+    tools:context=".activities.LoginActivity">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/usernameTextInputLayout"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_marginTop="68dp"
         app:hintEnabled="false"
-        app:layout_constraintEnd_toEndOf="@+id/imageView2"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        style="@style/TextInputLayoutStyle"
+        app:layout_constraintEnd_toEndOf="@+id/foodlifeLogo"
+        app:layout_constraintStart_toStartOf="@+id/foodlifeLogo"
+        app:layout_constraintTop_toBottomOf="@+id/foodlifeLogo"
         app:shapeAppearance="@style/ShapeAppearance.FoodLife.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etnewUsername"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:inputType="textPersonName"
             android:maxLength="100"
             android:textColor="@color/black"
-            android:inputType="textPersonName"
-            android:hint="@string/username"
 
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordTextInputLayout"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
@@ -48,55 +48,54 @@
         app:layout_constraintEnd_toEndOf="@+id/usernameTextInputLayout"
         app:layout_constraintStart_toStartOf="@+id/usernameTextInputLayout"
         app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout"
-        style="@style/TextInputLayoutStyle"
         app:shapeAppearance="@style/ShapeAppearance.FoodLife.SmallComponent">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etnewPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:maxLength="100"
+            android:hint="@string/password"
             android:inputType="textPassword"
-            android:hint="password"
+            android:maxLength="100"
+            android:textColor="@color/black"
 
             />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-
     <Button
         android:id="@+id/etLoginButton"
+        style="@style/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_rectangle"
         android:text="@string/login"
         app:layout_constraintEnd_toEndOf="@+id/passwordTextInputLayout"
         app:layout_constraintStart_toStartOf="@+id/passwordTextInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
-        style="@style/loginBtn"/>
-
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout" />
 
 
     <Button
         android:id="@+id/etSignUp"
+        style="@style/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_rectangle"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="@+id/etLoginButton"
         app:layout_constraintStart_toStartOf="@+id/etLoginButton"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginButton"
-        style="@style/loginBtn"/>
+        app:layout_constraintTop_toBottomOf="@+id/etLoginButton" />
 
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/or"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
@@ -106,7 +105,7 @@
         app:layout_constraintStart_toStartOf="@+id/etLoginButton" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/foodlifeLogo"
         android:layout_width="125dp"
         android:layout_height="105dp"
         android:layout_marginTop="50dp"

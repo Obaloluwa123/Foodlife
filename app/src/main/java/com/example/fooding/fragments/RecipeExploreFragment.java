@@ -2,6 +2,7 @@ package com.example.fooding.fragments;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
+import com.example.fooding.activities.DetailActivity;
 import com.example.fooding.activities.MainActivity;
 import com.example.fooding.adapters.RecipeExploreAdapter;
 import com.example.fooding.clients.FoodClient;
@@ -33,7 +35,7 @@ import java.util.Random;
 import java.util.Set;
 
 
-public class RecipeExploreFragment extends Fragment {
+public class RecipeExploreFragment extends Fragment implements RecipeExploreAdapter.RecipeExploreAdapterListener {
     private static final Integer INGREDIENT_NUMBER_LIMIT = 150;
     public TextView recipeCategory;
     public RecyclerView parentRecyclerView;
@@ -71,11 +73,11 @@ public class RecipeExploreFragment extends Fragment {
         parentRecyclerView4 = view.findViewById(R.id.chineseRecyclerView);
         parentRecyclerView5 = view.findViewById(R.id.breakfastRecyclerView);
 
-        recipeAdapter = new RecipeExploreAdapter(uniqueRecipes, null);
-        italianRecipeAdapter = new RecipeExploreAdapter(italianRecipes, null);
-        americanRecipeAdapter = new RecipeExploreAdapter(americanRecipes, null);
-        chineseRecipeAdapter = new RecipeExploreAdapter(chineseRecipes, null);
-        breakfastRecipeAdapter = new RecipeExploreAdapter(breakfastRecipes, null);
+        recipeAdapter = new RecipeExploreAdapter(uniqueRecipes, this);
+        italianRecipeAdapter = new RecipeExploreAdapter(italianRecipes, this);
+        americanRecipeAdapter = new RecipeExploreAdapter(americanRecipes, this);
+        chineseRecipeAdapter = new RecipeExploreAdapter(chineseRecipes, this);
+        breakfastRecipeAdapter = new RecipeExploreAdapter(breakfastRecipes, this);
 
         setupRecycler(parentRecyclerView, recipeAdapter);
         setupRecycler(parentRecyclerView2, italianRecipeAdapter);
@@ -147,8 +149,6 @@ public class RecipeExploreFragment extends Fragment {
     }
 
     private void querySimilarCuisinesRecipe(String cuisine) {
-
-
         favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
 
         if (favouriteLists.isEmpty()) {
@@ -184,6 +184,9 @@ public class RecipeExploreFragment extends Fragment {
                     breakfastRecipes.addAll(data);
                     breakfastRecipeAdapter.notifyDataSetChanged();
                 }
+                if (data.size() == 0 ) {
+                    querySimilarCuisinesRecipe(cuisine);
+                }
             }
 
             @Override
@@ -209,14 +212,12 @@ public class RecipeExploreFragment extends Fragment {
         String[] favFeatures = favoriteFeatures.split(" ");
         Random favoriteIngredient = new Random();
         int randomFav = favoriteIngredient.nextInt(favFeatures.length - 1);
-        Log.i(TAG, "queryPreviouslyLikedRecipe: " + favFeatures[randomFav]);
         FoodClient client = new FoodClient();
         client.suggestByFavorite("Breakfast", null, favFeatures[randomFav], new NetworkCallback<List<Recipe>>() {
             @Override
             public void onSuccess(List<Recipe> data) {
                 breakfastRecipes.addAll(data);
                 breakfastRecipeAdapter.notifyDataSetChanged();
-                Log.d(TAG, "on success");
             }
 
             @Override
@@ -224,6 +225,14 @@ public class RecipeExploreFragment extends Fragment {
                 Log.d(TAG, "on failure");
             }
         });
+
+    }
+
+    @Override
+    public void onRecipeClicked(Recipe food) {
+        Intent intent = new Intent(getActivity(), DetailActivity.class);
+        intent.putExtra(DetailActivity.FOOD_ID_ARG, food.getId());
+        startActivity(intent);
 
     }
 }

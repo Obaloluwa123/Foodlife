@@ -6,17 +6,33 @@
     android:layout_height="match_parent"
     tools:context="com.example.fooding.fragments.ProfileFragment">
 
-    <com.facebook.login.widget.ProfilePictureView
-        android:id="@+id/profileImage"
-        android:layout_width="151dp"
-        android:layout_height="181dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/pexels_andrea_piacquadio_3763188"
-        app:civ_border_color="@color/black"
-        app:civ_border_width="3dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/profilePictureCardView"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="250dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="250dp">
+
+            <com.facebook.login.widget.ProfilePictureView
+                android:id="@+id/profileImage"
+                android:layout_width="110dp"
+                android:layout_height="110dp" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
 
 
 
@@ -27,9 +43,9 @@
         android:layout_marginTop="20dp"
         android:text="@string/i_am_a_vegetarian"
         android:textAppearance="@style/desc"
-        app:layout_constraintEnd_toEndOf="@+id/profileImage"
-        app:layout_constraintStart_toStartOf="@+id/profileImage"
-        app:layout_constraintTop_toBottomOf="@+id/profileImage" />
+        app:layout_constraintEnd_toEndOf="@+id/profilePictureCardView"
+        app:layout_constraintStart_toStartOf="@+id/profilePictureCardView"
+        app:layout_constraintTop_toBottomOf="@+id/profilePictureCardView" />
 
     <ImageView
         android:id="@+id/userImage"
@@ -45,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/username"
+        android:text="Username:"
         android:textStyle="bold"
         android:textAppearance="@style/desc"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="32dp"
-        android:text="String/username"
+        android:text="Password:"
         android:textAppearance="@style/desc"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/LastNameImage"

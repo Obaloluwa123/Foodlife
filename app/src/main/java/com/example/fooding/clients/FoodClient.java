@@ -161,7 +161,7 @@ public class FoodClient extends AsyncHttpClient {
             params.put("includeIngredients", includeIngredients);
         }
 
-        params.put("number", 20);
+        params.put("number", 100);
         get(RECIPE_SEARCH_URL, params, new JsonHttpResponseHandler() {
 
             @Override
@@ -213,7 +213,7 @@ public class FoodClient extends AsyncHttpClient {
     public void getRecipeByPreference(String ingredients, NetworkCallback<List<Recipe>> callback) {
         RequestParams params = new RequestParams();
         params.put("ingredients", ingredients);
-        params.put("number", 20);
+        params.put("number", 100);
 
 
         get(RECIPE_SEARCH_URL, params, new JsonHttpResponseHandler() {

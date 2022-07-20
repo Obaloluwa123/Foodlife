@@ -21,14 +21,14 @@
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/filter_bottom_sheet.xml" value="0.3098958333333333" />
-        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.3858695652173913" />
+        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_ingredient.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_instructions.xml" value="0.21693840579710144" />
         <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.3508771929824561" />
         <entry key="app/src/main/res/layout/fragment_pantry.xml" value="0.2346014492753623" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_recipe_explore.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/ingredients_row_layout.xml" value="0.335" />
@@ -43,7 +43,7 @@
         <entry key="app/src/main/res/layout/layout_ingredient_search.xml" value="0.2074468085106383" />
         <entry key="app/src/main/res/layout/recipe_loading.xml" value="0.1" />
         <entry key="app/src/main/res/layout/suggest_dialog.xml" value="0.21197916666666666" />
-        <entry key="app/src/main/res/menu/main_menu.xml" value="0.25759124755859375" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/menu/menu_share.xml" value="0.1" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1" />

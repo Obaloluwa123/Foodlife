@@ -14,9 +14,17 @@ import androidx.fragment.app.Fragment;
 
 import com.example.fooding.R;
 import com.example.fooding.activities.LoginActivity;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.facebook.login.LoginManager;
 import com.facebook.login.widget.ProfilePictureView;
 import com.parse.ParseUser;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ProfileFragment extends Fragment {
 
@@ -44,13 +52,50 @@ public class ProfileFragment extends Fragment {
             username.setText(ParseUser.getCurrentUser().getUsername());
         }
 
+        Bundle bundle = new Bundle();
+        bundle.putString("fields", "gender, name , id");
+
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+
+                if (accessToken != null) {
+                    GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                        @Override
+                        public void onCompleted(@Nullable JSONObject jsonObject, @Nullable GraphResponse graphResponse) {
+                            try {
+                                String id = jsonObject.getString("id");
+                                new GraphRequest(
+                                        AccessToken.getCurrentAccessToken(),
+                                        "/{user-id}/picture",
+                                        null,
+                                        HttpMethod.GET,
+                                        new GraphRequest.Callback() {
+                                            public void onCompleted(GraphResponse response) {
+
+                                            }
+                                        }
+                                ).executeAsync();
+                                profileImage.setDrawingCacheEnabled(true);
+                                profileImage.setProfileId(id);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+
+                    });
+                    graphRequest.setParameters(bundle);
+                    graphRequest.executeAsync();
+
+        }
         logoutBtn.setOnClickListener(v -> {
+            LoginManager.getInstance().logOut();
+            profileImage.setProfileId("");
             ParseUser.logOutInBackground();
             ParseUser currentUser = ParseUser.getCurrentUser();
             Intent intent = new Intent(getContext(), LoginActivity.class);
             startActivity(intent);
         });
 
-    }
 
+    }
 }
