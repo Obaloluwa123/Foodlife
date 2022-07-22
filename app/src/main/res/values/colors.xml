@@ -17,6 +17,9 @@
     <color name="primaryColor">#222F49</color>
     <color name="chip_text_color">#FF000000</color>
     <color name="searchBarColor">#F1F1F1</color>
+    <color name="shimmer_color">#424242</color>
+    <color name="secondary">#BDBDBD</color>
+
 
 
 

@@ -25,6 +25,7 @@ import com.example.fooding.clients.NetworkCallback;
 import com.example.fooding.favourite.FavouriteList;
 import com.example.fooding.models.Ingredient;
 import com.example.fooding.models.Recipe;
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
@@ -49,6 +50,7 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
     private RecipeExploreAdapter americanRecipeAdapter;
     private RecipeExploreAdapter chineseRecipeAdapter;
     private RecipeExploreAdapter breakfastRecipeAdapter;
+    ShimmerFrameLayout shimmerFrameLayout;
 
     private final ArrayList<Recipe> uniqueRecipes = new ArrayList<>();
     private final ArrayList<Recipe> chineseRecipes = new ArrayList<>();
@@ -72,6 +74,8 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         parentRecyclerView3 = view.findViewById(R.id.americanRecyclerView);
         parentRecyclerView4 = view.findViewById(R.id.chineseRecyclerView);
         parentRecyclerView5 = view.findViewById(R.id.breakfastRecyclerView);
+        shimmerFrameLayout = view.findViewById(R.id.shimmer);
+        shimmerFrameLayout.startShimmer();
 
         recipeAdapter = new RecipeExploreAdapter(uniqueRecipes, this);
         italianRecipeAdapter = new RecipeExploreAdapter(italianRecipes, this);
@@ -111,12 +115,12 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
             }
 
             if (ingredients != null) {
-                fetchRecipes(ingredients);
+                fetchRecipesByIngredients(ingredients);
             }
         });
     }
 
-    private void fetchRecipes(List<Ingredient> ingredients) {
+    private void fetchRecipesByIngredients(List<Ingredient> ingredients) {
         if (ingredients.isEmpty()) return;
         Set<String> uniqueIngredients = new HashSet<>();
         for (Ingredient ingredient : ingredients) {
@@ -127,7 +131,7 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         query.append(list.get(0));
 
         for (int i = 1; i < list.size(); i++) {
-            query.append(",+");
+             query.append(",+");
             query.append(list.get(i));
         }
 
@@ -136,7 +140,9 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
 
             @Override
             public void onSuccess(List<Recipe> data) {
-
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                parentRecyclerView.setVisibility(View.VISIBLE);
                 uniqueRecipes.addAll(data);
                 recipeAdapter.notifyDataSetChanged();
             }
@@ -170,6 +176,11 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         client.suggestByFavorite(null, cuisine, favFeatures[randomFav], new NetworkCallback<List<Recipe>>() {
             @Override
             public void onSuccess(List<Recipe> data) {
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                parentRecyclerView2.setVisibility(View.VISIBLE);
+                parentRecyclerView3.setVisibility(View.VISIBLE);
+                parentRecyclerView4.setVisibility(View.VISIBLE);
 
                 if (Objects.equals(cuisine, "Italian")) {
                     italianRecipes.addAll(data);
@@ -194,7 +205,6 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
                 Log.d(TAG, "failed to display recipes");
             }
         });
-
     }
 
     private void queryPreviouslyLikedRecipe() {
@@ -216,18 +226,20 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         client.suggestByFavorite("Breakfast", null, favFeatures[randomFav], new NetworkCallback<List<Recipe>>() {
             @Override
             public void onSuccess(List<Recipe> data) {
+                shimmerFrameLayout.stopShimmer();
+                shimmerFrameLayout.setVisibility(View.GONE);
+                parentRecyclerView5.setVisibility(View.VISIBLE);
                 breakfastRecipes.addAll(data);
                 breakfastRecipeAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Throwable throwable) {
-                Log.d(TAG, "on failure");
+
+
             }
         });
-
     }
-
     @Override
     public void onRecipeClicked(Recipe food) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);

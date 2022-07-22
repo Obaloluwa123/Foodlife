@@ -45,13 +45,11 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView ingredientNameTextView;
 
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ingredientNameTextView = itemView.findViewById(R.id.ingredientName);
 
         }
-
         public void bind(Ingredient suggestion) {
             ingredientNameTextView.setText(suggestion.uniqueIngredientSet());
 

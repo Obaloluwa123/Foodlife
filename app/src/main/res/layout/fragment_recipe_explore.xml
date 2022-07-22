@@ -5,6 +5,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/shimmer">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <include layout="@layout/fragment_explore_shimmer">
+
+        </include>
+        <include layout="@layout/fragment_explore_shimmer">
+
+        </include>
+        <include layout="@layout/fragment_explore_shimmer">
+
+        </include>
+        <include layout="@layout/fragment_explore_shimmer">
+
+        </include>
+        <include layout="@layout/fragment_explore_shimmer">
+
+        </include>
+    </LinearLayout>
+    </com.facebook.shimmer.ShimmerFrameLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -35,10 +61,12 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recipeByIngredientRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"/>
 
@@ -68,6 +96,7 @@
                     android:id="@+id/italianRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"/>
 
@@ -96,6 +125,7 @@
                     android:id="@+id/americanRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"/>
 
@@ -124,6 +154,7 @@
                     android:id="@+id/chineseRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"/>
 
@@ -152,6 +183,7 @@
                     android:id="@+id/breakfastRecyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:orientation="horizontal"/>
 

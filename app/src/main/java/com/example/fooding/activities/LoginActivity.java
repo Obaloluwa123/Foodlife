@@ -42,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
+        if (ParseUser.getCurrentUser() != null) {
+            openMainActivity();
+        }
         setContentView(R.layout.activity_login);
 
         callbackManager = CallbackManager.Factory.create();

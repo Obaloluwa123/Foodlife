@@ -24,7 +24,6 @@ public class SignupActivity extends AppCompatActivity {
     private EditText etNewUsername;
     private EditText etNewPassword;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +41,6 @@ public class SignupActivity extends AppCompatActivity {
 
             }
         });
-
 
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override

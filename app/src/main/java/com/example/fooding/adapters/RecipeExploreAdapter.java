@@ -56,13 +56,11 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
         void onRecipeClicked(Recipe food);
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         final TextView tvTitle;
         final ImageView ivImage;
         final CardView cardView;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
