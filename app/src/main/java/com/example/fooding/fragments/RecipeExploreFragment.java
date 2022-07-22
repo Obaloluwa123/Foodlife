@@ -1,10 +1,6 @@
 package com.example.fooding.fragments;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,34 +12,20 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fooding.R;
-import com.example.fooding.activities.DetailActivity;
-import com.example.fooding.adapters.FoodAdapter;
 import com.example.fooding.adapters.RecipeExploreAdapter;
-import com.example.fooding.clients.FoodClient;
-import com.example.fooding.clients.NetworkCallback;
-import com.example.fooding.models.Food;
-import com.example.fooding.models.Ingredient;
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
+import com.example.fooding.adapters.RecipeParentAdapter;
+import com.example.fooding.models.RecipeParent;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 
-public class RecipeExploreFragment extends Fragment implements FoodAdapter.FoodAdapterListener {
+public class RecipeExploreFragment extends Fragment {
 
 
     //TODO:Implement infinite scrolling as stretch goal
-    private static final Integer INGREDIENT_NUMBER_LIMIT = 150;
     RecipeExploreAdapter.RecipeExploreAdapterListener listener;
-    private RecipeExploreAdapter recipeAdapter;
-    private List<Food> recipes;
-
-    public RecipeExploreFragment() {
-    }
+    private RecipeParentAdapter recipeParentAdapter;
+    private ArrayList<RecipeParent> recipes = new ArrayList<>();
 
 
     @Override
@@ -61,72 +43,14 @@ public class RecipeExploreFragment extends Fragment implements FoodAdapter.FoodA
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        recipes = new ArrayList<>();
 
-        queryIngredients();
-        recipeAdapter = new RecipeExploreAdapter(recipes, listener);
+        recipes.add(new RecipeParent("Recipe By Ingredients in my Fridge"));
+        recipeParentAdapter = new RecipeParentAdapter(recipes, getContext());
 
         RecyclerView exploreRecyclerView = view.findViewById(R.id.exploreRecyclerView);
-        exploreRecyclerView.setAdapter(recipeAdapter);
+        exploreRecyclerView.setAdapter(recipeParentAdapter);
         exploreRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recipeParentAdapter.notifyDataSetChanged();
 
-    }
-
-    private void queryIngredients() {
-        ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
-        query.include(Ingredient.USER_KEY);
-        query.setLimit(INGREDIENT_NUMBER_LIMIT);
-        query.addDescendingOrder("createdAt");
-        query.findInBackground(new FindCallback<Ingredient>() {
-            @Override
-            public void done(List<Ingredient> ingredients, ParseException e) {
-                if (e != null) {
-                    return;
-                }
-
-                if (ingredients != null) {
-                    fetchRecipes(ingredients);
-                }
-            }
-        });
-    }
-
-    private void fetchRecipes(List<Ingredient> ingredients) {
-        if (ingredients.isEmpty()) return;
-        Set<String> uniqueIngredients = new HashSet<>();
-        for (Ingredient ingredient : ingredients) {
-            uniqueIngredients.add(ingredient.uniqueIngredientSet());
-        }
-        List<String> list = new ArrayList<>(uniqueIngredients);
-        StringBuilder query = new StringBuilder();
-        query.append(list.get(0));
-
-        for (int i = 1; i < list.size(); i++) {
-            query.append(",+");
-            query.append(list.get(i));
-        }
-
-        FoodClient client = new FoodClient();
-        client.getRecipeByIngredients("apples,+flour,+sugar&number=2", new NetworkCallback<List<Food>>() {
-
-            @Override
-            public void onSuccess(List<Food> data) {
-
-                recipes.addAll(data);
-                recipeAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onFailure(Throwable throwable) {
-                Log.e(TAG, "ONFAIL: ");
-            }
-        });
-    }
-
-    @Override
-    public void onFoodClicked(Food food) {
-        Intent intent = new Intent(getActivity(), DetailActivity.class);
-        intent.putExtra(DetailActivity.FOOD_ID_ARG, food.getId());
-        startActivity(intent);
     }
 }

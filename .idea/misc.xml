@@ -3,7 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="../../../../layout/custom_preview.xml" value="0.23980815347721823" />
         <entry key="app/src/main/res/drawable/gradient_overlay.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_close.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.1" />
@@ -11,36 +10,34 @@
         <entry key="app/src/main/res/drawable/ic_blue_heart.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_heart_button.xml" value="0.1585" />
         <entry key="app/src/main/res/drawable/ic_time.xml" value="0.1915" />
-        <entry key="app/src/main/res/drawable/input.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rounded_rectangle.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_detail.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.29393115942028986" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.2838541666666667" />
-        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.15577507598784193" />
+        <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.3614583333333333" />
         <entry key="app/src/main/res/layout/filter_bottom_sheet.xml" value="0.2074468085106383" />
-        <entry key="app/src/main/res/layout/fragment_explore.xml" value="0.29846014492753625" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.3858695652173913" />
-        <entry key="app/src/main/res/layout/fragment_favorite_recipe.xml" value="0.15577507598784193" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_ingredient.xml" value="0.2682291666666667" />
         <entry key="app/src/main/res/layout/fragment_ingredients.xml" value="0.21693840579710144" />
-        <entry key="app/src/main/res/layout/fragment_instructions.xml" value="0.18803418803418803" />
-        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/fragment_pantry.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_recipe_explore.xml" value="0.11627906976744186" />
+        <entry key="app/src/main/res/layout/fragment_instructions.xml" value="0.21693840579710144" />
+        <entry key="app/src/main/res/layout/fragment_overview.xml" value="0.37018066406250005" />
+        <entry key="app/src/main/res/layout/fragment_pantry.xml" value="0.2346014492753623" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.16185410334346503" />
+        <entry key="app/src/main/res/layout/fragment_recipe_explore.xml" value="0.27898550724637683" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/ingredients_row_layout.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/item_childrecyclerview.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_explore.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_childrecyclerview.xml" value="0.21197916666666666" />
+        <entry key="app/src/main/res/layout/item_explore.xml" value="0.27898550724637683" />
         <entry key="app/src/main/res/layout/item_food.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_ingredient.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_ingredient_search.xml" value="0.36680908203125007" />
+        <entry key="app/src/main/res/layout/item_ingredient.xml" value="0.2164855072463768" />
+        <entry key="app/src/main/res/layout/item_ingredient_search.xml" value="0.2079533941236069" />
         <entry key="app/src/main/res/layout/item_pantry.xml" value="0.14108409321175278" />
         <entry key="app/src/main/res/layout/item_search.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/item_suggestion.xml" value="0.3614583333333333" />
         <entry key="app/src/main/res/layout/layout_ingredient_search.xml" value="0.2074468085106383" />
-        <entry key="app/src/main/res/layout/suggest_dialog.xml" value="0.16576086956521738" />
+        <entry key="app/src/main/res/layout/suggest_dialog.xml" value="0.21197916666666666" />
         <entry key="app/src/main/res/menu/main_menu.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/menu/menu_bottom_navigation.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/xml/network_security_config.xml" value="0.1" />

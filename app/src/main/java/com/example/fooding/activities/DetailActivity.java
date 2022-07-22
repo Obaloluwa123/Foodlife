@@ -3,7 +3,6 @@ package com.example.fooding.activities;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -36,7 +35,7 @@ public class DetailActivity extends AppCompatActivity {
     final FragmentManager fragmentManager = getSupportFragmentManager();
     final FoodClient foodClient = new FoodClient();
     public boolean suggestionShown = false;
-    Dialog suggestionDialog;
+    private Dialog suggestionDialog;
     private ViewPager viewPager;
     private TabLayout tabLayout;
     private ArrayList<Food> suggestedFoods;
@@ -80,7 +79,6 @@ public class DetailActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    Log.d("Failed", throwable.toString());
                 }
             });
         }
@@ -92,7 +90,6 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onSuccess(List<Food> data) {
                 suggestedFoods.addAll(data);
-                Log.i("Let_see", "onSuccess: " + suggestedFoods.get(0).getImage());
             }
 
             @Override
@@ -105,9 +102,8 @@ public class DetailActivity extends AppCompatActivity {
     public void showSuggestionDialog() {
         Random random = new Random();
         int suggestionIndex = random.nextInt(suggestedFoods.size());
-        Log.i("suggested number", "showSuggestionDialog: " + suggestionIndex);
         suggestionDialog = new Dialog(this);
-        suggestionDialog.setContentView(R.layout.suggest_dialog);
+        suggestionDialog.setContentView(R.layout.item_suggestion);
         suggestionDialog.getWindow().getAttributes().windowAnimations = R.style.SuggestionDialogAnimation;
         suggestionDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 

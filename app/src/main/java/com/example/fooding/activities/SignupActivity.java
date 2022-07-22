@@ -57,13 +57,11 @@ public class SignupActivity extends AppCompatActivity {
                                     @Override
                                     public void done(ParseException e) {
                                         if (e == null) {
-                                            Log.i(TAG, "onClick signUp button");
                                             Toast.makeText(getApplicationContext(), "Signed up sucessfully", Toast.LENGTH_SHORT);
                                             openLoginActivity();
                                         } else {
                                             Log.i(TAG, "onClick Error");
                                             Toast.makeText(getApplicationContext(), "Error Signing Up", Toast.LENGTH_SHORT);
-                                            Log.e(TAG, e.toString());
                                         }
                                     }
                                 }

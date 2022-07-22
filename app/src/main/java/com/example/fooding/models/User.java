@@ -8,7 +8,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.parceler.Parcel;
 
-@SuppressWarnings("unused")
 @Parcel
 @Entity
 public class User {
