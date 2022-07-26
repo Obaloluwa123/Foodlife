@@ -19,7 +19,6 @@ public interface FavouriteDao {
     @Query("SELECT EXISTS(SELECT * FROM favouritelist WHERE Id=:id)")
     Boolean exists(String id);
 
-
     @Delete
     void delete(FavouriteList favouriteList);
 

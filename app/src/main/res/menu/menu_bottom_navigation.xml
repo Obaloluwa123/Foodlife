@@ -4,26 +4,26 @@
 
     <item
         android:id="@+id/action_pantry"
-        android:icon="@drawable/icons8_fridge_30"
-        android:title="Fridge" />
+        android:icon="@drawable/fridge"
+        android:title="@string/fridge" />
     <item
         android:id="@+id/action_recipe"
         android:icon="@drawable/ic_book"
-        android:title="Search"
+        android:title="@string/search"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_explore"
         android:icon="@drawable/icons8_compass_60"
-        android:title="explore" />
+        android:title="@string/explore" />
     <item
         android:id="@+id/action_favorite"
         android:icon="@drawable/icons8_music_64"
-        android:title="Favorite"
+        android:title="@string/favorite"
         app:showAsAction="always" />
     <item
         android:id="@+id/action_profile"
-        android:icon="@drawable/ic_baseline_person_24"
-        android:title="Profile"
+        android:icon="@drawable/account"
+        android:title="@string/profile"
         app:showAsAction="always" />
 
 </menu>

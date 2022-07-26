@@ -14,7 +14,7 @@ import androidx.room.Room;
 
 import com.example.fooding.R;
 import com.example.fooding.favourite.FavouriteDatabase;
-import com.example.fooding.fragments.FavouriteFragment;
+import com.example.fooding.fragments.FavoriteRecipeFragment;
 import com.example.fooding.fragments.FridgeFragment;
 import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.RecipeExploreFragment;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new RecipeExploreFragment();
                         break;
                     case R.id.action_favorite:
-                        fragment = new FavouriteFragment();
+                        fragment = new FavoriteRecipeFragment();
                         break;
                     case R.id.action_profile:
                     default:
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.action_favorite) {
-            Fragment fragment = new FavouriteFragment();
+            Fragment fragment = new FavoriteRecipeFragment();
             fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
             return true;
         }
