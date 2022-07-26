@@ -59,4 +59,9 @@
     <string name="recommended_chinese_recipes" />
     <string name="recommended_breakfast_recipes" />
     <string name="image" />
+    <string name="like_recipes_so_they_can_be_added_here" />
+    <string name="search" />
+    <string name="explore" />
+    <string name="profile" />
+    <string name="fridge" />
 </resources>
