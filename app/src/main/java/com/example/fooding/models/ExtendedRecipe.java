@@ -6,11 +6,15 @@ import android.os.Parcelable;
 
 import androidx.annotation.RequiresApi;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class FoodExtended implements Parcelable {
+
+public class ExtendedRecipe implements Parcelable {
 
     public String title;
     public String image;
@@ -20,6 +24,12 @@ public class FoodExtended implements Parcelable {
     public boolean cheap;
     public boolean dairyFree;
     public boolean glutenFree;
+    private Integer amount;
+    private String consistency;
+    private String aisle;
+    private String original;
+    private String unit;
+    private List<ExtendedIngredients> extendedIngredients;
     @SuppressWarnings("unused")
     public int id;
     public String sourceName;
@@ -29,7 +39,7 @@ public class FoodExtended implements Parcelable {
     public boolean veryHealthy;
 
 
-    public FoodExtended(JSONObject jsonObject) throws JSONException {
+    public ExtendedRecipe(JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("title");
         image = jsonObject.getString("image");
         if (jsonObject.has("likes")) aggregateLikes = jsonObject.getInt("likes");
@@ -40,20 +50,27 @@ public class FoodExtended implements Parcelable {
         glutenFree = jsonObject.getBoolean("glutenFree");
         id = jsonObject.getInt("id");
         sourceName = jsonObject.getString("sourceName");
+
         if (jsonObject.has("sourceUrl")) sourceUrl = jsonObject.getString("sourceUrl");
         if (jsonObject.has("Vegan")) Vegan = jsonObject.getBoolean("Vegan");
         if (jsonObject.has("Vegetarian")) Vegetarian = jsonObject.getBoolean("Vegetarian");
         if (jsonObject.has("veryHealthy")) veryHealthy = jsonObject.getBoolean("veryHealthy");
 
-
     }
 
-    public static FoodExtended fromJsonObject(JSONObject object) throws JSONException {
-        return new FoodExtended(object);
+    public static ExtendedRecipe fromJsonObject(JSONObject object) throws JSONException {
+        return new ExtendedRecipe(object);
     }
 
+    public static List<ExtendedRecipe> fromJsonArray(JSONArray IngredientsJsonArray) throws JSONException {
+        List<ExtendedRecipe> ingredient = new ArrayList<>();
+        for (int i = 0; i < IngredientsJsonArray.length(); i++) {
+            ingredient.add(new ExtendedRecipe(IngredientsJsonArray.getJSONObject(i)));
+        }
+        return ingredient;
+    }
     @RequiresApi(api = Build.VERSION_CODES.Q)
-    protected FoodExtended(Parcel in) {
+    protected ExtendedRecipe(Parcel in) {
         title = in.readString();
         image = in.readString();
         aggregateLikes = in.readInt();
@@ -68,18 +85,22 @@ public class FoodExtended implements Parcelable {
         Vegan = in.readBoolean();
         Vegetarian = in.readBoolean();
         veryHealthy = in.readBoolean();
+        aisle = in.readString();
+        image = in.readString();
+        amount = in.readInt();
+        unit = in.readString();
     }
 
-    public static final Creator<FoodExtended> CREATOR = new Creator<FoodExtended>() {
+    public static final Creator<ExtendedRecipe> CREATOR = new Creator<ExtendedRecipe>() {
         @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
-        public FoodExtended createFromParcel(Parcel in) {
-            return new FoodExtended(in);
+        public ExtendedRecipe createFromParcel(Parcel in) {
+            return new ExtendedRecipe(in);
         }
 
         @Override
-        public FoodExtended[] newArray(int size) {
-            return new FoodExtended[size];
+        public ExtendedRecipe[] newArray(int size) {
+            return new ExtendedRecipe[size];
         }
     };
 
@@ -104,5 +125,10 @@ public class FoodExtended implements Parcelable {
         parcel.writeBoolean(Vegan);
         parcel.writeBoolean(Vegetarian);
         parcel.writeBoolean(veryHealthy);
+        parcel.writeString(aisle);
+        parcel.writeString(image);
+        parcel.writeInt(amount);
+        parcel.writeString(unit);
+
     }
 }

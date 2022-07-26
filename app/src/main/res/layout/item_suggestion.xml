@@ -21,8 +21,8 @@
             android:text="Try out this recipe!!"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAppearance="@style/title"/>
 
         <ImageView
             android:id="@+id/suggested_food_image"
@@ -46,11 +46,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/suggested_food_image"
-            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
             android:text="Rice garnished spice"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textAppearance="@style/desc" />
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

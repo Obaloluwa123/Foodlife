@@ -22,17 +22,17 @@ import com.bumptech.glide.Glide;
 import com.example.fooding.R;
 import com.example.fooding.activities.MainActivity;
 import com.example.fooding.favourite.FavouriteList;
-import com.example.fooding.models.FoodExtended;
+import com.example.fooding.models.ExtendedRecipe;
 
 @SuppressWarnings({"PointlessBooleanExpression", "StatementWithEmptyBody"})
-public class OverviewFragment extends Fragment {
+public class RecipeOverviewFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";
 
-    public FoodExtended foodExtended;
+    public ExtendedRecipe extendedRecipe;
 
-    public static OverviewFragment newInstance(FoodExtended food) {
-        OverviewFragment fragment = new OverviewFragment();
+    public static RecipeOverviewFragment newInstance(ExtendedRecipe food) {
+        RecipeOverviewFragment fragment = new RecipeOverviewFragment();
         Bundle args = new Bundle();
         args.putParcelable(FOOD_ARG, food);
         fragment.setArguments(args);
@@ -54,25 +54,25 @@ public class OverviewFragment extends Fragment {
 
         TextView summaryTextView = view.findViewById(R.id.summary_textView);
 
-        foodExtended = requireArguments().getParcelable(FOOD_ARG);
+        extendedRecipe = requireArguments().getParcelable(FOOD_ARG);
 
-        textView.setText(foodExtended.title);
+        textView.setText(extendedRecipe.title);
 
-        summaryTextView.setText(foodExtended.summary);
+        summaryTextView.setText(extendedRecipe.summary);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            summaryTextView.setText(HtmlCompat.fromHtml(foodExtended.summary, HtmlCompat.FROM_HTML_MODE_LEGACY));
+            summaryTextView.setText(HtmlCompat.fromHtml(extendedRecipe.summary, HtmlCompat.FROM_HTML_MODE_LEGACY));
         } else {
-            summaryTextView.setText(Html.fromHtml(foodExtended.summary));
+            summaryTextView.setText(Html.fromHtml(extendedRecipe.summary));
         }
 
-        if (MainActivity.favouriteDatabase.favouriteDao().exists(String.valueOf(foodExtended.id))) {
-            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
+        if (MainActivity.favouriteDatabase.favouriteDao().exists(String.valueOf(extendedRecipe.id))) {
+            likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_red_heart));
         } else {
             likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
 
         }
 
-        Glide.with(requireContext()).load(foodExtended.image).into(imageView);
+        Glide.with(requireContext()).load(extendedRecipe.image).into(imageView);
 
         final Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.like_button_action);
 
@@ -82,9 +82,9 @@ public class OverviewFragment extends Fragment {
                 likeButtonImageView.startAnimation(animation);
                 FavouriteList favoriteList = new FavouriteList();
 
-                String id = String.valueOf(foodExtended.id);
-                String title = foodExtended.title;
-                String image = foodExtended.image;
+                String id = String.valueOf(extendedRecipe.id);
+                String title = extendedRecipe.title;
+                String image = extendedRecipe.image;
 
 
                 favoriteList.setId(id);
@@ -96,7 +96,7 @@ public class OverviewFragment extends Fragment {
                     likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_heart_button));
                 } else {
                     MainActivity.favouriteDatabase.favouriteDao().addData(favoriteList);
-                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_blue_heart));
+                    likeButtonImageView.setBackground(getContext().getDrawable(R.drawable.ic_red_heart));
                     Log.d("ID", id);
                 }
             }
@@ -114,11 +114,6 @@ public class OverviewFragment extends Fragment {
             timestampLastClick = 0;
         }
 
-        public DoubleClickListener(long doubleClickQualificationSpanInMillis) {
-            this.doubleClickQualificationSpanInMillis = doubleClickQualificationSpanInMillis;
-            timestampLastClick = 0;
-        }
-
         @Override
         public void onClick(View v) {
             if ((SystemClock.elapsedRealtime() - timestampLastClick) < doubleClickQualificationSpanInMillis) {
@@ -128,6 +123,5 @@ public class OverviewFragment extends Fragment {
         }
 
         public abstract void onDoubleClick();
-
     }
 }

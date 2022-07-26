@@ -3,13 +3,13 @@ package com.example.fooding.activities;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
@@ -18,8 +18,8 @@ import com.example.fooding.R;
 import com.example.fooding.adapters.PagerAdapter;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
-import com.example.fooding.models.Food;
-import com.example.fooding.models.FoodExtended;
+import com.example.fooding.models.Recipe;
+import com.example.fooding.models.ExtendedRecipe;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
@@ -36,10 +36,11 @@ public class DetailActivity extends AppCompatActivity {
     final FragmentManager fragmentManager = getSupportFragmentManager();
     final FoodClient foodClient = new FoodClient();
     public boolean suggestionShown = false;
-    Dialog suggestionDialog;
+    private Dialog suggestionDialog;
     private ViewPager viewPager;
     private TabLayout tabLayout;
-    private ArrayList<Food> suggestedFoods;
+    private ArrayList<Recipe> suggestedRecipes;
+    private int suggestionIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +48,10 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail);
         viewPager = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
-        suggestedFoods = new ArrayList<>();
-
+        suggestedRecipes = new ArrayList<>();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         setupFood();
 
         if (!suggestionShown) {
@@ -71,16 +74,15 @@ public class DetailActivity extends AppCompatActivity {
         String foodmeal = getIntent().getStringExtra(FOOD_MEAL_ARG);
 
         if (foodId != null) {
-            foodClient.getExtendedFood(foodId, fooddiet, foodmeal, new NetworkCallback<FoodExtended>() {
+            foodClient.getExtendedFood(foodId, fooddiet, foodmeal, new NetworkCallback<ExtendedRecipe>() {
                 @Override
-                public void onSuccess(FoodExtended data) {
+                public void onSuccess(ExtendedRecipe data) {
                     setupViewPager(data);
                     getSuggestionDetails("rice");
                 }
 
                 @Override
                 public void onFailure(Throwable throwable) {
-                    Log.d("Failed", throwable.toString());
                 }
             });
         }
@@ -88,11 +90,10 @@ public class DetailActivity extends AppCompatActivity {
 
     public void getSuggestionDetails(String ingredient) {
 
-        foodClient.suggestByIngredients(ingredient, new NetworkCallback<List<Food>>() {
+        foodClient.suggestByIngredients(ingredient, new NetworkCallback<List<Recipe>>() {
             @Override
-            public void onSuccess(List<Food> data) {
-                suggestedFoods.addAll(data);
-                Log.i("Let_see", "onSuccess: " + suggestedFoods.get(0).getImage());
+            public void onSuccess(List<Recipe> data) {
+                suggestedRecipes.addAll(data);
             }
 
             @Override
@@ -104,10 +105,11 @@ public class DetailActivity extends AppCompatActivity {
 
     public void showSuggestionDialog() {
         Random random = new Random();
-        int suggestionIndex = random.nextInt(suggestedFoods.size());
-        Log.i("suggested number", "showSuggestionDialog: " + suggestionIndex);
+        if (!suggestedRecipes.isEmpty()) {
+            suggestionIndex = random.nextInt(suggestedRecipes.size());
+        }
         suggestionDialog = new Dialog(this);
-        suggestionDialog.setContentView(R.layout.suggest_dialog);
+        suggestionDialog.setContentView(R.layout.item_suggestion);
         suggestionDialog.getWindow().getAttributes().windowAnimations = R.style.SuggestionDialogAnimation;
         suggestionDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
@@ -122,17 +124,16 @@ public class DetailActivity extends AppCompatActivity {
             }
         });
 
-        if (suggestedFoods != null && suggestedFoods.size() > suggestionIndex) {
-            Glide.with(this).load(suggestedFoods.get(suggestionIndex).getImage()).into(suggestedFoodImage);
-            suggestedFoodName.setText(suggestedFoods.get(suggestionIndex).getTitle());
+        if (suggestedRecipes != null && suggestedRecipes.size() > suggestionIndex) {
+            Glide.with(getApplicationContext()).load(suggestedRecipes.get(suggestionIndex).getImage()).into(suggestedFoodImage);
+            suggestedFoodName.setText(suggestedRecipes.get(suggestionIndex).getTitle());
             suggestionDialog.show();
         }
     }
 
-    private void setupViewPager(FoodExtended food) {
+    private void setupViewPager(ExtendedRecipe food) {
         PagerAdapter pagerAdapter = new PagerAdapter(food, fragmentManager);
         viewPager.setAdapter(pagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
     }
-
 }

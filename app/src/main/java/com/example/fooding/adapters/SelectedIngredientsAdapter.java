@@ -24,6 +24,7 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
         this.context = context;
         this.ingredients = ingredients;
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,15 +43,13 @@ public class SelectedIngredientsAdapter extends RecyclerView.Adapter<SelectedIng
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView ingredientNameTextView;
-
+        private TextView ingredientNameTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ingredientNameTextView = itemView.findViewById(R.id.ingredientName);
 
         }
-
         public void bind(Ingredient suggestion) {
             ingredientNameTextView.setText(suggestion.uniqueIngredientSet());
 

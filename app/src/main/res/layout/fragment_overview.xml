@@ -4,61 +4,85 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.OverviewFragment">
+    tools:context=".fragments.RecipeOverviewFragment">
 
-    <ImageView
-        android:id="@+id/ivImage"
-        android:layout_width="0dp"
-        android:layout_height="250dp"
-        android:layout_marginBottom="17dp"
-        android:scaleType="centerCrop"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/imgCardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
         app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:shapeAppearance="@style/CardStyle">
 
-    <ImageView
-        android:id="@+id/like_imageView"
-        android:layout_width="130dp"
-        android:layout_height="146dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="178dp"
-        android:layout_marginBottom="179dp"
-        android:background="@drawable/ic_heart_button"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivImage"
-        app:layout_constraintVertical_bias="0.435" />
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:shapeAppearance="@style/CardStyle">
+            <ImageView
+                android:id="@+id/ivImage"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                tools:srcCompat="@tools:sample/avatars" />
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="260dp"
+            android:layout_gravity="center_horizontal">
+
+                <ImageView
+                    android:id="@+id/time_imageView"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_time" />
+
+            <ImageView
+                android:id="@+id/like_imageView"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="70dp"
+                android:background="@drawable/ic_heart_button" />
+
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="267dp"
         android:layout_marginEnd="12dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/imgCardView">
 
         <TextView
             android:id="@+id/title_textView"
             android:layout_width="387dp"
             android:layout_height="wrap_content"
-            android:fontFamily="Courgette"
             android:text="@string/title"
+            android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAppearance="@style/title"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp">
+            android:layout_marginTop="18dp"
+            android:layout_gravity="center_horizontal">
 
             <ImageView
                 android:id="@+id/vegetarian_imageView"
@@ -74,7 +98,8 @@
                 android:layout_marginStart="35dp"
                 android:text="@string/vegetarian"
                 tools:layout_editor_absoluteX="49dp"
-                tools:layout_editor_absoluteY="302dp" />
+                tools:layout_editor_absoluteY="302dp"
+                android:textAppearance="@style/smallText"/>
 
             <ImageView
                 android:id="@+id/vegan_imageView"
@@ -91,12 +116,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="165dp"
-                android:text="@string/Vegan" />
+                android:text="@string/Vegan"
+                android:textAppearance="@style/smallText"/>
 
             <ImageView
                 android:id="@+id/gluten_free_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="260dp"
                 android:src="@drawable/ic_check"
                 app:tint="@color/black" />
@@ -106,13 +132,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="295dp"
-                android:text="@string/gluten_free" />
+                android:text="@string/gluten_free"
+                android:textAppearance="@style/smallText"/>
 
 
             <ImageView
                 android:id="@+id/healthy_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="27dp"
                 android:layout_marginTop="50dp"
                 android:src="@drawable/ic_check"
                 app:tint="@color/black" />
@@ -123,13 +150,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="35dp"
                 android:layout_marginTop="50dp"
-                android:text="@string/healthy" />
+                android:text="@string/healthy"
+                android:textAppearance="@style/smallText"/>
 
 
             <ImageView
                 android:id="@+id/diary_free_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="130dp"
                 android:layout_marginTop="50dp"
                 android:src="@drawable/ic_check"
@@ -141,15 +169,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="165dp"
                 android:layout_marginTop="50dp"
-                android:text="@string/diary_free" />
+                android:text="@string/diary_free"
+                android:textAppearance="@style/smallText"/>
 
             <ImageView
                 android:id="@+id/cheap_imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="32dp"
+                android:layout_height="27dp"
                 android:layout_marginStart="260dp"
                 android:layout_marginTop="50dp"
-                android:src="@drawable/ic_check" />
+                android:src="@drawable/ic_check"/>
 
             <TextView
                 android:id="@+id/cheap_textView"
@@ -157,7 +186,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="295dp"
                 android:layout_marginTop="50dp"
-                android:text="@string/cheap" />
+                android:text="@string/cheap"
+                android:textAppearance="@style/smallText"/>
 
         </RelativeLayout>
 
@@ -168,7 +198,7 @@
         android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -177,6 +207,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
             android:orientation="vertical">
 
             <TextView
@@ -184,7 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/textview"
-                android:textSize="16sp" />
+                android:textAppearance="@style/desc"/>
         </LinearLayout>
     </ScrollView>
 

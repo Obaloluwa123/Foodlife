@@ -1,25 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--suppress ALL -->
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/cyan2</item>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/cyan3</item>
-        <item name="colorAccent">@color/cyan4</item>
-        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:statusBarColor">@color/primaryColor</item>
+
     </style>
 
     <style name="CustomChipStyle" parent="Widget.MaterialComponents.Chip.Filter">
         <item name="chipBackgroundColor">@color/chip_background_color</item>
         <item name="android:textColor">@color/chip_text_color</item>
         <item name="checkedIconTint">@color/chip_text_color</item>
+        <item name="android:textAppearance">@style/desc</item>
     </style>
 
-    <!--suppress AndroidDomInspection -->
-    <style name="DetailsActivitystyle" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/cyan2</item>
-        <item name="colorPrimaryDark">@color/cyan3</item>
-        <item name="colorAccent">@color/cyan4</item>
-        <item name="colorControlNormal"></item>
-        <item name="android:statusBarColor">@color/cyan2</item>
+    <style name="TextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/primaryColor</item>
+        <item name="cornerRadius">12dp</item>
     </style>
+
+    <style name="ShapeAppearance.FoodLife.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+
+
+    <style name="loginBtnText" parent="TextAppearance.AppCompat.Button">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineHeight">25sp</item>
+    </style>
+
+    <!-- Login and register Button  !-->
+    <style name="loginBtn" parent="Widget.MaterialComponents.Button">
+        <!-- <item name="android:backgroundTint">@color/loginBtn</item> -->
+        <item name="android:textAppearance">@style/loginBtnText</item>
+        <item name="android:backgroundTint">@color/primaryColor</item>
+        <!--  <item name="android:textColor">@color/onbTitle</item> -->
+    </style>
+
+    <style name="title" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="desc">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="smallText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="CardStyle" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cardCornerRadius">8dp</item>
+    </style>
+
+    <style name="foodTitle" parent="TextAppearance.AppCompat.Large">
+        <item name="android:textSize">34sp</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
 </resources>

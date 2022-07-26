@@ -3,12 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FavoriteFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.FavouriteRecipeFragment">
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFavourite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
         tools:layout_editor_absoluteX="138dp"
         tools:layout_editor_absoluteY="115dp" />
 
@@ -17,7 +20,8 @@
         android:id="@+id/NoItemText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_gravity="center"
-        android:text="Like recipes so they can be added here"/>
+        android:text="@string/like_recipes_so_they_can_be_added_here"/>
 
 </FrameLayout>

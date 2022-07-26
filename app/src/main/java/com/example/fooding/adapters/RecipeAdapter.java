@@ -1,6 +1,5 @@
 package com.example.fooding.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,35 +12,32 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
-import com.example.fooding.models.Food;
+import com.example.fooding.models.Recipe;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
 
-public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> implements View.OnClickListener {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> implements View.OnClickListener {
 
     final FoodAdapterListener listener;
-    final List<Food> foods;
+    final List<Recipe> recipes;
 
-    public FoodAdapter(List<Food> foods, FoodAdapterListener listener) {
-        this.foods = foods;
+    public RecipeAdapter(List<Recipe> recipes, FoodAdapterListener listener) {
+        this.recipes = recipes;
         this.listener = listener;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        Log.d("foodadapter", "onCreateViewHolder");
         View FoodView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food, parent, false);
         return new ViewHolder(FoodView);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("foodadapter", "onBindViewHolder" + position);
-        Food food = foods.get(position);
-        holder.bind(food);
+        Recipe recipe = recipes.get(position);
+        holder.bind(recipe);
         holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.itemView.getContext(), R.anim.anim1));
 
     }
@@ -49,14 +45,16 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
     @Override
 
     public int getItemCount() {
-        return foods.size();
+        if (recipes != null) {
+            return recipes.size();
+        }
+        return 1;
     }
 
     @Override
     public void onClick(View v) {
 
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -72,12 +70,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
             cardView = itemView.findViewById(R.id.cardView);
         }
 
-        public void bind(Food food) {
-            tvTitle.setText(food.getTitle());
-            Glide.with(ivImage.getContext()).load(food.getImage()).into(ivImage);
+        public void bind(Recipe recipe) {
+            tvTitle.setText(recipe.getTitle());
+            Glide.with(ivImage.getContext()).load(recipe.getImage()).into(ivImage);
             cardView.setOnClickListener(view -> {
                 if (listener != null) {
-                    listener.onFoodClicked(food);
+                    listener.onFoodClicked(recipe);
                 }
             });
 
@@ -85,8 +83,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> im
     }
 
     public interface FoodAdapterListener {
-        void onFoodClicked(Food food);
+        void onFoodClicked(Recipe recipe);
     }
-
-
 }

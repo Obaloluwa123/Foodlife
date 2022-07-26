@@ -1,4 +1,4 @@
-package com.example.fooding.favourite;
+package com.example.fooding.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
+import com.example.fooding.favourite.FavouriteList;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.List;
@@ -19,7 +20,6 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
 
     final List<FavouriteList> favouriteLists;
     final FavouriteAdapterListener listener;
-
 
     public FavouriteAdapter(List<FavouriteList> favouriteLists, FavouriteAdapterListener listener) {
 
@@ -78,5 +78,4 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
     public interface FavouriteAdapterListener {
         void onFavouriteFoodClicked(FavouriteList favouriteList);
     }
-
 }
