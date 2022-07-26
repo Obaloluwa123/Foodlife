@@ -37,6 +37,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
             case PAGE_1:
                 return IngredientsFragment.newInstance(recipes);
             case PAGE_2:
+
                 return RecipeInstructionsFragment.newInstance(food);
             default:
                 return null;
