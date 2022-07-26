@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.PantryFragment">
+    tools:context=".fragments.FridgeFragment">
 
     <androidx.appcompat.widget.SearchView
         android:id="@+id/ingredientSearchView"
@@ -15,7 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:background="@color/cyan5"
+        android:background="@color/searchBarColor"
         app:iconifiedByDefault="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +26,7 @@
             android:id="@+id/etRecipe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:text="@string/textview" />
 
     </androidx.appcompat.widget.SearchView>
 
@@ -34,8 +34,10 @@
         android:id="@+id/ingredientsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintTop_toBottomOf="@id/ingredientSearchView"
         app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="50dp"
         app:layout_constraintEnd_toEndOf="@id/ingredientSearchView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>

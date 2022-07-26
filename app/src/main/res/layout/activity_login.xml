@@ -4,71 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.LoginActivity">
+    android:clickable="true"
+    android:focusableInTouchMode="true"
+    tools:context=".activities.LoginActivity"
+    android:focusable="true">
 
-
-
-    <EditText
-        android:id="@+id/etnewUsername"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_marginTop="68dp"
-        android:ems="10"
-        android:background="@drawable/rounded_rectangle"
-        android:hint="@string/username"
-        android:inputType="textPersonName"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"
         app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        style="@style/TextInputLayoutStyle"
+        app:shapeAppearance="@style/ShapeAppearance.FoodLife.SmallComponent">
 
-    <EditText
-        android:id="@+id/etnewPassword"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etnewUsername"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="100"
+            android:textColor="@color/black"
+            android:inputType="textPersonName"
+            android:hint="@string/username"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTextInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="30dp"
         android:layout_marginTop="68dp"
-        android:background="@drawable/rounded_rectangle"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
+        app:endIconMode="password_toggle"
+        app:hintEnabled="false"
+        app:layout_constraintEnd_toEndOf="@+id/usernameTextInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/usernameTextInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout"
+        style="@style/TextInputLayoutStyle"
+        app:shapeAppearance="@style/ShapeAppearance.FoodLife.SmallComponent">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etnewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:maxLength="100"
+            android:inputType="textPassword"
+            android:hint="password"
 
-        app:layout_constraintEnd_toEndOf="@+id/etnewUsername"
-        app:layout_constraintStart_toStartOf="@+id/etnewUsername"
-        app:layout_constraintTop_toBottomOf="@+id/etnewUsername" />
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/etLoginButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="40dp"
-        android:backgroundTint="#ff1da1f2"
-        android:background="@drawable/rounded_rectangle"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:text="LOGIN"
-        app:layout_constraintEnd_toEndOf="@+id/etnewPassword"
-        app:layout_constraintStart_toStartOf="@+id/etnewPassword"
-        app:layout_constraintTop_toBottomOf="@+id/etnewPassword" />
+        app:layout_constraintEnd_toEndOf="@+id/passwordTextInputLayout"
+        app:layout_constraintStart_toStartOf="@+id/passwordTextInputLayout"
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
+        style="@style/loginBtn"/>
+
 
     <Button
         android:id="@+id/etSignUp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_marginTop="60dp"
-        android:backgroundTint="#32CD32"
-        android:background="@drawable/rounded_rectangle"
-        android:text="@string/sign_up"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="SIGN UP"
         app:layout_constraintEnd_toEndOf="@+id/etLoginButton"
         app:layout_constraintStart_toStartOf="@+id/etLoginButton"
-        app:layout_constraintTop_toBottomOf="@+id/etLoginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/etLoginButton"
+        style="@style/loginBtn"/>
 
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
-        android:text="@string/or"
+        android:layout_marginBottom="80dp"
+        android:text="OR"
         app:layout_constraintBottom_toBottomOf="@+id/etSignUp"
         app:layout_constraintEnd_toEndOf="@+id/etLoginButton"
         app:layout_constraintStart_toStartOf="@+id/etLoginButton" />
@@ -77,7 +107,7 @@
         android:id="@+id/imageView2"
         android:layout_width="125dp"
         android:layout_height="105dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -87,10 +117,10 @@
         android:id="@+id/facebookbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etSignUp"
-        app:srcCompat="@drawable/icons8_facebook_48" />
+        app:srcCompat="@drawable/ic_facebook_icon" />
 </androidx.constraintlayout.widget.ConstraintLayout>

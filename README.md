@@ -267,7 +267,7 @@ Your app has multiple views
     
 #### [OPTIONAL:] Existing API Endpoints
 ##### Spoonacular
-- Base URL - (https://spoonacular.com/food-api/docs)
+- Base URL - (https://spoonacular.com/recipe-api/docs)
    HTTP Verb | Endpoint | Description
    ----------|----------|------------
     `GET`    | recipes/findByIngredients/{id}| gets recipes by ingredients

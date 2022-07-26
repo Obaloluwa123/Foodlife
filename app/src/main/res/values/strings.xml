@@ -45,4 +45,23 @@
     <string name="fb_login_protocol_scheme">fb1384477938741883</string>
     <string name="facebook_client_token">ca0317c0efea871a3009e4d445cc039f</string>
     <string name="recipes_suggested_by_ingredients">Recipes suggested by Ingredients</string>
+    <string name="email" />
+    <string name="user_gmail_com" />
+    <string name="david" />
+    <string name="i_am_a_vegetarian" />
+    <string name="signup">SignUp</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="favorite">Favorite</string>
+    <string name="recommended_american_recipes" />
+    <string name="recommended_italian_recipes" />
+    <string name="recommended_recipes_based_on_ingredients_in_the_fridge" />
+    <string name="recommended_chinese_recipes" />
+    <string name="recommended_breakfast_recipes" />
+    <string name="image" />
+    <string name="like_recipes_so_they_can_be_added_here" />
+    <string name="search" />
+    <string name="explore" />
+    <string name="profile" />
+    <string name="fridge" />
 </resources>

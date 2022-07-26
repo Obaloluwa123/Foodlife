@@ -12,21 +12,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.fooding.R;
-import com.example.fooding.models.FoodExtended;
+import com.example.fooding.models.ExtendedRecipe;
 
 @SuppressWarnings({"ConstantConditions", "unused"})
-public class InstructionsFragment extends Fragment {
+public class RecipeInstructionsFragment extends Fragment {
 
     public static final String FOOD_ARG = "FOOD_ID_ARG";
     private static final String IMAGE_URL = "https://fullbellysisters.blogspot.com/";
 
-    public FoodExtended foodExtended;
+    public ExtendedRecipe extendedRecipe;
 
-    public InstructionsFragment() {
+    public RecipeInstructionsFragment() {
     }
 
-    public static InstructionsFragment newInstance(FoodExtended food) {
-        InstructionsFragment fragment = new InstructionsFragment();
+    public static RecipeInstructionsFragment newInstance(ExtendedRecipe food) {
+        RecipeInstructionsFragment fragment = new RecipeInstructionsFragment();
         Bundle args = new Bundle();
         args.putParcelable(FOOD_ARG, food);
         fragment.setArguments(args);
@@ -47,7 +47,7 @@ public class InstructionsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        foodExtended = getArguments().getParcelable(FOOD_ARG);
+        extendedRecipe = getArguments().getParcelable(FOOD_ARG);
 
     }
 }

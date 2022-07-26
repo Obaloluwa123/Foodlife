@@ -2,6 +2,7 @@ package com.example.fooding.fragments;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,11 @@ import com.example.fooding.adapters.SuggestionsAdapter;
 import com.example.fooding.clients.FoodClient;
 import com.example.fooding.clients.NetworkCallback;
 import com.example.fooding.models.Ingredient;
+import com.example.fooding.models.ExtendedIngredients;
 import com.example.fooding.models.IngredientSearchSuggestion;
-import com.example.fooding.models.Ingredients;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -33,15 +36,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class PantryFragment extends Fragment implements SearchView.OnQueryTextListener, SuggestionsAdapter.SuggestionAdapterListener {
+public class FridgeFragment extends Fragment implements SearchView.OnQueryTextListener, SuggestionsAdapter.SuggestionAdapterListener {
 
     protected List<Ingredient> allIngredients;
     private final List<IngredientSearchSuggestion> selectedSuggestions = new ArrayList<>();
-    private final List<Ingredients> selectedIngredients = new ArrayList<>();
+    private final List<ExtendedIngredients> selectedIngredients = new ArrayList<>();
     private SearchView recipeSearchView;
     private RecyclerView ingredientsRecyclerView;
     private RecyclerView suggestedRecyclerView;
     private TextView ingredientNameTextView;
+    private static final int INGREDIENTS_NUMBER = 100;
 
     private final SuggestionsAdapter suggestionsAdapter = new SuggestionsAdapter();
     private SelectedIngredientsAdapter ingredientsAdapter;
@@ -53,11 +57,17 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
 
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+
+            Ingredient deletedIngredient = allIngredients.get(viewHolder.getAdapterPosition());
+
+
             allIngredients.remove(viewHolder.getAdapterPosition());
             ingredientsAdapter.notifyItemRemoved(viewHolder.getAdapterPosition());
-            Toast.makeText(getContext(), "Ingredient deleted", Toast.LENGTH_SHORT).show();
+            deleteIngredient(deletedIngredient.getName());
             queryIngredients();
         }
+
 
         private void queryIngredients() {
             ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
@@ -73,7 +83,7 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
     };
     private final FoodClient client = new FoodClient();
 
-    public PantryFragment() {
+    public FridgeFragment() {
     }
 
     @Override
@@ -150,15 +160,39 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
     @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onSuggestionClicked(IngredientSearchSuggestion suggestion) {
-        String ingredientName = ingredientNameTextView.getText().toString();
-        selectedSuggestions.add(suggestion);
-        ingredientsAdapter.notifyDataSetChanged();
+        ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
+        query.whereEqualTo("ingredientName", suggestion.name);
+        query.getFirstInBackground(new GetCallback<Ingredient>()
+        {
+            public void done(Ingredient ingredients, ParseException e)
+            {
+                if(e == null)
+                {
+                    Toast.makeText(getContext(), "Item has already been selected", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    if(e.getCode() == ParseException.OBJECT_NOT_FOUND)
+                    {
+                        String ingredientName = ingredientNameTextView.getText().toString();
+                        selectedSuggestions.add(suggestion);
+                        ingredientsAdapter.notifyDataSetChanged();
 
-        suggestionsAdapter.suggestions = new ArrayList<>();
-        suggestionsAdapter.notifyDataSetChanged();
+                        suggestionsAdapter.suggestions = new ArrayList<>();
+                        suggestionsAdapter.notifyDataSetChanged();
 
-        recipeSearchView.setQuery("", false);
-        saveIngredient(suggestion.name);
+                        recipeSearchView.setQuery("", false);
+                        saveIngredient(suggestion.name);
+
+                        queryIngredients();
+                    }
+                    else
+                    {
+                    }
+                }
+            }
+        });
+
 
     }
 
@@ -176,10 +210,12 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
         });
     }
 
+
+
     private void queryIngredients() {
         ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
         query.include(Ingredient.USER_KEY);
-        query.setLimit(20);
+        query.setLimit(INGREDIENTS_NUMBER);
         query.addDescendingOrder("createdAt");
         query.findInBackground(new FindCallback<Ingredient>() {
             @Override
@@ -188,11 +224,35 @@ public class PantryFragment extends Fragment implements SearchView.OnQueryTextLi
                     return;
                 }
 
-                for (Ingredient ingredient : ingredients) {
-                }
-
                 allIngredients.addAll(ingredients);
                 ingredientsAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void deleteIngredient(String ingredientName) {
+
+        ParseQuery<Ingredient> query = ParseQuery.getQuery(Ingredient.class);
+
+        query.whereEqualTo("ingredientName", ingredientName);
+        query.findInBackground(new FindCallback<Ingredient>() {
+            @Override
+            public void done(List<Ingredient> objects, ParseException e) {
+
+                if (e == null) {
+                    objects.get(0).deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Toast.makeText(getContext(), "Ingredient Deleted..", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), "Fail to delete ingredient..", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                } else {
+                    Toast.makeText(getContext(), "Fail to get the object..", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

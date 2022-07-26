@@ -16,15 +16,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.fooding.R;
 import com.example.fooding.activities.DetailActivity;
 import com.example.fooding.activities.MainActivity;
-import com.example.fooding.favourite.FavouriteAdapter;
+import com.example.fooding.adapters.FavouriteAdapter;
 import com.example.fooding.favourite.FavouriteList;
 
 import java.util.List;
 
 @SuppressWarnings("ALL")
-public class FavoriteFragment extends Fragment implements FavouriteAdapter.FavouriteAdapterListener {
+public class FavouriteRecipeFragment extends Fragment implements FavouriteAdapter.FavouriteAdapterListener {
 
-
+//change
     private FavouriteAdapter favouriteAdapter;
     private RecyclerView favouriteRecipesRecyclerView;
     private TextView noItemText;
@@ -35,7 +35,7 @@ public class FavoriteFragment extends Fragment implements FavouriteAdapter.Favou
 
     public static final String TAG = "FavouriteFragment";
 
-    public FavoriteFragment() {
+    public FavouriteRecipeFragment() {
         selectedDiet = null;
         selectedMeal = null;
         currentSearch = null;

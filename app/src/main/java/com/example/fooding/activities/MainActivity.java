@@ -14,11 +14,11 @@ import androidx.room.Room;
 
 import com.example.fooding.R;
 import com.example.fooding.favourite.FavouriteDatabase;
-import com.example.fooding.fragments.FavoriteFragment;
-import com.example.fooding.fragments.PantryFragment;
+import com.example.fooding.fragments.FavouriteRecipeFragment;
+import com.example.fooding.fragments.FridgeFragment;
 import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.RecipeExploreFragment;
-import com.example.fooding.fragments.RecipeFragment;
+import com.example.fooding.fragments.RecipeSearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
 
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        favouriteDatabase = Room.databaseBuilder(getApplicationContext(), FavouriteDatabase.class, "housefavdb").allowMainThreadQueries().build();
+        favouriteDatabase = Room.databaseBuilder(getApplicationContext(), FavouriteDatabase.class, "favourite").allowMainThreadQueries().build();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
@@ -44,16 +44,16 @@ public class MainActivity extends AppCompatActivity {
                 Fragment fragment;
                 switch (menuItem.getItemId()) {
                     case R.id.action_pantry:
-                        fragment = new PantryFragment();
+                        fragment = new FridgeFragment();
                         break;
                     case R.id.action_recipe:
-                        fragment = new RecipeFragment();
+                        fragment = new RecipeSearchFragment();
                         break;
                     case R.id.action_explore:
                         fragment = new RecipeExploreFragment();
                         break;
                     case R.id.action_favorite:
-                        fragment = new FavoriteFragment();
+                        fragment = new FavouriteRecipeFragment();
                         break;
                     case R.id.action_profile:
                     default:
@@ -77,11 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.logout) {
-            onLogout();
-            return true;
-        } else if (item.getItemId() == R.id.action_favorite) {
-            Fragment fragment = new FavoriteFragment();
+        if (item.getItemId() == R.id.action_favorite) {
+            Fragment fragment = new FavouriteRecipeFragment();
             fragmentManager.beginTransaction().replace(R.id.flContainer, fragment).commit();
             return true;
         }
