@@ -18,7 +18,7 @@ import com.example.fooding.fragments.FavouriteFragment;
 import com.example.fooding.fragments.FridgeFragment;
 import com.example.fooding.fragments.ProfileFragment;
 import com.example.fooding.fragments.RecipeExploreFragment;
-import com.example.fooding.fragments.RecipeFragment;
+import com.example.fooding.fragments.RecipeSearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new FridgeFragment();
                         break;
                     case R.id.action_recipe:
-                        fragment = new RecipeFragment();
+                        fragment = new RecipeSearchFragment();
                         break;
                     case R.id.action_explore:
                         fragment = new RecipeExploreFragment();

@@ -12,17 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.fooding.R;
-import com.example.fooding.models.Food;
+import com.example.fooding.models.Recipe;
 
 import java.util.List;
 
 public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdapter.ViewHolder> implements View.OnClickListener {
 
     final RecipeExploreAdapterListener listener;
-    final List<Food> foodList;
+    final List<Recipe> recipeList;
 
-    public RecipeExploreAdapter(List<Food> foods, RecipeExploreAdapterListener listener) {
-        this.foodList = foods;
+    public RecipeExploreAdapter(List<Recipe> recipes, RecipeExploreAdapterListener listener) {
+        this.recipeList = recipes;
         this.listener = listener;
     }
 
@@ -36,15 +36,15 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Food food = foodList.get(position);
-        holder.bind(food);
+        Recipe recipe = recipeList.get(position);
+        holder.bind(recipe);
 
     }
 
     @Override
 
     public int getItemCount() {
-        return foodList.size();
+        return recipeList.size();
     }
 
     @Override
@@ -53,9 +53,8 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
     }
 
     public interface RecipeExploreAdapterListener {
-        void onRecipeClicked(Food food);
+        void onRecipeClicked(Recipe recipe);
     }
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -71,17 +70,15 @@ public class RecipeExploreAdapter extends RecyclerView.Adapter<RecipeExploreAdap
             cardView = itemView.findViewById(R.id.recipeCardView);
         }
 
-        public void bind(Food food) {
-            tvTitle.setText(food.getTitle());
+        public void bind(Recipe recipe) {
+            tvTitle.setText(recipe.getTitle());
 
-            Glide.with(ivImage.getContext()).load(food.getImage()).into(ivImage);
+            Glide.with(ivImage.getContext()).load(recipe.getImage()).into(ivImage);
             cardView.setOnClickListener(view -> {
                 if (listener != null) {
-                    listener.onRecipeClicked(food);
+                    listener.onRecipeClicked(recipe);
                 }
             });
-
         }
     }
-
 }

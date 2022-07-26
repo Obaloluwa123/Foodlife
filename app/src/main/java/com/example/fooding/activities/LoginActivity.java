@@ -9,9 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fooding.R;
+import com.facebook.AccessToken;
+import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -33,17 +36,22 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etUsername;
     private EditText etPassword;
     private ImageView facebookBtn;
+    private ImageView profileImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
+        if (ParseUser.getCurrentUser() != null) {
+            openMainActivity();
+        }
         setContentView(R.layout.activity_login);
 
         callbackManager = CallbackManager.Factory.create();
         facebookBtn = findViewById(R.id.facebookbtn);
         etUsername = findViewById(R.id.etnewUsername);
         etPassword = findViewById(R.id.etnewPassword);
+        profileImage = findViewById(R.id.profileImage);
         etPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -107,6 +115,23 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
+        Bundle bundle = new Bundle();
+        bundle.putString("fields", "gender, name , id");
+    }
+
+    AccessTokenTracker accessTokenTracker = new AccessTokenTracker() {
+        @Override
+        protected void onCurrentAccessTokenChanged(@Nullable AccessToken accessToken, @Nullable AccessToken currentAccessToken) {
+            if (currentAccessToken == null) {
+                LoginManager.getInstance().logOut();
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        accessTokenTracker.stopTracking();
     }
 
     public void loginUser(String username, String password) {

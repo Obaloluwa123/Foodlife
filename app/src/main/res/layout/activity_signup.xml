@@ -1,45 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clickable="true"
-    android:focusableInTouchMode="true">
+    android:focusableInTouchMode="true"
+    android:focusable="true">
 
-    <EditText
-        android:id="@+id/etnewUsername"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/usernameTextInputLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:ems="10"
-        android:hint="Username"
-        android:inputType="textPersonName"
+        android:layout_marginTop="200dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/TextInputLayoutStyle"
+        app:shapeAppearance="@style/ShapeAppearance.FoodLife.SmallComponent">
 
-    <EditText
-        android:id="@+id/etnewPassword"
-        android:layout_width="wrap_content"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/etnewUsername"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="100"
+        android:textColor="@color/black"
+        android:inputType="textPersonName"
+        android:hint="@string/username"
+
+        />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordTextInputLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
         android:layout_marginTop="72dp"
-        android:layout_marginEnd="104dp"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
+        app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etnewUsername" />
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextInputLayout"
+        style="@style/TextInputLayoutStyle"
+        app:shapeAppearance="@style/ShapeAppearance.FoodLife.SmallComponent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etnewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLength="100"
+            android:inputType="textPassword"
+            android:hint="password"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/signupBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="172dp"
-        android:text="SignUp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="90dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:text="@string/signup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etnewPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordTextInputLayout"
+        style="@style/loginBtn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

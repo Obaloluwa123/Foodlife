@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:text="Recipes By ---"
+        android:text="Recipes By"
         android:textStyle="bold"
         android:textColor="@color/black"
         android:textSize="16sp"

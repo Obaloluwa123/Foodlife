@@ -19,6 +19,10 @@ public class Ingredient extends ParseObject {
         put(INGREDIENT_KEY, ingredientName);
     }
 
+    public String getName() {
+        return getString("ingredientName");
+    }
+
     public ParseFile getIngredientImage() {
         return getParseFile(IMAGE_KEY);
     }

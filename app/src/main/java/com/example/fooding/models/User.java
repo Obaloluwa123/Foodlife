@@ -14,13 +14,13 @@ public class User {
 
     @ColumnInfo
     @PrimaryKey
-    private long id;
+    public long id;
     @ColumnInfo
-    private String name;
+    public String name;
     @ColumnInfo
-    private String ingredientName;
+    String ingredientName;
     @ColumnInfo
-    private String ingredientImage;
+    public String ingredientImage;
 
     private User() {
     }
@@ -32,8 +32,5 @@ public class User {
         user.ingredientName = jsonObject.getString("ingredientName");
         user.ingredientImage = jsonObject.getString("ingredientImage");
         return user;
-
-
     }
-
 }
