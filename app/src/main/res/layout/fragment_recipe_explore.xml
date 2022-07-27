@@ -54,7 +54,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:layout_marginTop="24dp"
-                android:text="Recommended recipes based on Calories"
+                android:text="Recommended recipe of the day"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textAppearance="@style/desc"
