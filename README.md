@@ -53,6 +53,19 @@ ProfileFragment shows users profile, which contains users imported profile image
 * [x] User can see steps on how to prepare the Recipe
 * [x] User can see Recommended Recipes for five categories. The first category is based on ingredients in their fridge, while the remaining categories are cuisines based on previously liked recipes.
 * [x] Ingredients search autocompletes
+* [x] The app integrates with spoonacular API
+* [x] The app uses gesture double tap to like a recipe
+* [x] The app uses shimmer animation in the explore fragment and slide-in animation in the Search fragment
+
+**Optional Nice-to-have Stories(Stretch)**
+* [x] User can save favorite recipes
+* [x] Add Facebook SDK for login
+* [x] Import user facebook profile image to user's profile 
+* [x] Added shimmer effect loading state for the explore page
+* [x] API call information is cached and can be seen offline
+* [] RecipeFragment has infinite scroll
+
+
 
 Complex Features:
 
@@ -149,17 +162,6 @@ Your app has multiple views
    * User can see saved recipes 
 * Profile
    * User can see their profile
-
-**Optional Nice-to-have Stories(Stretch)**
-* [x] User can save favorite recipes
-* [x] Add Facebook SDK for login
-* [x] Import user facebook profile image to user's profile 
-* [x] Added shimmer effect loading state for the explore page
-* [] User can share pictures of food taken with their friends on Facebook
-* [] API call information is cached and can be seen offline
-* [] RecipeFragment has infinite scroll
-* [] User can take picture of food
-* [] Food/Barcode scanner for ingredients to see list of recipes that contain the scanned ingredients.
 
 ### 2. Screen Archetypes
 
