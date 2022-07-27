@@ -3,6 +3,7 @@ package com.example.fooding.fragments;
 import static android.content.ContentValues.TAG;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,17 +31,21 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class RecipeExploreFragment extends Fragment implements RecipeExploreAdapter.RecipeExploreAdapterListener {
     private static final Integer INGREDIENT_NUMBER_LIMIT = 150;
     public TextView recipeCategory;
     public RecyclerView parentRecyclerView;
+    public RecyclerView parentRecyclerView1;
     public RecyclerView parentRecyclerView2;
     public RecyclerView parentRecyclerView3;
     public RecyclerView parentRecyclerView4;
@@ -50,13 +56,24 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
     private RecipeExploreAdapter americanRecipeAdapter;
     private RecipeExploreAdapter chineseRecipeAdapter;
     private RecipeExploreAdapter breakfastRecipeAdapter;
+    private RecipeExploreAdapter caloriesRecipeAdapter;
     ShimmerFrameLayout shimmerFrameLayout;
 
+    private final ArrayList<Recipe> caloriesRecipes = new ArrayList<>();
     private final ArrayList<Recipe> uniqueRecipes = new ArrayList<>();
     private final ArrayList<Recipe> chineseRecipes = new ArrayList<>();
     private final ArrayList<Recipe> italianRecipes = new ArrayList<>();
     private final ArrayList<Recipe> americanRecipes = new ArrayList<>();
     private final ArrayList<Recipe> breakfastRecipes = new ArrayList<>();
+
+    String favoriteId;
+    private final Map<String, String> caloriesMapsId= new HashMap<String, String>();
+    private final ArrayList<Integer> calories = new ArrayList<>();
+    StringBuilder caloriesString = new StringBuilder();
+
+    List<Integer> targetCalories = new ArrayList<>();
+    List<String> targetId = new ArrayList<>();
+    List<Recipe> targetRecipes = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +81,7 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         return inflater.inflate(R.layout.fragment_recipe_explore, container, false);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -94,6 +112,8 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         querySimilarCuisinesRecipe("American");
         querySimilarCuisinesRecipe("Chinese");
         queryPreviouslyLikedRecipe();
+
+        Log.i(TAG, "onViewCreated: "+calories.size());
     }
 
     private void setupRecycler(RecyclerView recyclerView, RecipeExploreAdapter adapter) {
@@ -205,6 +225,7 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     private void queryPreviouslyLikedRecipe() {
 
         favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
@@ -221,6 +242,8 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         Random favoriteIngredient = new Random();
         int randomFav = favoriteIngredient.nextInt(favFeatures.length - 1);
         FoodClient client = new FoodClient();
+
+
         client.suggestByFavorite("Breakfast", null, favFeatures[randomFav], new NetworkCallback<List<Recipe>>() {
             @Override
             public void onSuccess(List<Recipe> data) {
@@ -238,6 +261,77 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         });
     }
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public static List<Integer> getRecipesForTargetcalorie(ArrayList<Integer> calories, int targetCalories){
+            Map<Integer, Integer> map = new HashMap();
+            ArrayList<Integer> recipes = new ArrayList<Integer>();
+            for(int i=0; i<calories.size(); i++){
+                int complement = targetCalories - calories.get(i);
+                if(map.containsKey(complement)){
+                    recipes.add(map.get(complement));
+                    recipes.add(i);
+                }else{
+                    map.put(calories.get(i),i);
+                }
+
+            }
+            if(recipes.isEmpty()){
+                int total = 0;
+                for(int i=0; i<calories.size(); i++){
+                    total+=calories.get(i);
+                    if(total <= targetCalories){
+                        recipes.add(i);
+                    }
+                }
+            }
+            return recipes.stream().distinct().collect(
+                    Collectors.toList());
+        }
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        public void querySimilarCuisinesRecipeByCalories() {
+            favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
+
+            FoodClient client = new FoodClient();
+
+            for (int i = 0; i < favouriteLists.size(); i++) {
+                favoriteId = favouriteLists.get(i).getId();
+                client.getCaloriesById(favouriteLists.get(i).getId(), new NetworkCallback<String>() {
+                    @Override
+                    public void onSuccess(String data) {
+
+                        caloriesMapsId.put(favoriteId,data);
+                        int cal = Integer.parseInt(data);
+                        calories.add(cal);
+                    }
+                    @Override
+                    public void onFailure(Throwable throwable) {
+                        throwable.printStackTrace();
+                    }
+                });
+
+                try {
+                    Thread.sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            targetCalories = getRecipesForTargetcalorie(calories,2000);
+            for(String key: caloriesMapsId.keySet()){
+                int value = 0;
+                if(caloriesMapsId.get(key).equals(targetCalories.get(value).toString())){
+                    targetId.add(key);
+                }
+            }
+
+            for(int p = 0; p<favouriteLists.size();p++){
+                if(targetId.get(p).equals(favoriteId)){
+                    Recipe target = new Recipe(targetId.get(p), favouriteLists.get(p).getImage(),favouriteLists.get(p).getTitle());
+                    targetRecipes.add(target);
+                }
+            }
+
+        }
     @Override
     public void onRecipeClicked(Recipe food) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);

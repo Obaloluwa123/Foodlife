@@ -42,7 +42,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Headers;
 
@@ -220,15 +222,119 @@ public class RecipeSearchFragment extends Fragment implements RecipeAdapter.Food
 
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-
                     }
-
                 });
             }
-
         } catch (SnappydbException e) {
             e.printStackTrace();
         }
+    }
+    public class LRUCache<T> {
+
+        private final int capacity;
+        private int size;
+        private final Map<String, Node> hashmap;
+        private final DoublyLinkedList internalQueue;
+        LRUCache(final int capacity) {
+            this.capacity = capacity;
+            this.hashmap = new HashMap<>();
+            this.internalQueue = new DoublyLinkedList();
+            this.size = 0;
+
+        }
+
+        public T get(final String key) {
+            Node node = hashmap.get(key);
+            if (node == null) {
+                return null;
+            }
+            internalQueue.moveNodeToFront(node);
+            return  hashmap.get(key).value;
+
+        }
+        public void put(final String key, final T value) {
+            Node currentNode = hashmap.get(key);
+            if (currentNode != null) {
+                currentNode.value = value;
+                internalQueue.moveNodeToFront(currentNode);
+            }
+            if (size == capacity) {
+                String endNodeKey = internalQueue.getEndKey();
+                internalQueue.removeNodefromEnd();
+                hashmap.remove(endNodeKey);
+                size--;
+
+            }
+            Node node = new Node(key, value);
+            internalQueue.addNodeToFront(node);
+            hashmap.put(key, node);
+            size++;
+
+
+
+        }
+        private class Node {
+            String key;
+            T value;
+            Node next, prev;
+            public Node(final String key, final T value) {
+                this.key = key;
+                this.value = value;
+                this.next = null;
+                this.prev = null;
+
+            }
+        }
+        private class DoublyLinkedList {
+            private Node front, end;
+            public DoublyLinkedList() {
+                front = end = null;
+            }
+            private void addNodeToFront(final Node node ) {
+                if (end == null) {
+                    front = end = node;
+                    return;
+                }
+                node.next = front;
+                front.prev = node;
+                front = node;
+
+            }
+            public void moveNodeToFront(final Node node) {
+                if (front == node) {
+                    return;
+                }
+                if (node == end) {
+                    end = end.prev;
+                    end.next = null;
+                } else {
+                node.prev.next = node.next;
+                node.next.prev = node.prev;
+            }
+                node.prev = null;
+                node.next = front;
+                front.prev = node;
+                front = node;
+
+            }
+            private void removeNodefromEnd() {
+                if (end == null) {
+                    return;
+                }
+                if (front == end) {
+                    front = end = null;
+                } else {
+                    end = end.prev;
+                    end.next = null;
+                }
+
+            }
+            private String getEndKey() {
+                return  end.key;
+
+            }
+        }
+
     }
 
     public void getDatafromDB() {

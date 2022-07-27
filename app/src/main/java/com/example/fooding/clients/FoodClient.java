@@ -1,5 +1,7 @@
 package com.example.fooding.clients;
 
+import android.util.Log;
+
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
@@ -26,6 +28,8 @@ public class FoodClient extends AsyncHttpClient {
     private static final String BASE_IMAGE_URL = "https://spoonacular.com/cdn/ingredients_100x100/";
     private static final String INGREDIENT_AUTO_COMPLETE_URL = String.format("https://api.spoonacular.com/food/ingredients/autocomplete?apiKey=%s", API_KEY);
     public static final String SUGGEST_BY_INGREDIENTS = String.format("https://api.spoonacular.com/recipes/findByIngredients?apiKey=%s", API_KEY);
+    String Calories;
+    ArrayList<String> caloriesList = new ArrayList<>();
 
     public FoodClient() {
         super();
@@ -165,6 +169,7 @@ public class FoodClient extends AsyncHttpClient {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
+                    Log.d("Favoriote", "onSuccess: "+results);
                     callback.onSuccess(Recipe.fromJsonArray(results));
                 } catch (JSONException e) {
                     callback.onFailure(e);
@@ -193,6 +198,7 @@ public class FoodClient extends AsyncHttpClient {
                 } catch (Exception e) {
                     callback.onFailure(e);
                     e.printStackTrace();
+
                 }
             }
 
@@ -226,5 +232,69 @@ public class FoodClient extends AsyncHttpClient {
                 callback.onFailure(throwable);
             }
         });
+    }
+    public void getCaloriesById(String id, NetworkCallback<String> callback) {
+        String RECIPE_CALORIES_URL = String.format("https://api.spoonacular.com/recipes/%1$s/nutritionWidget.json?apiKey=%2$s",id, API_KEY);
+        String url = String.format(RECIPE_CALORIES_URL, id, API_KEY);
+//        Log.d("TAG", url );
+
+        get(url, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+
+                JSONObject jsonObject = json.jsonObject;
+
+                try {
+                    Calories = jsonObject.getString("calories").replace("k","");
+                    //Calorie cal = new Calorie(Calories);
+                    callback.onSuccess(Calories);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onFailure(e);
+
+                    Log.i("Error", "onFailure: "+e);
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                //callback.onFailure(throwable);
+                Log.d("TAG", "Failure to display calories" + response );
+
+            }
+        });
+        //return Calories;
+    }
+
+    public void getAllCaloriesById(String[] id, NetworkCallback callback) {
+        for(String i : id){
+            String RECIPE_CALORIES_URL = String.format("https://api.spoonacular.com/recipes/%1$s/nutritionWidget.json?apiKey=%2$s",i, API_KEY);
+            String url = String.format(RECIPE_CALORIES_URL, i, API_KEY);
+            get(url, new JsonHttpResponseHandler() {
+                @Override
+                public void onSuccess(int statusCode, Headers headers, JSON json) {
+                    JSONObject jsonObject = json.jsonObject;
+                    try {
+                        Calories = jsonObject.getString("calories").replace("k","");
+                        Log.i("Calories", "onSuccess: "+ Calories);
+                        caloriesList.add(Calories);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        callback.onFailure(e);
+
+                        Log.i("Error", "onFailure: "+e);
+                    }
+                }
+                @Override
+                public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                    //callback.onFailure(throwable);
+                    Log.d("TAG", "Failure to display calories" + response );
+
+                }
+            });
+        }
+
+        Log.i("CaloriesList", "getAllCaloriesById: "+Calories);
+
+        //return Calories;
     }
 }
