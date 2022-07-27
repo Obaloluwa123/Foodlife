@@ -1,11 +1,8 @@
 package com.example.fooding.fragments;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -67,7 +64,7 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
     private final ArrayList<Recipe> breakfastRecipes = new ArrayList<>();
 
     String favoriteId;
-    private final Map<String, String> caloriesMapsId= new HashMap<String, String>();
+    private final Map<String, String> caloriesMapsId = new HashMap<String, String>();
     private final ArrayList<Integer> calories = new ArrayList<>();
     StringBuilder caloriesString = new StringBuilder();
 
@@ -113,7 +110,6 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         querySimilarCuisinesRecipe("Chinese");
         queryPreviouslyLikedRecipe();
 
-        Log.i(TAG, "onViewCreated: "+calories.size());
     }
 
     private void setupRecycler(RecyclerView recyclerView, RecipeExploreAdapter adapter) {
@@ -176,7 +172,6 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
 
         if (favouriteLists.isEmpty()) {
-            Log.d(TAG, "Favourite list is empty");
             return;
         }
 
@@ -220,7 +215,6 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
 
             @Override
             public void onFailure(Throwable throwable) {
-                Log.d(TAG, "failed to display recipes");
             }
         });
     }
@@ -243,7 +237,6 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         int randomFav = favoriteIngredient.nextInt(favFeatures.length - 1);
         FoodClient client = new FoodClient();
 
-
         client.suggestByFavorite("Breakfast", null, favFeatures[randomFav], new NetworkCallback<List<Recipe>>() {
             @Override
             public void onSuccess(List<Recipe> data) {
@@ -261,77 +254,77 @@ public class RecipeExploreFragment extends Fragment implements RecipeExploreAdap
         });
     }
 
-        @RequiresApi(api = Build.VERSION_CODES.N)
-        public static List<Integer> getRecipesForTargetcalorie(ArrayList<Integer> calories, int targetCalories){
-            Map<Integer, Integer> map = new HashMap();
-            ArrayList<Integer> recipes = new ArrayList<Integer>();
-            for(int i=0; i<calories.size(); i++){
-                int complement = targetCalories - calories.get(i);
-                if(map.containsKey(complement)){
-                    recipes.add(map.get(complement));
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static List<Integer> getRecipesForTargetcalorie(ArrayList<Integer> calories, int targetCalories) {
+        Map<Integer, Integer> map = new HashMap();
+        ArrayList<Integer> recipes = new ArrayList<Integer>();
+        for (int i = 0; i < calories.size(); i++) {
+            int complement = targetCalories - calories.get(i);
+            if (map.containsKey(complement)) {
+                recipes.add(map.get(complement));
+                recipes.add(i);
+            } else {
+                map.put(calories.get(i), i);
+            }
+        }
+        if (recipes.isEmpty()) {
+            int total = 0;
+            for (int i = 0; i < calories.size(); i++) {
+                total += calories.get(i);
+                if (total <= targetCalories) {
                     recipes.add(i);
-                }else{
-                    map.put(calories.get(i),i);
-                }
-
-            }
-            if(recipes.isEmpty()){
-                int total = 0;
-                for(int i=0; i<calories.size(); i++){
-                    total+=calories.get(i);
-                    if(total <= targetCalories){
-                        recipes.add(i);
-                    }
                 }
             }
-            return recipes.stream().distinct().collect(
-                    Collectors.toList());
         }
-        @RequiresApi(api = Build.VERSION_CODES.N)
-        public void querySimilarCuisinesRecipeByCalories() {
-            favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
+        return recipes.stream().distinct().collect(
+                Collectors.toList());
+    }
 
-            FoodClient client = new FoodClient();
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void querySimilarCuisinesRecipeByCalories() {
+        favouriteLists = MainActivity.favouriteDatabase.favouriteDao().getFavouriteData();
 
-            for (int i = 0; i < favouriteLists.size(); i++) {
-                favoriteId = favouriteLists.get(i).getId();
-                client.getCaloriesById(favouriteLists.get(i).getId(), new NetworkCallback<String>() {
-                    @Override
-                    public void onSuccess(String data) {
+        FoodClient client = new FoodClient();
 
-                        caloriesMapsId.put(favoriteId,data);
-                        int cal = Integer.parseInt(data);
-                        calories.add(cal);
-                    }
-                    @Override
-                    public void onFailure(Throwable throwable) {
-                        throwable.printStackTrace();
-                    }
-                });
+        for (int i = 0; i < favouriteLists.size(); i++) {
+            favoriteId = favouriteLists.get(i).getId();
+            client.getCaloriesById(favouriteLists.get(i).getId(), new NetworkCallback<String>() {
+                @Override
+                public void onSuccess(String data) {
 
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    caloriesMapsId.put(favoriteId, data);
+                    int cal = Integer.parseInt(data);
+                    calories.add(cal);
                 }
-            }
 
-            targetCalories = getRecipesForTargetcalorie(calories,2000);
-            for(String key: caloriesMapsId.keySet()){
-                int value = 0;
-                if(caloriesMapsId.get(key).equals(targetCalories.get(value).toString())){
-                    targetId.add(key);
+                @Override
+                public void onFailure(Throwable throwable) {
+                    throwable.printStackTrace();
                 }
-            }
+            });
 
-            for(int p = 0; p<favouriteLists.size();p++){
-                if(targetId.get(p).equals(favoriteId)){
-                    Recipe target = new Recipe(targetId.get(p), favouriteLists.get(p).getImage(),favouriteLists.get(p).getTitle());
-                    targetRecipes.add(target);
-                }
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-
         }
+        targetCalories = getRecipesForTargetcalorie(calories, 2000);
+        for (String key : caloriesMapsId.keySet()) {
+            int value = 0;
+            if (caloriesMapsId.get(key).equals(targetCalories.get(value).toString())) {
+                targetId.add(key);
+            }
+        }
+        for (int p = 0; p < favouriteLists.size(); p++) {
+            if (targetId.get(p).equals(favoriteId)) {
+                Recipe target = new Recipe(targetId.get(p), favouriteLists.get(p).getImage(), favouriteLists.get(p).getTitle());
+                targetRecipes.add(target);
+            }
+        }
+
+    }
+
     @Override
     public void onRecipeClicked(Recipe food) {
         Intent intent = new Intent(getActivity(), DetailActivity.class);

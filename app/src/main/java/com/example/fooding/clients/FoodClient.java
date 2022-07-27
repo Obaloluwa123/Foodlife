@@ -169,7 +169,7 @@ public class FoodClient extends AsyncHttpClient {
                 JSONObject jsonObject = json.jsonObject;
                 try {
                     JSONArray results = jsonObject.getJSONArray("results");
-                    Log.d("Favoriote", "onSuccess: "+results);
+                    Log.d("Favoriote", "onSuccess: " + results);
                     callback.onSuccess(Recipe.fromJsonArray(results));
                 } catch (JSONException e) {
                     callback.onFailure(e);
@@ -233,11 +233,10 @@ public class FoodClient extends AsyncHttpClient {
             }
         });
     }
-    public void getCaloriesById(String id, NetworkCallback<String> callback) {
-        String RECIPE_CALORIES_URL = String.format("https://api.spoonacular.com/recipes/%1$s/nutritionWidget.json?apiKey=%2$s",id, API_KEY);
-        String url = String.format(RECIPE_CALORIES_URL, id, API_KEY);
-//        Log.d("TAG", url );
 
+    public void getCaloriesById(String id, NetworkCallback<String> callback) {
+        String RECIPE_CALORIES_URL = String.format("https://api.spoonacular.com/recipes/%1$s/nutritionWidget.json?apiKey=%2$s", id, API_KEY);
+        String url = String.format(RECIPE_CALORIES_URL, id, API_KEY);
         get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
@@ -245,56 +244,44 @@ public class FoodClient extends AsyncHttpClient {
                 JSONObject jsonObject = json.jsonObject;
 
                 try {
-                    Calories = jsonObject.getString("calories").replace("k","");
-                    //Calorie cal = new Calorie(Calories);
+                    Calories = jsonObject.getString("calories").replace("k", "");
                     callback.onSuccess(Calories);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     callback.onFailure(e);
 
-                    Log.i("Error", "onFailure: "+e);
                 }
             }
+
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                //callback.onFailure(throwable);
-                Log.d("TAG", "Failure to display calories" + response );
 
             }
         });
-        //return Calories;
     }
 
     public void getAllCaloriesById(String[] id, NetworkCallback callback) {
-        for(String i : id){
-            String RECIPE_CALORIES_URL = String.format("https://api.spoonacular.com/recipes/%1$s/nutritionWidget.json?apiKey=%2$s",i, API_KEY);
+        for (String i : id) {
+            String RECIPE_CALORIES_URL = String.format("https://api.spoonacular.com/recipes/%1$s/nutritionWidget.json?apiKey=%2$s", i, API_KEY);
             String url = String.format(RECIPE_CALORIES_URL, i, API_KEY);
             get(url, new JsonHttpResponseHandler() {
                 @Override
                 public void onSuccess(int statusCode, Headers headers, JSON json) {
                     JSONObject jsonObject = json.jsonObject;
                     try {
-                        Calories = jsonObject.getString("calories").replace("k","");
-                        Log.i("Calories", "onSuccess: "+ Calories);
+                        Calories = jsonObject.getString("calories").replace("k", "");
                         caloriesList.add(Calories);
                     } catch (JSONException e) {
                         e.printStackTrace();
                         callback.onFailure(e);
-
-                        Log.i("Error", "onFailure: "+e);
                     }
                 }
+
                 @Override
                 public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                    //callback.onFailure(throwable);
-                    Log.d("TAG", "Failure to display calories" + response );
 
                 }
             });
         }
-
-        Log.i("CaloriesList", "getAllCaloriesById: "+Calories);
-
-        //return Calories;
     }
 }
