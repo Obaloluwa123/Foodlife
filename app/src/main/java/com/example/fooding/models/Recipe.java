@@ -12,6 +12,12 @@ public class Recipe {
     private final String image;
     private final String id;
 
+    public Recipe(String id, String image, String title){
+        this.id = id;
+        this.image = image;
+        this.title = title;
+    }
+
     public Recipe(JSONObject jsonObject) throws JSONException {
         title = jsonObject.getString("title");
         image = jsonObject.getString("image");
